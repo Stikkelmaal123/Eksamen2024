@@ -1,5 +1,6 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const homeRoutes = require('./routes/homeRoutes');
 
 const app = express();
 const PORT = 3000;
@@ -13,12 +14,11 @@ app.engine('hbs', exphbs.engine({
 app.set('view engine', 'hbs');
 app.set('views', 'views');  // Specify views directory
 
+// Middleware to serve static files
 app.use(express.static('public'));
 
 // Routes
-app.get('/', (req, res) => {
-    res.render('index', { title: 'Welcome', message: 'Hello, Handlebars!' });
-});
+app.use('/', homeRoutes);
 
 // Start the server
 app.listen(PORT, () => {
