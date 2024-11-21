@@ -13,6 +13,8 @@ app.engine('hbs', exphbs.engine({
 app.set('view engine', 'hbs');
 app.set('views', 'views');  // Specify views directory
 
+app.use(express.static('public'));
+
 // Routes
 app.get('/', (req, res) => {
     res.render('index', { title: 'Welcome', message: 'Hello, Handlebars!' });
