@@ -4,7 +4,7 @@ const BASE_URL = 'http://portainer.kubelab.dk/api'
 let token = null;
 
 //login
-async function login(username, password) {
+const login = async function login(username, password) {
     try {
         const response = await axios.post(`${BASE_URL}/auth`, { username, password });
         token = response.data.jwt;
@@ -39,4 +39,4 @@ async function apiRequest(endpoint, method = 'GET', data = null) {
     }
 }
 
-module.export = { login, apiRequest };
+module.exports = { login, apiRequest, };
