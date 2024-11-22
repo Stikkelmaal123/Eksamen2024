@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const homeRoutes = require('./routes/homeRoutes');
+const portainerRoutes = require('./routes/portainerRoutes');
 
 const app = express();
 const PORT = 3000;
@@ -19,6 +20,7 @@ app.use(express.static('public'));
 
 // Routes
 app.use('/', homeRoutes);
+app.use('/', portainerRoutes);
 
 // Start the server
 app.listen(PORT, () => {
