@@ -1,4 +1,5 @@
 const { login, createStack, getEndpoints } = require('../utils/portainerApi');
+const db = require('../utils/db');
 
 // Render formular til oprettelse af stack
 exports.renderCreateStackForm = async (req, res) => {
@@ -18,8 +19,11 @@ exports.createStack = async (req, res) => {
         const { name, swarmId, fileContent, endpointId } = req.body;
         const stack = await createStack(name, swarmId, fileContent, parseInt(endpointId));
 
-        // Her kan vi gemme stacken i en database
-        // Eksempel: await StackModel.create(stack);
+        // stacken gemmes i databasen
+        await db.execute(
+            'INSERT INTO stacks (name, swarm_id, endpoint_id) VALUES (?, ?, ?)',
+            [name, swarmId, endpointId]
+        );
 
         res.render('stackDetails', { title: 'Stack Created', stack });
     } catch (error) {
@@ -28,13 +32,25 @@ exports.createStack = async (req, res) => {
     }
 };
 
+// Hent og vis alle stacks
+exports.getStacks = async (req, res) => {
+    try {
+        const [rows] = await db.execute('SELECT * FROM stacks');
+        res.render('stacks', { title: 'All Stacks', stacks: rows });
+    } catch (error) {
+        console.error('Error fetching stacks:', error.message);
+        res.status(500).send('Failed to fetch stacks.');
+    }
+};
+
+
 // exports.getPortainerInfo = async (req, res) => {
 //     try {
-//         //Login
+//         Login
 //         const jwt = await login('alpha', 'Ladida.12');
 //         console.log('JWT Token:', jwt);
 
-//         //Hent data
+//         Hent data
 //         const data = await apiRequest('/status');
 //         console.log('Portainer Status:', data);
 
