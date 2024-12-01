@@ -1,1 +1,31 @@
 <h1>{{message}}</h1>
+  <div class="table-container">
+    <!-- Header Row -->
+    <div class="header-row">
+      <div class="header-cell">Stack name</div>
+      <div class="header-cell">Stack type</div>
+      <div class="header-cell">Subdomain</div>
+      <div class="header-cell">Owner</div>
+      <div class="header-cell">Creation date</div>
+      <div class="header-cell">Status</div>
+      <div class="header-cell">Actions</div>
+    </div>
+  
+    <!-- Rows with expandable content -->
+    <div class="table-row" onclick="toggleRow(this)">
+      <div class="row-cell">WordPress project</div>
+      <div class="row-cell">WordPress</div>
+      <div class="row-cell">aosb48851@kubelab.dk</div>
+      <div class="row-cell">Anders Ole Snabe Buch</div>
+      <div class="row-cell">14/11-2024</div>
+      <div class="row-cell">Online</div>
+      <div class="row-cell">restart stop</div>
+    </div>
+    <div class="expandable-content">
+      <div class="content-cell">Group:</div>
+      <div class="content-cell">Uptime:</div>
+      <div class="content-cell">Lastest run:</div>
+    </div>
+  
+    <!-- Add more rows as needed -->
+  </div>
