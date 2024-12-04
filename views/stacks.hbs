@@ -1,23 +1,11 @@
 <h1>{{title}}</h1>
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Swarm ID</th>
-            <th>Endpoint ID</th>
-            <th>Created At</th>
-        </tr>
-    </thead>
-    <tbody>
+    <div>
         {{#each stacks}}
-        <tr>
-            <td>{{this.id}}</td>
-            <td>{{this.name}}</td>
-            <td>{{this.swarm_id}}</td>
-            <td>{{this.endpoint_id}}</td>
-            <td>{{this.created_at}}</td>
-        </tr>
+        <p>{{this.stack_name}}</p>
+        <p>{{this.template_name}}</p>
+        <p>{{this.sub_domain}}</p>
+        <p>{{this.user_name}}</p>
+        <p>{{formatDate this.creation_date}}</p>
         {{/each}}
-    </tbody>
-</table>
+    </div>
+

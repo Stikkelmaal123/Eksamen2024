@@ -1,16 +1,19 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const homeRoutes = require('./routes/homeRoutes');
-const portainerRoutes = require('./routes/portainerRoutes');
+const stackRoutes = require('./routes/stackRoutes');
+const dateHelper = require('./public/helpers/dateHelper');
 
 const app = express();
 const PORT = 3000;
 
-// Configure Handlebars
 app.engine('hbs', exphbs.engine({
     extname: 'hbs',         // Use `.hbs` extension for Handlebars files
     defaultLayout: 'main',  // Set default layout
     layoutsDir: 'views/layouts/', // Specify layouts directory
+    helpers: {
+        formatDate: dateHelper.formatDate
+    }
 }));
 app.set('view engine', 'hbs');
 app.set('views', 'views');  // Specify views directory
@@ -22,7 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/', homeRoutes);
-app.use('/', portainerRoutes);
+app.use('/', stackRoutes);
 
 // Start the server
 app.listen(PORT, () => {
