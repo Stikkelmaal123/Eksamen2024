@@ -17,6 +17,8 @@ app.set('views', 'views');  // Specify views directory
 
 // Middleware to serve static files
 app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/', homeRoutes);
