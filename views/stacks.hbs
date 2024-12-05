@@ -1,10 +1,10 @@
 <h1>{{title}}</h1>
     <div>
         {{#each stacks}}
-        <p>{{this.stack_name}}</p>
-        <p>{{this.template_name}}</p>
-        <p>{{this.sub_domain}}</p>
-        <p>{{this.user_name}}</p>
+        <p>Stack Name: {{this.stack_name}}</p>
+        <p>Created by: {{this.user_name}}</p>
+        <p>Template: {{this.template_name}}</p>
+        <p>Group: {{this.group_name}}</p>
         <p>{{formatDate this.creation_date}}</p>
         {{/each}}
     </div>
