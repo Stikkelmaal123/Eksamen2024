@@ -55,6 +55,3 @@ async function getEndpoints() {
         throw error;
     }
 }
-
-
-module.exports = { login, createStack, getEndpoints, };      

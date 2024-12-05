@@ -9,30 +9,7 @@
     <br><br>
 
     <label for="fileContent">Compose File Content:</label>
-    <textarea id="fileContent" name="fileContent" rows="10" cols="50" required>
-        version: '3'
-services:
-  web:
-    image: nginx
-    ports:
-      - "80:80"
-  wordpress:
-    image: wordpress:latest
-    environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: wpuser
-      WORDPRESS_DB_PASSWORD: wppassword
-      WORDPRESS_DB_NAME: wpdatabase
-    networks:
-      - traefik-proxy
-      - wp-network
-    deploy:
-      labels:
-        - "traefik.enable=true"
-        - "traefik.http.routers.CHANGEME01.rule=Host(SUBDOMAIN01.kubelab.dk)"
-        - "traefik.http.routers.CHANGEME01.entrypoints=web,websecure"
-        - "traefik.http.routers.CHANGEME01.tls.certresolver=letsencrypt"
-        - "traefik.http.services.CHANGEME01.loadbalancer.server.port=80"</textarea>
+    <textarea id="fileContent" name="fileContent" rows="10" cols="50" required></textarea>
     <br><br>
 
     <label for="endpointId">Endpoint:</label>
