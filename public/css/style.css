@@ -1,160 +1,307 @@
+/* Global Styles */
 body {
-  display: flex;
   margin: 0;
-  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+  display: flex;
+  min-height: 100vh;
+}
+
+h1, h3 {
+  margin: 0;
+  font-weight: normal;
+}
+
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+button:hover, a:hover {
+  opacity: 0.8;
+}
+
+/* Dashboard Layout */
+.dashboard {
+  display: flex;
+  width: 100%;
+}
+
+.sidebar {
+  background: #1a1a1a;
+  padding: 30px;
+  width: 250px;
   box-sizing: border-box;
-  background-color: var(--primary-background-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
-:root {
-
-  /* Colors */
-  
-  --primary-background-color: #0E0E0E;
-  --secondary-background-color: #202328;
-  --third-background-color: #464A4C;
-  --font-color: #f9f9f9;
-
-  /* fonts */
-
-  --main-font: "Roboto", serif;
-  
-
+.sidebar .logo {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  line-height: 1.3;
+  text-align: left;
 }
 
-.kosugi-maru-regular {
-  font-family: "Kosugi Maru", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+.sidebar .menu h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: #b0b0b0;
+  margin-top: 30px;
 }
 
-.logo {
-  font-family: "Rubik Mono One", serif;
-  font-weight: 400;
-  font-style: normal;
+.sidebar .menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-  /* Main container for the table */
-  .table-container {
-    width: 100%;
-    max-width: 80%;
-    height: 600px;
-    margin: auto;
-    padding: 20px;
-    font-family: var(--main-font);
-    background-color: var(--secondary-background-color);
-    border-radius: 10px;
-  }
+.sidebar .menu li {
+  margin-bottom: 10px;
+}
 
-  /* Header Row */
-  .header-row, .table-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    background-color: var(--third-background-color);
-    color: var(--font-color);
-    border-radius: 10px;
-  }
+.sidebar .menu li a {
+  display: block;
+  padding: 10px 15px;
+  background: #2a2a2a;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #e0e0e0;
+  text-align: left;
+  transition: background-color 0.3s;
+}
 
-  /* Center elements in header and table cells */
-  .header-cell, .row-cell {
-    flex: 1;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-size: 14px;
-  }
+.sidebar .menu li a:hover {
+  background: #353535;
+}
 
-  .row-cell {
-    font-weight: normal;
-  }
+.main-content {
+  flex-grow: 1;
+  padding: 40px;
+  box-sizing: border-box;
+}
 
-  .header-cell {
-    font-weight: bold;
-  }
+header h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
 
-  /* Clickable rows */
-  .table-row {
-    cursor: pointer;
-    margin-top: 10px;
-  }
- 
+/* Search Bar */
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 25px;
+}
 
-  /* Expandable content */
-  .expandable-content {
+.search-bar input {
+  flex: 1;
+  padding: 10px 15px 10px 45px;
+  background: #2a2a2a;
+  border: none;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.search-icon {
+  position: absolute;
+  left: 15px;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.search-icon img {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Project Table */
+.project-table {
+  margin-top: 20px;
+}
+
+/* Table Header */
+.table-header {
+  display: grid;
+  grid-template-columns:  1.5fr 1fr 2fr 1fr 1fr 1fr 1fr;
+  padding: 15px 20px;
+  align-items: center;
+  background: #2e2e2e;
+  font-weight: bold;
+  color: #e0e0e0;
+  text-transform: uppercase;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* New container that wraps each row set */
+.row-container {
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  background: #1f1f1f;
+  transition: background-color 0.3s;
+}
+
+.row-container:hover {
+  background: #2a2a2a;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns:  1.5fr 1fr 2fr 1fr 1fr 1fr 1fr;
+  padding: 15px 20px;
+  align-items: center;
+  cursor: pointer;
+  background: transparent;
+  position: relative;  /* Needed for the pseudo-element to be positioned properly */
+  z-index: 1;
+}
+
+/* White line under row when expanded */
+.table-row.expanded + .details-row::before {
+  content: "";
+  position: absolute;
+  top: -4px;  /* Position the line right above the details row */
+  left: 0;
+  width: 100%;
+  height: 1px;  /* Height of the white line */
+  background-color: #ffffff;  /* White color for the line */
+}
+
+.details-row {
+  display: none;
+  padding: 15px 20px;
+  background: #2a2a2a;
+  display: grid;
+  grid-template-columns:  repeat(3, 1fr);
+  gap: 20px;
+  position: relative;
+}
+
+.details-row.show {
+  display: grid;  /* Ensure details row is displayed */
+}
+
+.details-row span {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.status.online {
+  color: #00ff00;  /* Green for online status */
+}
+
+.status.offline {
+  color: #ff4d4d;  /* Red for offline status */
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actions button {
+  padding: 8px;
+  border-radius: 5px;
+  background: #444;
+  color: #ffffff;
+  font-size: 12px;
+  transition: background-color 0.3s;
+}
+
+.actions button:hover {
+  background: #555;
+}
+
+.actions .delete {
+  background: #ff4d4d;
+}
+
+.actions .delete:hover {
+  background: #ff3333;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
     display: none;
-    padding: 10px;
-    background-color: var(--third-background-color);
-    color: var(--font-color);
-    flex-direction: row;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
   }
 
-  .content-cell {
-    flex: 1;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
+  .table-header, .table-row {
+    grid-template-columns:  repeat(1, 1fr);
+    gap: 10px;
+  }
+
+  
+}
+
+@media (max-width: 768px) {
+  /* Hide header columns for Stack Name, Creation Date, and Owner */
+  .table-header span:nth-child(1), /* Stack Name */
+  .table-header span:nth-child(4), /* Owner */
+  .table-header span:nth-child(5), /* Creation Date */
+  .table-row span:nth-child(1),    /* Stack Name */
+  .table-row span:nth-child(4),    /* Owner */
+  .table-row span:nth-child(5) {   /* Creation Date */
+    display: none;
+  }
+
+  /* Adjust grid structure for remaining elements */
+  .table-header, .table-row {
+    grid-template-columns: 1fr 2fr 1fr 1fr; /* Adjust based on remaining columns */
+  }
+
+  /* Details row spacing for better visibility */
+  .details-row {
+    display: none; /* Default hidden */
+    grid-template-columns: 1fr; /* Stack details into a single column */
+    gap: 10px;
+  }
+
+  .details-row.show {
+    display: grid;
+  }
+
+  .details-row span {
     font-size: 14px;
+    margin-bottom: 5px;
   }
+}
 
-  /* Flexbox structure within the expandable content */
-
-
-  /* Show expanded content when active */
-  .table-row.expanded + .expandable-content {
-    display: flex;
-    border-top: 1px solid #f9f9f9;
+/* Hide details marked as mobile-only on larger screens */
+@media (min-width: 769px) {
+  .details-row span[data-mobile-only] {
+    display: none;
   }
+}
 
-  .table-row.expanded {
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-  }
-
-  .table-row.expanded + .table-row {
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-  }
-
-  /* Side nav */
-
-  .sidenav {
-    height: 100%;
-    width: 100%;
-    max-width: 20%;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 20px;
-  }
-
-  .sidenav a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
+/* Show mobile-only details on smaller screens */
+@media (max-width: 768px) {
+  .details-row span[data-mobile-only] {
     display: block;
   }
+}
 
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .header-cell, .row-cell {
-      font-size: 0.9em;
-    }
-  }
+/* min 769 max 768 */
 
-  @media (max-width: 480px) {
-    .header-cell, .row-cell {
-      font-size: 0.8em;
-    }
-  }
+
+
+
