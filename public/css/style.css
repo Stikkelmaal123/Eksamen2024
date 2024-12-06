@@ -231,13 +231,7 @@ header h1 {
   background: #555;
 }
 
-.actions .delete {
-  background: #ff4d4d;
-}
 
-.actions .delete:hover {
-  background: #ff3333;
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -303,5 +297,25 @@ header h1 {
 /* min 769 max 768 */
 
 
+.custom-button {
+  position: absolute;
+  right: 10px;
+  top: 5px;
+  width: 120px;
+  height: 39px;
+  background-color: #880000;
+  border-radius: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Simulates the filter effect */
+  cursor: pointer;
+}
 
+.custom-button:hover {
+  background-color: #a30000; /* Slightly lighter red on hover */
+}
 
