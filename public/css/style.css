@@ -34,7 +34,7 @@ button:hover, a:hover {
   display: flex;
   width: 100%;
 }
-
+/* sidebar  
 .sidebar {
   background: #1a1a1a;
   padding: 30px;
@@ -86,6 +86,8 @@ button:hover, a:hover {
   background: #353535;
 }
 
+*/
+
 .main-content {
   flex-grow: 1;
   padding: 40px;
@@ -102,6 +104,7 @@ header h1 {
   position: relative;
   display: flex;
   align-items: center;
+  max-width: 40%;
   width: 100%;
   margin-bottom: 25px;
 }
@@ -235,13 +238,20 @@ header h1 {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  /* 
   .sidebar {
     display: none;
   }
-
+*/
   .table-header, .table-row {
     grid-template-columns:  repeat(1, 1fr);
     gap: 10px;
+  }
+  .search-bar {
+    max-width: 100%;
+  }
+  .main-content {
+    padding: 10px;
   }
 
   
@@ -318,4 +328,122 @@ header h1 {
 .custom-button:hover {
   background-color: #a30000; /* Slightly lighter red on hover */
 }
+
+
+
+
+
+
+/* new sidemenu */
+
+/* Base sidebar styles */
+.sidebar {
+  background: #1a1a1a;
+  padding: 30px;
+  width: 250px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Sidebar hidden by default on mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+/* Sidebar overlay styles (activated on mobile only) */
+.sidebar-overlay {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.9);
+  padding: 30px;
+  animation: slide-in 0.3s ease-out;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Sidebar logo styles */
+.sidebar .logo {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  line-height: 1.3;
+  text-align: left;
+}
+
+/* Sidebar menu heading */
+.sidebar .menu h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: #b0b0b0;
+  margin-top: 30px;
+}
+
+/* Sidebar menu list */
+.sidebar .menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar .menu li {
+  margin-bottom: 10px;
+}
+
+.sidebar .menu li a {
+  display: block;
+  padding: 10px 15px;
+  background: #2a2a2a;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #e0e0e0;
+  text-align: left;
+  transition: background-color 0.3s;
+}
+
+.sidebar .menu li a:hover {
+  background: #353535;
+}
+
+/* Sidebar toggle button */
+.sidebar-toggle {
+  display: none;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background: #1a1a1a;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 1001;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .sidebar-toggle {
+    display: block;
+  }
+}
+
+
+
+
 
