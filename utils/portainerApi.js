@@ -1,9 +1,9 @@
 const axios = require('axios');
 
-const BASE_URL = 'http://portainer.kubelab.dk/api'
+const BASE_URL = 'http://portainer.kubelab.dk/api';
 let token = null;
 
-//login
+// Login function to authenticate with the Portainer API
 const login = async function login(username, password) {
     try {
         const response = await axios.post(`${BASE_URL}/auth`, { username, password });
@@ -14,44 +14,37 @@ const login = async function login(username, password) {
         console.error('Error authenticating with Portainer', error.response?.data || error.message);
         throw error;
     }   
-}
+};
 
-
-async function createStack(name, swarmId, fileContent, endpointId) {
+// Create stack function
+const createStack = async (name, fileContent) => {
     try {
         if (!token) {
-            throw new Error('User is not authenticated.');
+            throw new Error('User is not authenticated. Please log in first.');
         }
+
         const payload = {
             Name: name,
-            SwarmID: swarmId,
             StackFileContent: fileContent,
-            EndpointID: endpointId,
         };
 
-        console.log('Payload', payload);
+        console.log('Payload for stack creation:', payload);
 
-        const response = await axios.post(`${BASE_URL}/stacks/create/swarm`, payload, {
-            headers: { Authorization: `Bearer ${token}` },
-        });
+        const response = await axios.post(
+            `${BASE_URL}/stacks`,
+            payload,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
 
         return response.data;
     } catch (error) {
         console.error('Error creating stack:', error.response?.data || error.message);
         throw error;
     }
-}
+};
 
-// Hent endpoints
-async function getEndpoints() {
-    try {
-        const response = await axios.get(`${BASE_URL}/endpoints`, {
-            headers: { Authorization: `Bearer ${token}` },
-        });
-
-        return response.data;
-    } catch (error) {
-        console.error('Error fetching endpoints:', error.response?.data || error.message);
-        throw error;
-    }
-}
+module.exports = { login, createStack };

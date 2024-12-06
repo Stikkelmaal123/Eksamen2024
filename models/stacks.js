@@ -1,5 +1,4 @@
 const db = require('../utils/db');
-// const { createStack, getEndpoints } = require('../utils/portainerApi');
 
 module.exports = {
     getAllStacks: async () => {
@@ -16,5 +15,14 @@ module.exports = {
                 ON groups_users.group_id = \`groups\`.group_id`
         );  
         return rows;
+    },
+
+    createStack: async (stackData) => {
+        const { name, description } = stackData;
+        const result = await db.execute(
+            `INSERT INTO stacks (name, description) VALUES (?, ?)`,
+            [name, description]
+        );
+        return result.insertId; // Return the ID of the newly created stack
     }
-}
+};

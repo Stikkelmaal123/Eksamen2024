@@ -1,6 +1,5 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
-const homeRoutes = require('./routes/homeRoutes');
 const stackRoutes = require('./routes/stackRoutes');
 const dateHelper = require('./public/helpers/dateHelper');
 
@@ -24,7 +23,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-app.use('/', homeRoutes);
 app.use('/', stackRoutes);
 
 // Start the server
