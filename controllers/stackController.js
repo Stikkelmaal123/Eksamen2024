@@ -5,9 +5,9 @@ const { v4: uuidv4 } = require('uuid'); // For generating unique strings
 
 exports.createStack = async (req, res) => {
     try {
-        const { stackName, templateName, subdomain, groupsUsersId, endpointId } = req.body;
+        const { stackName, templateName, subdomain, groupsUsersId } = req.body;
 
-        if (!stackName || !templateName || !subdomain || !groupsUsersId || !endpointId) {
+        if (!stackName || !templateName || !subdomain || !groupsUsersId) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
@@ -40,6 +40,7 @@ exports.createStack = async (req, res) => {
         const stackFileContent = JSON.stringify(stackTemplate, null, 2);
 
         // Pass username and password for authentication
+        const endpointId = 5;
         const username = "alpha"; // Replace with your actual username
         const password = "Ladida.12"; // Replace with your actual password
 

@@ -16,6 +16,21 @@ const login = async function login(username, password) {
     }   
 };
 
+
+const getSwarmID = async (endpointId) => {
+    try {
+        const response = await axios.get(`${BASE_URL}/endpoints/${endpointId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+        return response.data.SwarmID; // SwarmID is part of the endpoint data
+    } catch (error) {
+        console.error('Error fetching Swarm ID:', error.response?.data || error.message);
+        throw error;
+    }
+};
+
 // Create stack function
 const createStack = async (name, fileContent, endpointId, username, password) => {
     try {
@@ -25,17 +40,23 @@ const createStack = async (name, fileContent, endpointId, username, password) =>
             await login(username, password);
         }
 
+        const swarmId = await getSwarmID(endpointId);
+        if (!swarmId) {
+            throw new Error('SwarmID not found for the specified endpoint');
+        }
+
         const payload = {
             Name: name,
             StackFileContent: fileContent,
             EndpointId: endpointId,
+            SwarmID: swarmId,
             ComposeFormat: "3.8",
         };
 
         console.log('Payload for stack creation:', payload);
 
         const response = await axios.post(
-            `${BASE_URL}/stacks?type=1&method=string`,
+            `${BASE_URL}/stacks?type=1&method=string&endpointId=${endpointId}`,
             payload,
             {
                 headers: {
@@ -51,4 +72,4 @@ const createStack = async (name, fileContent, endpointId, username, password) =>
     }
 };
 
-module.exports = { login, createStack };
+module.exports = { login, getSwarmID, createStack };
