@@ -5,13 +5,13 @@ const { v4: uuidv4 } = require('uuid'); // For generating unique strings
 
 exports.createStack = async (req, res) => {
     try {
-        const { stackName, templateName, subdomain, groupsUsersId } = req.body;
+        const { stackName, templateName, subdomain, groupsUsersId, endpointId } = req.body;
 
-        if (!stackName || !templateName || !subdomain || !groupsUsersId) {
+        if (!stackName || !templateName || !subdomain || !groupsUsersId || !endpointId) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
-        // Generate unique identifier for stack configuration
+        // Generate a unique random string for "CHANGEME"
         const randomString = uuidv4();
 
         // Create stack template
@@ -22,19 +22,35 @@ exports.createStack = async (req, res) => {
             services: {
                 test: {
                     image: "nginx:latest",
-                    environment: [
-                        `SUBDOMAIN=${subdomain}`,
-                    ],
+                    networks: ["traefik-proxy"],
+                    deploy: {
+                        labels: [
+                            "traefik.enable=true",
+                            `traefik.http.routers.${randomString}.rule=Host(\`${subdomain}\`)`,
+                            `traefik.http.routers.${randomString}.entrypoints=web,websecure`,
+                            `traefik.http.routers.${randomString}.tls.certresolver=letsencrypt`,
+                            `traefik.http.services.${randomString}.loadbalancer.server.port=80`,
+                        ],
+                    },
                 },
             },
         };
 
-        // Convert template to YAML (example conversion)
-        const yaml = require('js-yaml');
-        const stackFileContent = yaml.dump(stackTemplate);
+        // Convert the stack template to JSON
+        const stackFileContent = JSON.stringify(stackTemplate, null, 2);
+
+        // Pass username and password for authentication
+        const username = "alpha"; // Replace with your actual username
+        const password = "Ladida.12"; // Replace with your actual password
 
         // Call Portainer API to create the stack
-        const createdStack = await portainerApi.createStack(stackName, stackFileContent);
+        const createdStack = await portainerApi.createStack(
+            stackName,
+            stackFileContent,
+            endpointId,
+            username,
+            password
+        );
 
         // Save stack details in the database
         const query = 'INSERT INTO stacks (stack_name, template_name, sub_domain) VALUES (?, ?, ?)';

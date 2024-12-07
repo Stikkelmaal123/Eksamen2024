@@ -11,27 +11,31 @@ const login = async function login(username, password) {
         console.log('Authenticated with Portainer', token);
         return token;
     } catch (error) {
-        console.error('Error authenticating with Portainer', error.response?.data || error.message);
+        console.error('Error authenticating with Portainer:', error.response?.data || error.message);
         throw error;
     }   
 };
 
 // Create stack function
-const createStack = async (name, fileContent) => {
+const createStack = async (name, fileContent, endpointId, username, password) => {
     try {
+        // Ensure the user is logged in
         if (!token) {
-            throw new Error('User is not authenticated. Please log in first.');
+            console.log('No token found. Logging in...');
+            await login(username, password);
         }
 
         const payload = {
             Name: name,
             StackFileContent: fileContent,
+            EndpointId: endpointId,
+            ComposeFormat: "3.8",
         };
 
         console.log('Payload for stack creation:', payload);
 
         const response = await axios.post(
-            `${BASE_URL}/stacks`,
+            `${BASE_URL}/stacks?type=1&method=string`,
             payload,
             {
                 headers: {
