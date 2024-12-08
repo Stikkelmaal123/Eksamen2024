@@ -5,9 +5,9 @@ const { v4: uuidv4 } = require('uuid'); // For generating unique strings
 
 exports.createStack = async (req, res) => {
     try {
-        const { stackName, templateName, subdomain, groupsUsersId } = req.body;
+        const { stackName, templateName, subdomain } = req.body;
 
-        if (!stackName || !templateName || !subdomain || !groupsUsersId) {
+        if (!stackName || !templateName || !subdomain) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 

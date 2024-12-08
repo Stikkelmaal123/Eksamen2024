@@ -19,41 +19,51 @@ const login = async function login(username, password) {
 
 const getSwarmID = async (endpointId) => {
     try {
-        const response = await axios.get(`${BASE_URL}/endpoints/${endpointId}`, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
-        return response.data.SwarmID; // SwarmID is part of the endpoint data
+        const response = await axios.get(
+            `${BASE_URL}/endpoints/${endpointId}/docker/swarm`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+
+        console.log('Swarm Data:', response.data);
+
+        // Extract the SwarmID from the response
+        const swarmId = response.data.ID;
+        if (!swarmId) {
+            throw new Error('SwarmID not found in Swarm data.');
+        }
+
+        return swarmId;
     } catch (error) {
         console.error('Error fetching Swarm ID:', error.response?.data || error.message);
         throw error;
     }
 };
 
+
 // Create stack function
 const createStack = async (name, fileContent, endpointId, username, password) => {
     try {
-        // Ensure the user is logged in
         if (!token) {
             console.log('No token found. Logging in...');
             await login(username, password);
         }
 
-        const swarmId = await getSwarmID(endpointId);
-        if (!swarmId) {
-            throw new Error('SwarmID not found for the specified endpoint');
-        }
+        const swarmId = await getSwarmID(endpointId); // Could return null
+        console.log('Swarm ID:', swarmId);
 
         const payload = {
             Name: name,
             StackFileContent: fileContent,
             EndpointId: endpointId,
-            SwarmID: swarmId,
+            SwarmID: swarmId || undefined, // Exclude SwarmID if it's null
             ComposeFormat: "3.8",
         };
 
-        console.log('Payload for stack creation:', payload);
+        console.log('Payload for Stack Creation:', payload);
 
         const response = await axios.post(
             `${BASE_URL}/stacks?type=1&method=string&endpointId=${endpointId}`,

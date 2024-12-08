@@ -18,10 +18,10 @@ module.exports = {
     },
 
     createStack: async (stackData) => {
-        const { name, description } = stackData;
+        const { stack_name, template_name, sub_domain} = stackData;
         const result = await db.execute(
-            `INSERT INTO stacks (name, description) VALUES (?, ?)`,
-            [name, description]
+            `INSERT INTO stacks (stack_name, template_name, sub_domain) VALUES (?, ?)`,
+            [stack_name, template_name, sub_domain]
         );
         return result.insertId; // Return the ID of the newly created stack
     }
