@@ -23,6 +23,11 @@ module.exports = {
             `INSERT INTO stacks (stack_name, template_name, sub_domain) VALUES (?, ?)`,
             [stack_name, template_name, sub_domain]
         );
-        return result.insertId; // Return the ID of the newly created stack
+        const [ymlData] = await db.execute(
+            `SELECT * FROM templates WHERE template_name = ?`,
+            [template_name]
+        );
+    
+        return result.insertId && ymlData; // Return the ID of the newly created stack
     }
 };

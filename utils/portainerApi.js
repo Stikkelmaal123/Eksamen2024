@@ -18,7 +18,15 @@ const login = async function login(username, password) {
 
 
 const getSwarmID = async (endpointId) => {
+    
     try {
+        
+        const token = localStorage.getItem('jwtToken'); // Retrieve the token from localStorage
+
+        if (!token) {
+            throw new Error('No token found in localStorage. Please log in.');
+        }
+
         const response = await axios.get(
             `${BASE_URL}/endpoints/${endpointId}/docker/swarm`,
             {
@@ -46,9 +54,9 @@ const getSwarmID = async (endpointId) => {
 // Create stack function
 const createStack = async (name, fileContent, endpointId, username, password) => {
     try {
+        const token = localStorage.getItem('jwtToken');
         if (!token) {
-            console.log('No token found. Logging in...');
-            await login(username, password);
+            throw new Error('No token found in localStorage. Please log in.');
         }
 
         const swarmId = await getSwarmID(endpointId); // Could return null
