@@ -37,7 +37,6 @@ module.exports = (req, res, next) => {
 
 // Routes
 app.use('/', stackRoutes);
-app.use('/', pageRoutes);
 app.use ('/auth', authRoutes);
 
 // Start the server
