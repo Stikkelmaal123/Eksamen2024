@@ -1,6 +1,7 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const stackRoutes = require('./routes/stackRoutes');
+const pageRoutes = require('./routes/pageRoutes');
 const dateHelper = require('./public/helpers/dateHelper');
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/', stackRoutes);
+app.use('/', pageRoutes);
 
 // Start the server
 app.listen(PORT, () => {
