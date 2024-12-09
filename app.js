@@ -1,7 +1,6 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const stackRoutes = require('./routes/stackRoutes');
-const pageRoutes = require('./routes/pageRoutes');
 const dateHelper = require('./public/helpers/dateHelper');
 
 const app = express();
