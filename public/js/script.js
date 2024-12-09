@@ -89,6 +89,9 @@ window.addEventListener('resize', toggleMobileOnlyDetails);
 // Initial check on page load
 toggleMobileOnlyDetails();
 
+
+
+
 // dark mode code below
 
 const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
