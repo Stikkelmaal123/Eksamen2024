@@ -30,7 +30,6 @@ const getSwarmID = async (endpointId) => {
 
         console.log('Swarm Data:', response.data);
 
-        // Extract the SwarmID from the response
         const swarmId = response.data.ID;
         if (!swarmId) {
             throw new Error('SwarmID not found in Swarm data.');
