@@ -37,7 +37,7 @@ module.exports = (req, res, next) => {
 
 // Routes
 app.use('/', stackRoutes);
-app.use ('/auth', authRoutes);
+app.use('/', authRoutes);
 
 // Start the server
 app.listen(PORT, () => {
