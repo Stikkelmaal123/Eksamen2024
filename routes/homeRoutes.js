@@ -1,8 +1,12 @@
 const express = require('express');
-
-const homeControllers = ('../controllers/homeController');
-
+const homeControllers = require('../controllers/homeController');
+const isAuthenticated = require('../middleware/auth');
 const router = express.Router();
-router.get('/', homeControllers.getHomepage);
 
-module.exports = router
+
+/*router.get('/', isAuthenticated, homeControllers.getHomepage);*/
+router.get('/', (req, res) => {
+    res.render('index', {title:'Home', message:'Welcome to the homepage'});
+});
+
+module.exports = router;

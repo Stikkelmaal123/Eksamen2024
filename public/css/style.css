@@ -1,164 +1,581 @@
 body {
-  display: flex;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  background-color: var(--primary-background-color);
-}
-
-
-
-
-
-:root {
-
-  /* Colors */
-  
-  --primary-background-color: #0E0E0E;
-  --secondary-background-color: #202328;
-  --third-background-color: #464A4C;
-  --font-color: #f9f9f9;
-
-  /* fonts */
-
-  --main-font: "Roboto", serif;
-  
-
-}
-
-.kosugi-maru-regular {
-  font-family: "Kosugi Maru", sans-serif;
-  font-weight: 400;
-  font-style: normal;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 .logo {
-  font-family: "Rubik Mono One", serif;
-  font-weight: 400;
-  font-style: normal;
+    position: absolute;
+    top: 2%;
+    left: 2%;
+    font-size: 50px;
+    font-weight: bold;
+    line-height: 1.2;
+    color: #F9F9F9;
+  }
+
+.login-container {
+    text-align: center;
 }
 
-  /* Main container for the table */
-  .table-container {
-    width: 100%;
-    max-width: 80%;
-    margin-left: 160px;
-    height: 600px;
-    margin: auto;
-    padding: 20px;
-    font-family: var(--main-font);
-    background-color: var(--secondary-background-color);
+.login-box {
+    background-color: #1e1e1e;
+    padding: 30px;
     border-radius: 10px;
-  }
+    width: 400px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-  /* Header Row */
-  .header-row, .table-row {
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+form label {
+    display: flex;
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #c7c7c7;
+}
+
+form .forgot-password {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+form .forgot-password a {
+    color: #f57c00;
+    text-decoration: none;
+}
+
+form .btn-login {
+    background-color: #f57c00;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+form .btn-login:hover {
+    background-color: #ff8c33;
+}
+
+/* Modal Styling */
+dialog[data-modal] {
+    display: none; /* Explicitly hide the modal by default */
+    border: none;
+    border-radius: 10px;
+    padding: 20px 40px;
+    width: 1148px;
+    height: 806px;
+    max-width: 90%;
+    max-height: 90%;
+    background-color: #121212;
+    color: #fff;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Modal Backdrop */
+dialog[data-modal]::backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+}
+
+/* Show modal when `open` attribute is applied */
+dialog[data-modal][open] {
+    display: flex; /* Show modal when open */
+}
+
+/* Header */
+dialog[data-modal] h1 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Form Styling */
+dialog[data-modal] form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Labels */
+dialog[data-modal] label {
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: #d1d1d1;
+}
+
+/* Inputs */
+dialog[data-modal] input {
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #2e2e2e;
+    color: #fff;
+}
+
+/* Reset Password Button */
+dialog[data-modal] button#reset-password {
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ce430b;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+dialog[data-modal] button#reset-password:hover {
+    background-color: #f15011;
+}
+
+/* Footer Buttons */
+dialog[data-modal] .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+dialog[data-modal] .modal-footer button {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+dialog[data-modal] .modal-footer button#logout {
+    background-color: #800;
+
+}
+
+dialog[data-modal] .modal-footer button#logout:hover {
+    background-color: rgb(202, 2, 2);
+}
+
+dialog[data-modal] .modal-footer button#save {
+    background-color: #ce430b;
+
+}
+
+dialog[data-modal] .modal-footer button#save:hover {
+    background-color: #f15011;
+}
+
+/* Close Button */
+dialog[data-modal] .close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+dialog[data-modal] .close-btn:hover {
+    color: #ff8c33;
+}
+
+dialog.large-modal{
+    display: none; /* Explicitly hide the modal by default */
+    border: none;
+    border-radius: 10px;
+    padding: 20px 40px;
+    width: 1550px;
+    height: 810px;
+    background-color: #121212;
+    color: #fff;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Modal Content Layout */
+.modal-content {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
-    background-color: var(--third-background-color);
-    color: var(--font-color);
-    border-radius: 10px;
-  }
+    gap: 20px;
+    width: 100%;
+    height: auto;
+}
 
-  /* Center elements in header and table cells */
-  .header-cell, .row-cell {
+/* Left Section (Group Details) */
+.left-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     flex: 1;
-    text-align: center;
+}
+
+.left-section input[type="text"],
+.left-section input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #3a3a3a;
+    border-radius: 5px;
+    background-color: #2e2e2e;
+    color: white;
+    font-size: 16px;
+}
+
+.education-select {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.education-select div {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-size: 14px;
-  }
+    gap: 10px;
+}
 
-  .row-cell {
-    font-weight: normal;
-  }
+/* Right Section (User List) */
+.right-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
 
-  .header-cell {
-    font-weight: bold;
-  }
+.right-section h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
 
-  /* Clickable rows */
-  .table-row {
+.user-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.user-list-container .search-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #3a3a3a;
+    border-radius: 5px;
+    background-color: #2e2e2e;
+    color: white;
+    font-size: 16px;
+}
+
+#user-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#user-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #3a3a3a;
+    border-radius: 5px;
+    background-color: #1e1e1e;
+}
+
+#user-list li span {
+    font-size: 16px;
+}
+
+#user-list .remove-user-btn {
+    background-color: #800;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
     cursor: pointer;
-    margin-top: 10px;
-  }
- 
+}
 
-  /* Expandable content */
-  .expandable-content {
-    display: none;
-    padding: 10px;
-    background-color: var(--third-background-color);
-    color: var(--font-color);
-    flex-direction: row;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-  }
+#user-list .remove-user-btn:hover {
+    background-color: rgb(202, 2, 2);
+}
 
-  .content-cell {
-    flex: 1;
-    text-align: center;
-    display: flex;
+/* Footer Button */
+.modal-footer {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.modal-footer .btn-create-group {
+    background-color: #ce430b;
+    color: white;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.modal-footer .btn-create-group:hover {
+    background-color: #f15011;
+}
+
+
+.add-user-csv-box {
+    width: 1050px;
+    height: 400px;
+    background-color: #d9d9d9;
+    margin-top: 15px;
+    align-self: center;
+    border-radius: 5px;
     align-items: center;
     justify-content: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    font-size: 14px;
-  }
+    text-align: center;
+    display: flex
+}
 
-  /* Flexbox structure within the expandable content */
+dialog[data-modal="create-stack"] .left-section {
+    flex: 1;
+}
 
-
-  /* Show expanded content when active */
-  .table-row.expanded + .expandable-content {
+dialog[data-modal="create-stack"] .left-section form {
     display: flex;
-    border-top: 1px solid #f9f9f9;
-  }
+    flex-direction: column;
+    gap: 20px;
+}
 
-  .table-row.expanded {
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-  }
+dialog[data-modal="create-stack"] .left-section input,
+dialog[data-modal="create-stack"] .left-section select {
+    width: 80%;
+    padding: 8px;
+    border: 1px solid #3a3a3a;
+    border-radius: 5px;
+    background-color: #2e2e2e;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
-  .table-row.expanded + .table-row {
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
-  }
+/* Right Section */
+dialog[data-modal="create-stack"] .right-section {
+    flex: 1;
+}
 
-  /* Side nav */
+dialog[data-modal="create-stack"] .right-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-  .sidenav {
-    height: 100%;
-    width: 160px;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: #111;
-    overflow-x: hidden;
-    padding-top: 20px;
-  }
+dialog[data-modal="create-stack"] .right-section input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #3a3a3a;
+    border-radius: 5px;
+    background-color: #2e2e2e;
+    color: white;
+    font-size: 16px;
+}
 
-  .sidenav a {
-    padding: 6px 8px 6px 16px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-  }
+dialog[data-modal="create-stack"] .modal-footer {
+    text-align: right;
+    margin-top: 20px;
+}
 
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .header-cell, .row-cell {
-      font-size: 0.9em;
-    }
-  }
+dialog[data-modal="create-stack"] .modal-footer button {
+    background-color: #ce430b;
+    color: white;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
 
-  @media (max-width: 480px) {
-    .header-cell, .row-cell {
-      font-size: 0.8em;
-    }
-  }
+dialog[data-modal="create-stack"] .modal-footer button:hover {
+    background-color: #f15011;
+}
+
+.group-stacks-modal {
+    display: none;
+    border: none;
+    border-radius: 10px;
+    padding: 20px 40px;
+    width: 1200px;
+    height: 700px;
+    background-color: #121212;
+    color: #fff;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.group-stacks-modal h1 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.stack-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    color: #d1d1d1;
+}
+
+.stack-table th,
+.stack-table td {
+    padding: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.stack-table th {
+    background-color: #1e1e1e;
+    color: #fff;
+    font-weight: bold;
+}
+
+.stack-table td {
+    background-color: #1e1e1e;
+}
+
+.delete-btn {
+    background-color: #800;
+    color: white;
+    padding: 5px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.delete-btn:hover {
+    background-color: rgb(202, 2, 2);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.delete-stacks-btn,
+.save-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.delete-stacks-btn {
+    background-color: #800;
+    
+}
+
+.delete-stacks-btn:hover {
+    background-color: rgb(202, 2, 2);
+}
+
+.group-details-modal {
+    display: none;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    width: 1200px;
+    height: 800px;
+    background-color: #121212;
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.group-details-modal .modal-content {
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.details-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #d1d1d1;
+}
+
+.details-table th,
+.details-table td {
+    padding: 15px;
+    border-bottom: 1px solid #333;
+}
+
+.details-table th {
+    background-color: #1e1e1e;
+}
+
+.details-table td {
+    background-color: #2e2e2e;
+}
+
+.edit-btn {
+    background-color: #800;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.edit-btn:hover {
+    background-color: rgb(202, 2, 2);
+}
+
+.date-picker,
+.education-options {
+    margin-bottom: 20px;
+}
+
+.education-options h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.education-options div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+}

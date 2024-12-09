@@ -1,2 +1,333 @@
-<h1>{{message}}</h1>
-<p>This is a Handlebars page!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<div class="logo">KUBE<br>LAB</div>
+
+    <button onclick="window.location.href='/auth/login';">Go to Login</button>
+
+<button data-open-modal="profile-settings">Profile settings</button>
+
+<dialog data-modal="profile-settings">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Profile settings</h1>
+    <form>
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" value="Anders Ole Snabe Buch" />
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" value="aosb48851@edu.ucl.dk" />
+        </div>
+        <button type="button" id="reset-password">Reset password</button>
+    </form>
+    <div class="modal-footer">
+        <button id="logout">Log out</button>
+        <button id="save">Save</button>
+    </div>
+</dialog>
+
+<button data-open-modal="create-stack">Create stack</button>
+
+<dialog data-modal="create-stack">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Creating stack</h1>
+    <div class="modal-content">
+        <div class="left-section">
+            <form>
+                <div>
+                    <label for="stack-name">Stack name</label>
+                    <input type="text" id="stack-name" placeholder="Name" />
+                </div>
+                <div>
+                    <label for="subdomain-name">Subdomain name</label>
+                    <input type="text" id="subdomain-name" placeholder="Name" />
+                </div>
+                <div>
+                    <label for="templates">Templates</label>
+                    <select id="templates" multiple>
+                        <option value="wordpress">WordPress</option>
+                        <option value="mariadb">MariaDB</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="right-section">
+            <h2>Optional</h2>
+            <form>
+                <div>
+                    <label for="owner-name">Add another owner</label>
+                    <input type="text" id="owner-name" placeholder="Name" />
+                </div>
+                <div>
+                    <label for="group-name">Add group to stack</label>
+                    <input type="text" id="group-name" list="groups" placeholder="Search group" />
+                    <datalist id="groups">
+                        <option value="WOUE24"></option>
+                        <option value="WOUE23"></option>
+                    </datalist>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="create-stack">Create stack</button>
+    </div>
+</dialog>
+
+<button data-open-modal="add-user">Add user</button>
+
+<dialog data-modal="add-user">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Add user</h1>
+    <form>
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Name..." />
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Email..." />
+        </div>
+        <button type="button" id="reset-password">Add user</button>
+    </form>
+    <div class="add-user-csv-box">
+        <p class="csv">Drag and drop csv file or click here</p>
+    </div>
+    <div class="modal-footer">
+        <button id="save">Done</button>
+    </div>
+</dialog>
+
+<button data-open-modal="add-template">Add template</button>
+
+<dialog data-modal="add-template">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Add template</h1>
+    <div>
+        <label for="name">Template name</label>
+        <input type="text" id="name" placeholder="Template..." />
+    </div>
+    <div>
+        <label for="name">Template</label>
+        <input type="text" id="name" placeholder="Add template text here..." />
+    </div>
+    <div class="modal-footer">
+        <button id="save">Done</button>
+    </div>
+</dialog>
+
+<button data-open-modal="delete-stack">Delete stack</button>
+
+<dialog data-modal="delete-stack">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Are you sure you want to delete (“stack”)?</h1>
+    <div class="modal-content">
+        <table class="stack-table">
+            <thead>
+                <tr>
+                    <th>Stack name</th>
+                    <th>Stack type</th>
+                    <th>Subdomain</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example rows -->
+                <tr>
+                    <td>OPStackbro</td>
+                    <td>WPServer</td>
+                    <td>aosb48851@edu.ucl.dk</td>
+                    <td><button class="delete-btn">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button id="delete-stacks" class="delete-stacks-btn">Yes delete stack</button>
+        <button id="save" class="save-btn">No don't delete</button>
+    </div>
+</dialog>
+
+<button data-open-modal="group-details">Group details</button>
+
+<dialog data-modal="group-details" class="group-details-modal">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Details</h1>
+    <div class="modal-content">
+        <div class="left-section">
+            <table class="details-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Example rows -->
+                    <tr>
+                        <td>Anders Ole Snabe Buch</td>
+                        <td>aosb48851@edu.ucl.dk</td>
+                        <td><button class="edit-btn">Edit</button></td>
+                    </tr>
+                    <tr>
+                        <td>Anders Ole Snabe Buch</td>
+                        <td>aosb48851@edu.ucl.dk</td>
+                        <td><button class="edit-btn">Edit</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="right-section">
+            <div class="date-picker">
+                <label for="expiration-date">Expiration Date</label>
+                <input type="date" id="expiration-date" />
+            </div>
+            <div class="education-options">
+                <h2>Education</h2>
+                <div>
+                    <input type="checkbox" id="webudvikler" />
+                    <label for="webudvikler">Webudvikler</label>
+                </div>
+                <div>
+                    <input type="checkbox" id="webbureau" />
+                    <label for="webbureau">Webbureau</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        
+        <button id="delete-group" class="delete-btn">Delete Group</button>
+        <button id="save" class="save-btn">Save</button>
+    </div>
+</dialog>
+
+<dialog data-modal="edit-user" class="edit-user-modal">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Edit User</h1>
+    <form>
+        <div>
+            <label for="edit-name">Name</label>
+            <input type="text" id="edit-name" placeholder="Name..." />
+        </div>
+        <div>
+            <label for="edit-email">Email</label>
+            <input type="email" id="edit-email" placeholder="Email..." />
+        </div>
+    </form>
+    <div class="modal-footer">
+        <button id="save-edit" class="save-btn">Save</button>
+    </div>
+</dialog>
+
+<button data-open-modal="group-stacks">Group stacks</button>
+
+<dialog data-modal="group-stacks" class="group-stacks-modal">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Stacks in ("current group")</h1>
+    <div class="modal-content">
+        <table class="stack-table">
+            <thead>
+                <tr>
+                    <th>Stack name</th>
+                    <th>Stack type</th>
+                    <th>Subdomain</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example rows -->
+                <tr>
+                    <td>OPStackbro</td>
+                    <td>WPServer</td>
+                    <td>aosb48851@edu.ucl.dk</td>
+                    <td><button class="delete-btn">Delete</button></td>
+                </tr>
+                <tr>
+                    <td>OPStackbro</td>
+                    <td>WPServer</td>
+                    <td>aosb48851@edu.ucl.dk</td>
+                    <td><button class="delete-btn">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button id="delete-stacks" class="delete-stacks-btn">Delete stacks</button>
+        <button id="save" class="save-btn">Save</button>
+    </div>
+</dialog>
+
+<button data-open-modal="large">Create group</button>
+
+<dialog data-modal="large" class="large-modal">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Creating group</h1>
+    <div class="modal-content">
+        <div class="left-section">
+            <form>
+                <div>
+                    <label for="group-name">Group name</label>
+                    <input type="text" id="group-name" placeholder="Enter name..." />
+                </div>
+                <div>
+                    <label for="education">Education</label>
+                    <div class="education-select">
+                        <div>
+                            <input type="checkbox" id="webudvikler" />
+                            <label for="webudvikler">Webudvikler</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="webbureau" />
+                            <label for="webbureau">Webbureau</label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <label for="expiration-date">Expiration date</label>
+                    <input type="date" id="expiration-date" />
+                </div>
+            </form>
+        </div>
+        <div class="right-section">
+            <h2>Add users to group</h2>
+            <div class="user-list-container">
+                <input type="text" placeholder="Search user" class="search-input" />
+                <ul id="user-list">
+                    <!-- Example user items -->
+                    <li>
+                        <span>Name: Anders Ole Snabe Buch</span>
+                        <span>Email: aosb48851@edu.ucl.dk</span>
+                        <button class="remove-user-btn">Remove</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn-create-group">Create group</button>
+    </div>
+</dialog>
+
+<dialog data-modal="delete">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Delete User</h1>
+    <p>Are you sure you want to delete <span id="delete-name"></span>?</p>
+    <div class="modal-footer">
+        <button id="confirm-delete" class="delete-btn">Delete</button>
+        <button data-close-modal>Cancel</button>
+    </div>
+</dialog>
+
+    <script src="../js/modal.js"></script>
+</body>
+</html>
+
