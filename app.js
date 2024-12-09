@@ -24,7 +24,6 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/', stackRoutes);
-app.use('/', pageRoutes);
 
 // Start the server
 app.listen(PORT, () => {
