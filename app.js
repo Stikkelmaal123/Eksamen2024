@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const exphbs = require('express-handlebars');
 const stackRoutes = require('./routes/stackRoutes');
 const dateHelper = require('./public/helpers/dateHelper');
@@ -22,6 +23,11 @@ app.set('views', 'views');  // Specify views directory
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: false,
+}));
 
 // Routes
 app.use('/', stackRoutes);
