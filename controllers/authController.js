@@ -1,24 +1,3 @@
-
-const portainerApi = require('../utils/portainerApi');
-
-exports.login = async (req, res) => {
-    const { email, password } = req.body;
-
-    try {
-        const token = await portainerApi.login(email, password);
-
-        if (token) {
-            return res.json({ token });
-        } else {
-            return res.status(401).json({ error: 'Authentication failed' });
-        }
-    } catch (error) {
-        console.error('Error during login:', error);
-        return res.status(500).json({ error: 'Internal server error' });
-    }
-};
-
-
 exports.getLoginPage = (req, res) => {
     res.render('login', { title: 'Log In' });
 };
