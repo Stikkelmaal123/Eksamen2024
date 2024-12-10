@@ -2,16 +2,12 @@
 const portainerApi = require('../utils/portainerApi');
 
 exports.login = async (req, res) => {
-    try {
-        // Ignore the input and use hardcoded credentials
-        const username = "alpha";
-        const password = "Ladida.12";
+    const { email, password } = req.body;
 
-        // Call the Portainer API to log in
-        const token = await portainerApi.login(username, password);
+    try {
+        const token = await portainerApi.login(email, password);
 
         if (token) {
-            // Send the token back to the client
             return res.json({ token });
         } else {
             return res.status(401).json({ error: 'Authentication failed' });
@@ -21,7 +17,6 @@ exports.login = async (req, res) => {
         return res.status(500).json({ error: 'Internal server error' });
     }
 };
-
 
 
 exports.getLoginPage = (req, res) => {
