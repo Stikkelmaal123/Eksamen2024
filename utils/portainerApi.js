@@ -1,24 +1,15 @@
 const axios = require('axios');
-<<<<<<< Updated upstream
-=======
 
 const BASE_URL = 'https://portainer.kubelab.dk/api'; // Ensure you're using https
->>>>>>> Stashed changes
 
 const login = async (username, password) => {
     try {
-<<<<<<< Updated upstream
-        const response = await axios.post(`${BASE_URL}/auth`, { username, password });
-        token = response.data.jwt;
-        console.log('Authenticated with Portainer', token);
-        return token;
-=======
         const response = await axios.post(`${BASE_URL}/auth`, {
             username,
             password,
         });
-        return response.data.jwt;  // This is the JWT token
->>>>>>> Stashed changes
+        token = response.data.jwt;  // This is the JWT token
+        return token;  // Return the token to use later
     } catch (error) {
         console.error('Error authenticating with Portainer:', error);
         throw error;
@@ -57,7 +48,7 @@ const getSwarmID = async (endpointId) => {
 const createStack = async (name, fileContent, endpointId) => {
     try {
         if (!token) {
-            alert('Yoú are not logged in');
+            throw new Error('You are not logged in');
         }
 
         const swarmId = await getSwarmID(endpointId); 

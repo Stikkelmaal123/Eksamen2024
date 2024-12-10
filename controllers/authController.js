@@ -1,3 +1,6 @@
+const { getUserByEmailAndPassword } = require('../models/user');
+const { login: portainerLogin } = require('../utils/portainerApi');
+
 exports.getLoginPage = (req, res) => {
     res.render('login', { layout: 'main2'});
 
@@ -22,7 +25,7 @@ exports.postLogin = async (req, res) => {
 
         // Store user and token in session
         req.session.user = { id: user.id, email: user.email };
-        req.session.portainerToken = portainerToken;
+        req.session.portainerToken = portainerToken;  // Save the token in session
 
         // Redirect to the homepage
         res.redirect('/stacks');
@@ -33,7 +36,6 @@ exports.postLogin = async (req, res) => {
             message: 'An error occurred. Please try again later.',
         });
     }
-   res.redirect('/');
 };
 
 exports.logout = (req, res) => {
