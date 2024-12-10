@@ -3,6 +3,11 @@ const portainerApi = require('../utils/portainerApi');
 
 exports.login = async (req, res) => {
     try {
+        // Ignore the input and use hardcoded credentials
+        const username = "alpha";
+        const password = "Ladida.12";
+
+        // Call the Portainer API to log in
         const token = await portainerApi.login(username, password);
 
         if (token) {
