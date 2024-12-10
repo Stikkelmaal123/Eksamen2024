@@ -1,0 +1,60 @@
+
+      <div class="dashboard">
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header>
+        <button class="sidebar-toggle">☰</button>
+        <h1>Projects</h1>
+      </header>
+
+      <!-- Navigation/Search -->
+      <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <div class="search-icon">
+          <img src="../img/1st trailing-icon.svg" alt="Search Icon">
+        </div>
+      </div>
+
+      <!-- Project Table -->
+      <div class="project-table">
+
+        <!-- Table Header (Make sure this stays) -->
+        <div class="table-header">
+          <span>Stack name</span>
+          <span>Stack type</span>
+          <span>Subdomain</span>
+          <span>Owner</span>
+          <span>Creation date</span>
+          <span>Status</span>
+          <span>Actions</span>
+        </div>
+        {{#each stacks}}
+        <div class="row-container">
+          <div class="table-row" onclick="toggleDetails(this)">
+            <span class="stack-name">{{this.stack_name}}</span>
+            <span>{{this.template_name}}</span>
+            <span>{{this.sub_domain}}</span>
+            <span class="owner">{{this.user_name}}</span>
+            <span class="creation-date">{{formatDate this.creation_date}}</span>
+            <span class="status online">Online</span>
+            <span class="actions">
+              <button>⟳</button>
+              <button>⏸</button>
+              <button class="expand">☑️</button>
+            </span>
+          </div>
+          <div class="details-row">
+            <span data-mobile-only><strong>Stack Name: </strong>{{this.stack_name}}</span>
+            <span><strong>Group: </strong>{{this.group_name}}</span>
+            <span data-mobile-only><strong>Owner: </strong>{{this.user_name}}</span>
+            <span data-mobile-only><strong>Creation Date: </strong>{{formatDate this.creation_date}}</span>
+            <span><strong>Uptime: </strong>6278 days</span>
+            <span><strong>Latest run: </strong>27/13/9044</span>
+            <button class="custom-button">Delete</button>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </main>
+  </div>
