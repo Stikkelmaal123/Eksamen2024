@@ -39,6 +39,7 @@ exports.createStack = async (req, res) => {
         // Convert the stack template to JSON
         const stackFileContent = JSON.stringify(stackTemplate, null, 2);
 
+        // Pass username and password for authentication
         const endpointId = 5;
 
         // Call Portainer API to create the stack
