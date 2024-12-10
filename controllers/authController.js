@@ -4,21 +4,20 @@ exports.getLoginPage = (req, res) => {
 
 exports.postLogin = async (req, res) => {
     const { email, password } = req.body;
-/*
-    // Replace with your authentication logic
+
     if (email === 'test@example.com' && password === 'password') {
         req.session.user = { email }; // Store user info in session
         return res.redirect('/'); // Redirect to homepage after login
     } else {
         res.render('login', { title: 'Log In', message: 'Invalid credentials, please try again.' });
-    }/
+    }
    res.redirect('/');
 };
 
 exports.logout = (req, res) => {
-   / req.session.destroy(() => {
+    req.session.destroy(() => {
         res.redirect('/auth/login'); // Redirect to login after logout
-    });*/
+    });
     res.redirect('/auth/login');
 };
 

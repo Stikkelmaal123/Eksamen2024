@@ -41,16 +41,12 @@ exports.createStack = async (req, res) => {
 
         // Pass username and password for authentication
         const endpointId = 5;
-        const username = "alpha"; // Replace with your actual username
-        const password = "Ladida.12"; // Replace with your actual password
 
         // Call Portainer API to create the stack
         const createdStack = await portainerApi.createStack(
             stackName,
             stackFileContent,
-            endpointId,
-            username,
-            password
+            endpointId
         );
 
         // Save stack details in the database
