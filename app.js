@@ -27,6 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', stackRoutes);
 app.use('/', authRoutes);
 
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
