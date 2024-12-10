@@ -36,6 +36,18 @@ modals.forEach(modal => {
     });
 });
 
+// Close modals when the Esc key is pressed
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        modals.forEach(modal => {
+            if (modal.open) {
+                modal.close();
+                modal.style.display = "none"; // Fallback
+            }
+        });
+    }
+});
+
 // Ensure all modals are hidden initially (fallback for unsupported browsers)
 modals.forEach(modal => {
     if (!modal.open) {

@@ -110,12 +110,12 @@
 <dialog data-modal="add-template">
     <button class="close-btn" data-close-modal>&times;</button>
     <h1>Add template</h1>
-    <div>
+    <div class="template-setup">
         <label for="name">Template name</label>
         <input type="text" id="name" placeholder="Template..." />
     </div>
-    <div>
-        <label for="name">Template</label>
+    <div class="template-setup">
+        <label for="name">Template text</label>
         <input type="text" id="name" placeholder="Add template text here..." />
     </div>
     <div class="modal-footer">
@@ -128,6 +128,7 @@
 <dialog data-modal="delete-stack">
     <button class="close-btn" data-close-modal>&times;</button>
     <h1>Are you sure you want to delete (“stack”)?</h1>
+    <div class="background-box">
     <div class="modal-content">
         <table class="stack-table">
             <thead>
@@ -148,6 +149,7 @@
                 </tr>
             </tbody>
         </table>
+        </div>
     </div>
     <div class="modal-footer">
         <button id="delete-stacks" class="delete-stacks-btn">Yes delete stack</button>
@@ -159,54 +161,72 @@
 
 <dialog data-modal="group-details" class="group-details-modal">
     <button class="close-btn" data-close-modal>&times;</button>
-    <h1>Details</h1>
+    <h1 class="modal-header">WUE24</h1>
+    
     <div class="modal-content">
-        <div class="left-section">
-            <table class="details-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Example rows -->
-                    <tr>
-                        <td>Anders Ole Snabe Buch</td>
-                        <td>aosb48851@edu.ucl.dk</td>
-                        <td><button class="edit-btn">Edit</button></td>
-                    </tr>
-                    <tr>
-                        <td>Anders Ole Snabe Buch</td>
-                        <td>aosb48851@edu.ucl.dk</td>
-                        <td><button class="edit-btn">Edit</button></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="details-table-left-box">
+            <div class="left-section">
+                <table class="details-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Example rows -->
+                        <tr>
+                            <td>Anders Ole Snabe Buch</td>
+                            <td>aosb48851@edu.ucl.dk</td>
+                            <td><button class="edit-btn">Edit</button></td>
+                        </tr>
+                        <tr>
+                            <td>Anders Ole Snabe Buch</td>
+                            <td>aosb48851@edu.ucl.dk</td>
+                            <td><button class="edit-btn">Edit</button></td>
+                        </tr>
+                        <tr>
+                            <td>Anders Ole Snabe Buch</td>
+                            <td>aosb48851@edu.ucl.dk</td>
+                            <td><button class="edit-btn">Edit</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
         <div class="right-section">
-            <div class="date-picker">
+            <div class="date-picker-box">
                 <label for="expiration-date">Expiration Date</label>
                 <input type="date" id="expiration-date" />
             </div>
-            <div class="education-options">
-                <h2>Education</h2>
-                <div>
-                    <input type="checkbox" id="webudvikler" />
-                    <label for="webudvikler">Webudvikler</label>
-                </div>
-                <div>
-                    <input type="checkbox" id="webbureau" />
-                    <label for="webbureau">Webbureau</label>
+            <div class="education-box">
+    <h2>Education</h2>
+    <div class="education-options">
+        <label class="education-option">
+                        <div class="education-item">
+                            <input type="checkbox" id="webudvikler" />
+                            <span>Webudvikler</span>
+                        </div>
+                </label>
+                <label class="education-option">
+                        <div class="education-item">
+                            <input type="checkbox" id="webbureau" />
+                            <span>Webbureau</span>
+                        </div>
+                        </label>
                 </div>
             </div>
         </div>
     </div>
+
     <div class="modal-footer">
-        
-        <button id="delete-group" class="delete-btn">Delete Group</button>
-        <button id="save" class="save-btn">Save</button>
+        <button id="manage-users" class="manage-btn">Manage Users</button>
+        <div class="button-group">
+            <button id="delete-group" class="delete-btn">Delete Group</button>
+            <button id="save" class="save-btn">Save</button>
+        </div>
     </div>
 </dialog>
 
@@ -233,6 +253,7 @@
 <dialog data-modal="group-stacks" class="group-stacks-modal">
     <button class="close-btn" data-close-modal>&times;</button>
     <h1>Stacks in ("current group")</h1>
+    <div class="background-box">
     <div class="modal-content">
         <table class="stack-table">
             <thead>
@@ -260,6 +281,7 @@
             </tbody>
         </table>
     </div>
+    </div>
     <div class="modal-footer">
         <button id="delete-stacks" class="delete-stacks-btn">Delete stacks</button>
         <button id="save" class="save-btn">Save</button>
@@ -271,33 +293,38 @@
 <dialog data-modal="large" class="large-modal">
     <button class="close-btn" data-close-modal>&times;</button>
     <h1>Creating group</h1>
+        <div class="group-name-container">
+        <label for="group-name">Group name</label>
+        <input type="text" id="group-name" placeholder="Enter name..." />
+    </div>
     <div class="modal-content">
         <div class="left-section">
-            <form>
-                <div>
-                    <label for="group-name">Group name</label>
-                    <input type="text" id="group-name" placeholder="Enter name..." />
-                </div>
-                <div>
-                    <label for="education">Education</label>
-                    <div class="education-select">
-                        <div>
+            <form class="create-group-form">
+
+                <div class="education-box">
+    <h2>Education</h2>
+    <div class="education-options">
+        <label class="education-option">
+                        <div class="education-item">
                             <input type="checkbox" id="webudvikler" />
-                            <label for="webudvikler">Webudvikler</label>
+                            <span>Webudvikler</span>
                         </div>
-                        <div>
+                </label>
+                <label class="education-option">
+                        <div class="education-item">
                             <input type="checkbox" id="webbureau" />
-                            <label for="webbureau">Webbureau</label>
+                            <span>Webbureau</span>
                         </div>
-                    </div>
+                        </label>
                 </div>
-                <div>
-                    <label for="expiration-date">Expiration date</label>
-                    <input type="date" id="expiration-date" />
-                </div>
+            </div>
+                 <div class="date-picker-box">
+                <label for="expiration-date">Expiration Date</label>
+                <input type="date" id="expiration-date" />
+            </div>
             </form>
         </div>
-        <div class="right-section">
+        <div id="add-users-to-group" class="right-section">
             <h2>Add users to group</h2>
             <div class="user-list-container">
                 <input type="text" placeholder="Search user" class="search-input" />

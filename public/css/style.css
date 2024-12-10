@@ -2,8 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background-color: #121212;
-    color: #fff;
+    background-color: #0E0E0E;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,7 +24,7 @@ body {
 }
 
 .login-box {
-    background-color: #1e1e1e;
+    background-color: #202328;
     padding: 30px;
     border-radius: 10px;
     width: 400px;
@@ -41,6 +40,7 @@ form label {
     display: flex;
     text-align: left;
     margin-bottom: 8px;
+    
 }
 
 form input {
@@ -49,7 +49,7 @@ form input {
     margin-bottom: 15px;
     border: none;
     border-radius: 5px;
-    background-color: #c7c7c7;
+    background-color: #D9D9D9;
 }
 
 form .forgot-password {
@@ -58,7 +58,7 @@ form .forgot-password {
 }
 
 form .forgot-password a {
-    color: #f57c00;
+    color: #f9f9f9;
     text-decoration: none;
 }
 
@@ -66,10 +66,14 @@ form .btn-login {
     background-color: #f57c00;
     border: none;
     padding: 10px 20px;
-    color: white;
+    color: #F9F9F9;
     cursor: pointer;
     border-radius: 5px;
     font-size: 16px;
+}
+
+form input::placeholder{
+    color: #0E0E0E
 }
 
 form .btn-login:hover {
@@ -86,13 +90,24 @@ dialog[data-modal] {
     height: 806px;
     max-width: 90%;
     max-height: 90%;
-    background-color: #121212;
-    color: #fff;
+    background-color: #202328;
+    color: #F9F9F9;
     position: relative;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+}
+
+h2{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    padding-left: 5px;
+}
+
+p{
+    color: #0E0E0E;
 }
 
 /* Modal Backdrop */
@@ -120,23 +135,33 @@ dialog[data-modal] form {
     gap: 20px;
 }
 
+dialog[data-modal="large"] form {
+    display: flex;
+    flex-direction: row;
+}
+
+dialog[data-modal] .template-setup{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px; /* Space between rows */
+}
+
 /* Labels */
 dialog[data-modal] label {
     font-size: 18px;
     margin-bottom: 8px;
-    color: #d1d1d1;
+    color: #f9f9f9;
 }
 
 /* Inputs */
 dialog[data-modal] input {
-    width: 100%;
+    width: 50%;
     height: 50px;
     padding: 10px;
     font-size: 16px;
     border: none;
     border-radius: 5px;
-    background-color: #2e2e2e;
-    color: #fff;
+    background-color: #D9D9D9;
 }
 
 /* Reset Password Button */
@@ -146,7 +171,6 @@ dialog[data-modal] button#reset-password {
     border: none;
     border-radius: 5px;
     background-color: #ce430b;
-    color: white;
     font-size: 16px;
     cursor: pointer;
     align-self: flex-start;
@@ -194,10 +218,10 @@ dialog[data-modal] .close-btn {
     position: absolute;
     top: 20px;
     right: 20px;
-    font-size: 24px;
+    font-size: 40px;
     background: none;
     border: none;
-    color: white;
+    color: #f9f9f9;
     cursor: pointer;
 }
 
@@ -212,8 +236,7 @@ dialog.large-modal{
     padding: 20px 40px;
     width: 1550px;
     height: 810px;
-    background-color: #121212;
-    color: #fff;
+    background-color: #202328;
     position: relative;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     display: flex;
@@ -221,13 +244,58 @@ dialog.large-modal{
     justify-content: space-between;
 }
 
+.group-name-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px; /* Adds space between group name and the sections below */
+    padding: 10px 0;
+}
+
+.group-name-container label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #f9f9f9;
+}
+
+.group-name-container input {
+    width: 30%;
+    height: 30px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #D9D9D9;
+    font-size: 16px;
+    color: #f9f9f9;
+}
+
+.group-name-container input::placeholder {
+    color: #0E0E0E;
+}
+
 /* Modal Content Layout */
 .modal-content {
     display: flex;
-    justify-content: space-between;
-    gap: 20px;
+    gap: 50px;
     width: 100%;
     height: auto;
+}
+
+.left-section,
+.right-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Spacing between child elements */
+    flex: 1; /* Both sections take equal space */
+    overflow-y: auto; /* Allows scroll if content exceeds the container */
+}
+
+.left-section form,
+.right-section .user-list-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 /* Left Section (Group Details) */
@@ -242,10 +310,9 @@ dialog.large-modal{
 .left-section input[type="date"] {
     width: 100%;
     padding: 10px;
-    border: 1px solid #3a3a3a;
+    border: none;
     border-radius: 5px;
-    background-color: #2e2e2e;
-    color: white;
+    background-color: #D9D9D9;
     font-size: 16px;
 }
 
@@ -282,10 +349,9 @@ dialog.large-modal{
 .user-list-container .search-input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #3a3a3a;
+    border: none;
     border-radius: 5px;
-    background-color: #2e2e2e;
-    color: white;
+    background-color: #D9D9D9;
     font-size: 16px;
 }
 
@@ -302,9 +368,9 @@ dialog.large-modal{
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    border: 1px solid #3a3a3a;
+    border: none;
     border-radius: 5px;
-    background-color: #1e1e1e;
+    background-color: #D9D9D9;
 }
 
 #user-list li span {
@@ -313,7 +379,6 @@ dialog.large-modal{
 
 #user-list .remove-user-btn {
     background-color: #800;
-    color: white;
     border: none;
     border-radius: 5px;
     padding: 5px 10px;
@@ -332,7 +397,6 @@ dialog.large-modal{
 
 .modal-footer .btn-create-group {
     background-color: #ce430b;
-    color: white;
     padding: 10px 30px;
     border: none;
     border-radius: 5px;
@@ -372,10 +436,9 @@ dialog[data-modal="create-stack"] .left-section input,
 dialog[data-modal="create-stack"] .left-section select {
     width: 80%;
     padding: 8px;
-    border: 1px solid #3a3a3a;
+    border: none;
     border-radius: 5px;
-    background-color: #2e2e2e;
-    color: white;
+    background-color: #d9d9d9;
     font-size: 16px;
     display: flex;
     flex-direction: column;
@@ -396,10 +459,9 @@ dialog[data-modal="create-stack"] .right-section form {
 dialog[data-modal="create-stack"] .right-section input {
     width: 100%;
     padding: 10px;
-    border: 1px solid #3a3a3a;
+    border: none;
     border-radius: 5px;
     background-color: #2e2e2e;
-    color: white;
     font-size: 16px;
 }
 
@@ -410,7 +472,6 @@ dialog[data-modal="create-stack"] .modal-footer {
 
 dialog[data-modal="create-stack"] .modal-footer button {
     background-color: #ce430b;
-    color: white;
     padding: 10px 30px;
     border: none;
     border-radius: 5px;
@@ -429,8 +490,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
     padding: 20px 40px;
     width: 1200px;
     height: 700px;
-    background-color: #121212;
-    color: #fff;
+    background-color: #202328;
     position: relative;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     display: flex;
@@ -441,35 +501,54 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 .group-stacks-modal h1 {
     font-size: 28px;
     margin-bottom: 20px;
-    color: #fff;
 }
 
 .stack-table {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
-    color: #d1d1d1;
+    color: #202328;
 }
 
 .stack-table th,
 .stack-table td {
     padding: 15px;
-    border-bottom: 1px solid #333;
+    border: none;
 }
 
 .stack-table th {
-    background-color: #1e1e1e;
-    color: #fff;
+    background-color: #D9D9D9;
     font-weight: bold;
 }
 
 .stack-table td {
-    background-color: #1e1e1e;
+    background-color: #d9d9d9;
+}
+
+.background-box{
+    width: 100%;
+    height: 100%;
+    background-color: #464A4C;
+}
+
+#manage-users{
+    align-items: flex-start;
+    justify-content: left;
+    background-color: #ce430b;
+    margin-right: auto;
+}
+
+#manage-users:hover{
+    background-color: #f15011;
+}
+
+.button-group{
+    display: flex;
+    gap: 20px;
 }
 
 .delete-btn {
     background-color: #800;
-    color: white;
     padding: 5px 15px;
     border: none;
     border-radius: 5px;
@@ -482,8 +561,47 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 
 .modal-footer {
     display: flex;
-    justify-content: flex-end;
-    gap: 20px;
+    justify-content: space-between;
+    align-items:center; 
+}
+
+.date-picker-box{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    background-color: #464A4C;
+}
+
+.education-box{
+    display: flex;
+    flex-direction: column;
+    background-color: #464A4C;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 25%;
+    width: 80%;
+}
+
+.education-box h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #F9F9F9;
+}
+
+
+.date-picker-box,
+.education-box {
+    background-color: #464A4C;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.education-options div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .delete-stacks-btn,
@@ -511,8 +629,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
     padding: 20px;
     width: 1200px;
     height: 800px;
-    background-color: #121212;
-    color: #fff;
+    background-color: #202328;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
@@ -531,23 +648,33 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
     color: #d1d1d1;
 }
 
+.left-section{
+    margin-top: 10px;
+}
+
 .details-table th,
 .details-table td {
     padding: 15px;
-    border-bottom: 1px solid #333;
+    border: none;
 }
 
 .details-table th {
-    background-color: #1e1e1e;
+    background-color: #D9D9D9;
 }
 
 .details-table td {
-    background-color: #2e2e2e;
+    background-color: #D9D9D9;
+}
+
+.details-table-left-box{
+    width: 50%;
+    background-color: #464A4C;
+    border-radius: 10px;
+    padding: 20px;
 }
 
 .edit-btn {
     background-color: #800;
-    color: white;
     border: none;
     border-radius: 5px;
     padding: 5px 10px;
@@ -568,6 +695,31 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
     margin-bottom: 10px;
 }
 
+.education-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between each checkbox option */
+}
+
+.education-option {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between checkbox and label text */
+    font-size: 16px;
+    color: #F9F9F9;
+}
+
+.education-option input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.education-option span {
+    font-size: 16px;
+    font-weight: normal;
+}
+
 .education-options div {
     display: flex;
     align-items: center;
@@ -578,4 +730,38 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
     display: flex;
     justify-content: flex-end;
     gap: 20px;
+}
+
+.modal-header {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.education-item {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between checkbox and text */
+    background-color: #D9D9D9;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    color: #0E0E0E;
+    width: 100%;
+}
+
+.education-item input[type="checkbox"] {
+    height: 20px;
+    cursor: pointer;
+}
+
+.education-item span {
+    font-size: 16px;
+    font-weight: bold;
+    flex-grow: 1; /* Allows the text to take up remaining space */
+}
+
+.large-modal .education-box{
+    margin-top: 0%;
 }
