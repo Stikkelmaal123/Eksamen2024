@@ -6,13 +6,6 @@ exports.getLoginPage = (req, res) => {
 exports.postLogin = async (req, res) => {
     const { email, password } = req.body;
 
-<<<<<<< Updated upstream
-    if (email === 'test@example.com' && password === 'password') {
-        req.session.user = { email }; // Store user info in session
-        return res.redirect('/'); // Redirect to homepage after login
-    } else {
-        res.render('login', { title: 'Log In', message: 'Invalid credentials, please try again.' });
-=======
     try {
         //  Validate user credentials
         const user = await getUserByEmailAndPassword(email, password);
@@ -39,7 +32,6 @@ exports.postLogin = async (req, res) => {
             title: 'Log In',
             message: 'An error occurred. Please try again later.',
         });
->>>>>>> Stashed changes
     }
    res.redirect('/');
 };
