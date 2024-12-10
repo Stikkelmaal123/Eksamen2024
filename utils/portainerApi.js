@@ -2,11 +2,11 @@ const axios = require('axios');
 
 const BASE_URL = 'https://portainer.kubelab.dk/api'; // Ensure you're using https
 
-const login = async (username, password) => {
+const login = async () => {
     try {
         const response = await axios.post(`${BASE_URL}/auth`, {
-            username,
-            password,
+            username: "alpha",
+            password: "Ladida.12",
         });
         token = response.data.jwt;  // This is the JWT token
         return token;  // Return the token to use later
