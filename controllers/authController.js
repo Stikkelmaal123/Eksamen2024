@@ -6,11 +6,40 @@ exports.getLoginPage = (req, res) => {
 exports.postLogin = async (req, res) => {
     const { email, password } = req.body;
 
+<<<<<<< Updated upstream
     if (email === 'test@example.com' && password === 'password') {
         req.session.user = { email }; // Store user info in session
         return res.redirect('/'); // Redirect to homepage after login
     } else {
         res.render('login', { title: 'Log In', message: 'Invalid credentials, please try again.' });
+=======
+    try {
+        //  Validate user credentials
+        const user = await getUserByEmailAndPassword(email, password);
+
+        if (!user) {
+            return res.render('login', {
+                title: 'Log In',
+                message: 'Invalid credentials, please try again.',
+            });
+        }
+
+        // Authenticate with Portainer API
+        const portainerToken = await portainerLogin("alpha", "Ladida.12");
+
+        // Store user and token in session
+        req.session.user = { id: user.id, email: user.email };
+        req.session.portainerToken = portainerToken;
+
+        // Redirect to the homepage
+        res.redirect('/stacks');
+    } catch (error) {
+        console.error('Login error:', error);
+        res.render('login', {
+            title: 'Log In',
+            message: 'An error occurred. Please try again later.',
+        });
+>>>>>>> Stashed changes
     }
    res.redirect('/');
 };

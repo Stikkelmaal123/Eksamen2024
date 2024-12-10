@@ -18,6 +18,7 @@ app.engine('hbs', exphbs.engine({
 app.set('view engine', 'hbs');
 app.set('views', 'views');  // Specify views directory
 
+
 // Middleware to serve static files
 app.use(express.static('public'));
 app.use(express.json());
