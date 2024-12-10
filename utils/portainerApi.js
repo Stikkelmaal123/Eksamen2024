@@ -44,21 +44,20 @@ const getSwarmID = async (endpointId) => {
 
 
 // Create stack function
-const createStack = async (name, fileContent, endpointId, username, password) => {
+const createStack = async (name, fileContent, endpointId) => {
     try {
         if (!token) {
-            console.log('No token found. Logging in...');
-            await login(username, password);
+            alert('Yoú are not logged in');
         }
 
-        const swarmId = await getSwarmID(endpointId); // Could return null
+        const swarmId = await getSwarmID(endpointId); 
         console.log('Swarm ID:', swarmId);
 
         const payload = {
             Name: name,
             StackFileContent: fileContent,
             EndpointId: endpointId,
-            SwarmID: swarmId || undefined, // Exclude SwarmID if it's null
+            SwarmID: swarmId,
             ComposeFormat: "3.8",
         };
 
