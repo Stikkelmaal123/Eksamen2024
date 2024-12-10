@@ -1,61 +1,27 @@
 /* Global Styles */
 body {
     margin: 0;
-    font-family: var(--main-font);
-    background-color: var(--primary-background-color);
+    font-family: 'Inter', sans-serif;
+    background-color: #121212;
+    color: #ffffff;
     display: flex;
     min-height: 100vh;
   }
-
-/* root settings */
-
-:root {
-
-  /* Colors */
-  
-  --primary-background-color: #FF1493; /* Main baground */
-  --secondary-background-color: #202328; /* hover baground for row and headers */
-  --third-background-color: #464A4C; /* Row and row header background */
-  --font-color: #f9f9f9; /* for all text */
-  --searchbar-input-color: #2a2a2a;
-
-
-  /* fonts */
-
-  --main-font: "Roboto", serif;
-  
-}
-
-[data-theme="dark"] {
-  --primary-background-color: #0E0E0E; /* Main baground */
-  --secondary-background-color: #202328; /* hover baground for row and headers */
-  --third-background-color: #464A4C; /* Row and row header background */
-  --font-color: #f9f9f9; /* for all text */
-  --searchbar-input-color: #2a2a2a;
-}
-
-
- strong {
-  color: var(--font-color);
- }
   
   h1, h3 {
-    color: var(--font-color);
     margin: 0;
-    font-family: "Kosugi Maru", sans-serif;
-    font-weight: 400;
-    font-style: normal;
+    font-weight: normal;
   }
   
   a {
-    color: var(--font-color);
+    color: #ffffff;
     text-decoration: none;
   }
   
   button {
     background: none;
     border: none;
-    color: var(--font-color);
+    color: #ffffff;
     cursor: pointer;
   }
   
@@ -219,10 +185,10 @@ form .btn-login:hover {
   .search-bar input {
     flex: 1;
     padding: 10px 15px 10px 45px;
-    background: var(--searchbar-input-color);
+    background: #2a2a2a;
     border: none;
     border-radius: 10px;
-    color: var(--font-color);
+    color: #ffffff;
     font-size: 14px;
     width: 100%;
     box-sizing: border-box;
@@ -253,9 +219,9 @@ form .btn-login:hover {
     grid-template-columns:  1.5fr 1fr 2fr 1fr 1fr 1fr 1fr;
     padding: 15px 20px;
     align-items: center;
-    background: var(--third-background-color);
+    background: #2e2e2e;
     font-weight: bold;
-    color: var(--font-color);
+    color: #e0e0e0;
     text-transform: uppercase;
     border-radius: 10px;
     margin-bottom: 20px;
@@ -266,13 +232,12 @@ form .btn-login:hover {
     border-radius: 10px;
     overflow: hidden;
     margin-bottom: 15px;
-    background: var(--third-background-color);
-    color: var(--font-color);
+    background: #1f1f1f;
     transition: background-color 0.3s;
   }
   
   .row-container:hover {
-    background: var(--secondary-background-color);
+    background: #2a2a2a;
   }
   
   .table-row {
@@ -294,13 +259,13 @@ form .btn-login:hover {
     left: 0;
     width: 100%;
     height: 1px;  /* Height of the white line */
-    background-color: var(--font-color);  /* White color for the line */
+    background-color: #ffffff;  /* White color for the line */
   }
   
   .details-row {
     display: none;
     padding: 15px 20px;
-    background: var(--secondary-background-color);
+    background: #2a2a2a;
     display: grid;
     grid-template-columns:  repeat(3, 1fr);
     gap: 20px;
@@ -446,7 +411,7 @@ form .btn-login:hover {
   
   /* Base sidebar styles */
   .sidebar {
-    background: var(--primary-background-color);
+    background: #1a1a1a;
     padding: 30px;
     width: 250px;
     box-sizing: border-box;
@@ -487,10 +452,6 @@ form .btn-login:hover {
   
   /* Sidebar logo styles */
   .sidebar .logo {
-    color: var(--font-color);
-    font-family: "Rubik Mono One", serif;
-    font-weight: 400;
-    font-style: normal;
     font-size: 28px;
     font-weight: bold;
     margin-bottom: 30px;
@@ -503,7 +464,7 @@ form .btn-login:hover {
     font-size: 12px;
     text-transform: uppercase;
     margin-bottom: 10px;
-    color: var(--font-color);
+    color: #b0b0b0;
     margin-top: 30px;
   }
   
@@ -521,10 +482,10 @@ form .btn-login:hover {
   .sidebar .menu li a {
     display: block;
     padding: 10px 15px;
-    background: var(--secondary-background-color);
+    background: #2a2a2a;
     border-radius: 5px;
     font-size: 14px;
-    color: var(--font-color);
+    color: #e0e0e0;
     text-align: left;
     transition: background-color 0.3s;
   }
@@ -540,7 +501,7 @@ form .btn-login:hover {
     top: 10px;
     left: 10px;
     background: #1a1a1a;
-    color: var(--font-color);
+    color: #fff;
     border: none;
     padding: 10px;
     font-size: 18px;
@@ -559,11 +520,8 @@ form .btn-login:hover {
 .theme-switch-wrapper {
   display: flex;
   align-items: center;
-  border-radius: 10px;
-  background-color: var(--secondary-background-color);
 }
 .theme-switch-wrapper em {
-  color: var(--font-color);
   margin-left: 10px;
   font-size: 1rem;
 }
@@ -587,7 +545,7 @@ form .btn-login:hover {
   transition: 0.4s;
 }
 .slider:before {
-  background-color: var(--font-color);
+  background-color: #fff;
   bottom: 4px;
   content: "";
   height: 26px;
