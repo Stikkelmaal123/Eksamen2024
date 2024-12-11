@@ -244,9 +244,130 @@
         </div>
     </form>
     <div class="modal-footer">
+        <button id="delete-user" class="delete-btn">Remove user</button>
         <button id="save-edit" class="save-btn">Save</button>
     </div>
 </dialog>
+
+
+    <dialog data-modal="manage-users" class="manage-users-modal">
+        <button class="close-btn" data-close-modal>&times;</button>
+        <h1>Manage users in ("current group")</h1>
+        
+        <div class="modal-content">
+            <!-- Form Section -->
+            <div class="input-section">
+                <form>
+                    <div>
+                        <label for="user-name">Name</label>
+                        <input type="text" id="user-name" placeholder="Indtast navn">
+                    </div>
+                    <div>
+                        <label for="user-email">Email</label>
+                        <input type="email" id="user-email" placeholder="Indtast email">
+                    </div>
+                </form>
+                <div class="button-group">
+                    <button class="add-user-btn">Add user</button>
+                    <button class="add-users-csv-btn">Add user(s) from csv file</button>
+                </div>
+            </div>
+
+            <!-- Table Section -->
+            <div class="table-section">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Education</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Example rows -->
+                        <tr>
+                            <td>Anders Ole Snabe Buch</td>
+                            <td>aosb48851@edu.ucl.dk</td>
+                            <td>Webudvikling</td>
+                            <td><button class="edit-btn">Edit</button></td>
+                        </tr>
+                        <tr>
+                            <td>Anders Ole Snabe Buch</td>
+                            <td>aosb48851@edu.ucl.dk</td>
+                            <td>Webudvikling</td>
+                            <td><button class="edit-btn">Edit</button></td>
+                        </tr>
+                        <tr>
+                            <td>Anders Ole Snabe Buch</td>
+                            <td>aosb48851@edu.ucl.dk</td>
+                            <td>Webudvikling</td>
+                            <td><button class="edit-btn">Edit</button></td>
+                        </tr>
+                        <tr>
+                            <td>Anders Ole Snabe Buch</td>
+                            <td>aosb48851@edu.ucl.dk</td>
+                            <td>Webudvikling</td>
+                            <td><button class="edit-btn">Edit</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="modal-footer">
+            <button class="remove-stacks-btn">Remove stacks</button>
+            <button class="save-btn">Save</button>
+        </div>
+    </dialog>
+
+<dialog data-modal="manage-user" class="manage-user-modal">
+        <button class="close-btn" data-close-modal>&times;</button>
+        <h1>Managing ("current user")</h1>
+        
+        <div class="modal-content">
+            <!-- Left Section -->
+            <div class="edit-user-section">
+                <h2>Edit user info</h2>
+                <form>
+                    <div class="input-group">
+                        <label for="user-name">Name</label>
+                        <input type="text" id="user-name" value="Anders Ole Snabe Buch">
+                    </div>
+                    <div class="input-group">
+                        <label for="user-email">Email</label>
+                        <input type="email" id="user-email" value="aosb48851@edu.ucl.dk">
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Section -->
+            <div class="permissions-section">
+                <div class="permission-group">
+                    <h2>Change permissions</h2>
+                    <select id="user-permissions">
+                        <option value="student">Student</option>
+                        <option value="good-student">The good student</option>
+                        <option value="admin">Admin</option>
+                        <option value="super-admin">Super admin</option>
+                    </select>
+                </div>
+                <div class="permission-group">
+                    <h2>Permitted snacks</h2>
+                    <input type="number" id="permitted-snacks" value="1">
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="modal-footer">
+            <button class="delete-user-btn">Delete user</button>
+            <button class="save-btn">Save</button>
+        </div>
+    </dialog>
+
+
 
 <button data-open-modal="group-stacks">Group stacks</button>
 
@@ -353,6 +474,8 @@
         <button data-close-modal>Cancel</button>
     </div>
 </dialog>
+
+
 
     <script src="../js/modal.js"></script>
 </body>

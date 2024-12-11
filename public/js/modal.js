@@ -116,90 +116,74 @@ editCloseButton.addEventListener("click", () => {
     editModal.style.display = "none"; // Fallback
 });
 
-/*document.getElementById("delete-stacks").addEventListener("click", () => {
-    if (confirm("Are you sure you want to delete all stacks?")) {
-        alert("Stacks deleted successfully!");
-    }
+
+// Select the "Manage Users" button and the corresponding modal
+const manageUsersButton = document.getElementById("manage-users");
+const manageUsersModal = document.querySelector('[data-modal="manage-users"]');
+
+// Add an event listener to the button to open the modal
+manageUsersButton.addEventListener("click", () => {
+    manageUsersModal.style.display = "flex"; // Fallback for unsupported browsers
+    manageUsersModal.showModal(); // Show the modal
 });
 
-const deleteButtons = document.querySelectorAll(".delete-btn");
-deleteButtons.forEach((button) => {
+// Add close functionality to the "Manage Users" modal
+const manageUsersCloseButton = manageUsersModal.querySelector(".close-btn");
+
+manageUsersCloseButton.addEventListener("click", () => {
+    manageUsersModal.close();
+    manageUsersModal.style.display = "none"; // Fallback
+});
+
+
+// Select all "Edit" buttons within the "Manage Users" modal
+const manageUsersEditButtons = document.querySelectorAll('.manage-users-modal .edit-btn');
+const manageUserModal = document.querySelector('[data-modal="manage-user"]');
+
+// Add event listeners to each "Edit" button inside "Manage Users" modal
+manageUsersEditButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
         const row = event.target.closest("tr");
-        row.remove();
-    });
-});*/
-
-/*document.getElementById("save-details").addEventListener("click", () => {
-    const expirationDate = document.getElementById("expiration-date").value;
-    const selectedEducations = Array.from(
-        document.querySelectorAll(".education-options input:checked")
-    ).map((checkbox) => checkbox.nextElementSibling.textContent);
-
-    if (!expirationDate || selectedEducations.length === 0) {
-        alert("Please fill out all fields.");
-        return;
-    }
-
-    alert(`Details saved!\nExpiration Date: ${expirationDate}\nEducations: ${selectedEducations.join(", ")}`);
-});
-
-document.getElementById("delete-group").addEventListener("click", () => {
-    if (confirm("Are you sure you want to delete this group?")) {
-        alert("Group deleted successfully.");
-    }
-});*/
-
-/* // Get all buttons with class 'action-btn'
-const actionButtons = document.querySelectorAll(".action-btn");
-
-// Modals for each action
-const modals = {
-    edit: document.querySelector('dialog[data-modal="edit"]'),
-    delete: document.querySelector('dialog[data-modal="delete"]'),
-    view: document.querySelector('dialog[data-modal="view"]'),
-};
-
-// Attach click listeners to buttons
-actionButtons.forEach((button) => {
-    button.addEventListener("click", (event) => {
-        const action = button.getAttribute("data-action");
-        const row = button.closest("tr");
         const name = row.querySelector("td:nth-child(1)").textContent.trim();
         const email = row.querySelector("td:nth-child(2)").textContent.trim();
 
-        handleModalAction(action, { name, email });
+        // Populate the "Manage User" modal fields with user data
+        manageUserModal.querySelector('#user-name').value = name;
+        manageUserModal.querySelector('#user-email').value = email;
+
+        // Open the "Manage User" modal
+        manageUserModal.style.display = "flex"; // Fallback for unsupported browsers
+        manageUserModal.showModal();
     });
 });
 
-// Function to handle modal actions
-function handleModalAction(action, data) {
-    const modal = modals[action];
-    if (!modal) return;
+// Add close functionality for the "Manage User" modal
+const manageUserCloseButton = manageUserModal.querySelector(".close-btn");
 
-    // Populate modal content based on action
-    if (action === "edit") {
-        document.getElementById("edit-name").value = data.name;
-        document.getElementById("edit-email").value = data.email;
-    } else if (action === "delete") {
-        document.getElementById("delete-name").textContent = data.name;
-    } else if (action === "view") {
-        document.getElementById("view-name").textContent = data.name;
-        document.getElementById("view-email").textContent = data.email;
+manageUserCloseButton.addEventListener("click", () => {
+    manageUserModal.close();
+    manageUserModal.style.display = "none"; // Fallback
+});
+
+// Select the "Delete stacks" button inside the "Group stacks" modal
+const deleteStacksButton = document.querySelector('#delete-stacks');
+
+// Select the "Delete stacks" modal
+const deleteStacksModal = document.querySelector('[data-modal="delete-stacks"]');
+
+// Add an event listener to the button to open the "Delete stacks" modal
+deleteStacksButton.addEventListener('click', () => {
+    if (deleteStacksModal) {
+        deleteStacksModal.style.display = "flex"; // Fallback for unsupported browsers
+        deleteStacksModal.showModal(); // Show the modal
     }
+});
 
-    // Open the modal
-    modal.style.display = "flex"; // Fallback for unsupported browsers
-    modal.showModal();
-}
+// Ensure the "Delete stacks" modal can be closed
+const deleteStacksModalCloseButton = deleteStacksModal.querySelector(".close-btn");
 
-// Close modal logic (reusable)
-document.querySelectorAll("[data-close-modal]").forEach((closeButton) => {
-    closeButton.addEventListener("click", () => {
-        const modal = closeButton.closest("dialog");
-        if (modal) {
-            modal.close();
-            modal.style.display = "none"; // Fallback
-        }
-    });
-}); */
+deleteStacksModalCloseButton.addEventListener('click', () => {
+    deleteStacksModal.close();
+    deleteStacksModal.style.display = "none"; // Fallback
+});
+
