@@ -1,20 +1,27 @@
 const axios = require('axios');
+const https = require('https');
 
-const BASE_URL = 'https://portainer.kubelab.dk/api'; // Ensure you're using https
+const BASE_URL = 'https://portainer.kubelab.dk/api';
 
-const login = async () => {
+async function login() {
     try {
-        const response = await axios.post(`${BASE_URL}/auth`, {
-            username: "alpha",
-            password: "Ladida.12",
+        const agent = new https.Agent({ 
+            rejectUnauthorized: false // Ignore SSL certificate errors
         });
-        token = response.data.jwt;  // This is the JWT token
-        return token;  // Return the token to use later
+        
+        const response = await axios.post(
+            `${BASE_URL}/auth`,
+            { username: 'alpha', password: 'Ladida.12' },
+            { httpsAgent: agent }
+        );
+        
+        console.log('JWT Token:', response.data.jwt);
+        return response.data.jwt;
     } catch (error) {
-        console.error('Error authenticating with Portainer:', error);
+        console.error('Error authenticating with Portainer:', error.message);
         throw error;
-    }   
-};
+    }
+}
             
 
 

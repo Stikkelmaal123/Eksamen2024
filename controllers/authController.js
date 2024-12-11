@@ -1,42 +1,42 @@
 const { getUserByEmailAndPassword } = require('../models/user');
-const { login: portainerLogin } = require('../utils/portainerApi');
+const portainerApi = require('../utils/portainerApi'); 
 
 exports.getLoginPage = (req, res) => {
-    res.render('login', { layout: 'main2'});
-
+    res.render('login', { layout: 'main2' });
 };
 
 exports.postLogin = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        //  Validate user credentials
+        // Validate user credentials
         const user = await getUserByEmailAndPassword(email, password);
 
         if (!user) {
+            // Invalid credentials
             return res.render('login', {
+                layout: 'main2',
                 title: 'Log In',
                 message: 'Invalid credentials, please try again.',
             });
         }
+        const token = await portainerApi.login();
 
-        // Authenticate with Portainer API
-        const portainerToken = await portainerLogin("alpha", "Ladida.12");
-
-        // Store user and token in session
-        req.session.user = { id: user.id, email: user.email };
-        req.session.portainerToken = portainerToken;  // Save the token in session
-
-        // Redirect to the homepage
+        console.log('Portainer JWT token:', token);
+        // Redirect to stacks if login is successful
+        req.session.jwt = token;
         res.redirect('/stacks');
+        
     } catch (error) {
         console.error('Login error:', error);
         res.render('login', {
+            layout: 'main2',
             title: 'Log In',
             message: 'An error occurred. Please try again later.',
         });
     }
 };
+
 
 exports.logout = (req, res) => {
     req.session.destroy(() => {

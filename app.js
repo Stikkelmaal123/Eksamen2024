@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars');
 const stackRoutes = require('./routes/stackRoutes');
 const dateHelper = require('./public/helpers/dateHelper');
 const authRoutes = require('./routes/authRoutes');
+const session = require('express-session');
 
 const app = express();
 const PORT = 3000;
@@ -23,6 +24,12 @@ app.set('views', 'views');  // Specify views directory
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(session({
+    secret: '12397v9chiasng3', 
+    resave: false, 
+    saveUninitialized: true,
+    cookie: { secure: false }
+  }));
 
 // Routes
 app.use('/', stackRoutes);
