@@ -43,6 +43,159 @@
         </ul>
       </nav>
     </aside>
+      
+      
+      <!-- Modals -->
+
+      <!-- Add groups modal -->
+
+    <dialog data-modal="large" class="large-modal">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Creating group</h1>
+        <div class="group-name-container">
+        <label for="group-name">Group name</label>
+        <input type="text" id="group-name" placeholder="Enter name..." />
+    </div>
+    <div class="modal-content">
+        <div class="left-section">
+            <form class="create-group-form">
+
+                <div class="education-box">
+    <h2>Education</h2>
+    <div class="education-options">
+        <label class="education-option">
+                        <div class="education-item">
+                            <input type="checkbox" id="webudvikler" />
+                            <span>Webudvikler</span>
+                        </div>
+                </label>
+                <label class="education-option">
+                        <div class="education-item">
+                            <input type="checkbox" id="webbureau" />
+                            <span>Webbureau</span>
+                        </div>
+                        </label>
+                </div>
+            </div>
+                 <div class="date-picker-box">
+                <label for="expiration-date">Expiration Date</label>
+                <input type="date" id="expiration-date" />
+            </div>
+            </form>
+        </div>
+        <div id="add-users-to-group" class="right-section">
+            <h2>Add users to group</h2>
+            <div class="user-list-container">
+                <input type="text" placeholder="Search user" class="search-input" />
+                <ul id="user-list">
+                    <!-- Example user items -->
+                    <li>
+                        <span>Name: Anders Ole Snabe Buch</span>
+                        <span>Email: aosb48851@edu.ucl.dk</span>
+                        <button class="remove-user-btn">Remove</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn-create-group">Create group</button>
+    </div>
+    </dialog>
+    
+
+    <!-- Add stacks modal -->
+
+    <dialog data-modal="create-stack">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Creating stack</h1>
+    <div class="modal-content">
+        <div class="left-section">
+            <form>
+                <div>
+                    <label for="stack-name">Stack name</label>
+                    <input type="text" id="stack-name" placeholder="Name" />
+                </div>
+                <div>
+                    <label for="subdomain-name">Subdomain name</label>
+                    <input type="text" id="subdomain-name" placeholder="Name" />
+                </div>
+                <div>
+                    <label for="templates">Templates</label>
+                    <select id="templates" multiple>
+                        <option value="wordpress">WordPress</option>
+                        <option value="mariadb">MariaDB</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <div class="right-section">
+            <h2>Optional</h2>
+            <form>
+                <div>
+                    <label for="owner-name">Add another owner</label>
+                    <input type="text" id="owner-name" placeholder="Name" />
+                </div>
+                <div>
+                    <label for="group-name">Add group to stack</label>
+                    <input type="text" id="group-name" list="groups" placeholder="Search group" />
+                    <datalist id="groups">
+                        <option value="WOUE24"></option>
+                        <option value="WOUE23"></option>
+                    </datalist>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="create-stack">Create stack</button>
+    </div>
+</dialog>
+
+    <!-- Add users modal -->
+
+    <dialog data-modal="add-user">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Add user</h1>
+    <form>
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Name..." />
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Email..." />
+        </div>
+        <button type="button" id="reset-password">Add user</button>
+    </form>
+    <div class="add-user-csv-box">
+        <p class="csv">Drag and drop csv file or click here</p>
+    </div>
+    <div class="modal-footer">
+        <button id="save">Done</button>
+    </div>
+</dialog>
+
+    
+    <!-- Add template modal -->
+
+    <dialog data-modal="add-template">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Add template</h1>
+    <div class="template-setup">
+        <label for="name">Template name</label>
+        <input type="text" id="name" placeholder="Template..." />
+    </div>
+    <div class="template-setup">
+        <label for="name">Template text</label>
+        <input type="text" id="name" placeholder="Add template text here..." />
+    </div>
+    <div class="modal-footer">
+        <button id="save">Done</button>
+    </div>
+</dialog>
+
+
     {{{body}}} <!-- Content from child templates will be injected here -->
 </body>
 </html>

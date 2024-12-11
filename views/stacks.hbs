@@ -59,4 +59,35 @@
     </main>
   </div>
 
+<dialog data-modal="delete-stack">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Are you sure you want to delete (“stack”)?</h1>
+    <div class="background-box">
+    <div class="modal-content">
+        <table class="stack-table">
+            <thead>
+                <tr>
+                    <th>Stack name</th>
+                    <th>Stack type</th>
+                    <th>Subdomain</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example rows -->
+                <tr>
+                    <td>OPStackbro</td>
+                    <td>WPServer</td>
+                    <td>aosb48851@edu.ucl.dk</td>
+                    <td><button class="delete-btn">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="delete-stacks" class="delete-stacks-btn">Yes delete stack</button>
+        <button id="save" class="save-btn">No don't delete</button>
+    </div>
+</dialog>
 
