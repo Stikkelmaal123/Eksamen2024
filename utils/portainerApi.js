@@ -15,8 +15,10 @@ async function login() {
             { httpsAgent: agent }
         );
         
-        console.log('JWT Token:', response.data.jwt);
-        return response.data.jwt;
+        const token = response.data.jwt;
+        console.log('JWT Token:', token);
+
+        return token;
     } catch (error) {
         console.error('Error authenticating with Portainer:', error.message);
         throw error;
@@ -27,6 +29,10 @@ async function login() {
 
 const getSwarmID = async (endpointId) => {
     try {
+        if (!token) {
+            throw new Error('No token found in session storage. Please log in.');
+        }
+
         const response = await axios.get(
             `${BASE_URL}/endpoints/${endpointId}/docker/swarm`,
             {
@@ -55,7 +61,7 @@ const getSwarmID = async (endpointId) => {
 const createStack = async (name, fileContent, endpointId) => {
     try {
         if (!token) {
-            throw new Error('You are not logged in');
+            throw new Error('No token found in session storage. Please log in.');
         }
 
         const swarmId = await getSwarmID(endpointId); 

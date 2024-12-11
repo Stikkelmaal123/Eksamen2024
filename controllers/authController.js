@@ -23,10 +23,12 @@ exports.postLogin = async (req, res) => {
         const token = await portainerApi.login();
 
         console.log('Portainer JWT token:', token);
-        // Redirect to stacks if login is successful
-        req.session.jwt = token;
-        res.redirect('/stacks');
-        
+       // Send token to client and provide redirect URL
+       res.status(200).json({
+        message: 'Login successful',
+        token,
+        redirect: '/stacks',
+    });
     } catch (error) {
         console.error('Login error:', error);
         res.render('login', {
