@@ -31,9 +31,9 @@
         {{#each stacks}}
         <div class="row-container-groups">
           <div class="table-row-groups">
-            <span>WUE2024</span>
+            <span>{{this.group_name}}</span>
             <span>Webudvikler</span>
-            <span>12/12/2025</span>
+            <span>{{formatDate this.expiration_date}}</span>
             <span>31</span>
             <span>31</span>
             <span class="actions-groups">
