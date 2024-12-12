@@ -116,6 +116,49 @@ function switchTheme(e) {
 
 toggleSwitch.addEventListener('change', switchTheme, false);
 
+// group page javascript
+
+// JavaScript for toggling .group-links-container visibility
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Select all action buttons
+    const actionButtons = document.querySelectorAll(".actions-groups button");
+
+    // Variable to track the currently open dropdown
+    let currentlyOpenDropdown = null;
+
+    actionButtons.forEach(button => {
+        button.addEventListener("click", (e) => {
+            e.stopPropagation(); // Prevent event from bubbling to document
+
+            // Find the corresponding dropdown
+            const groupLinksContainer = button.nextElementSibling;
+
+            // Close the currently open dropdown if it exists and is not the same as the clicked one
+            if (currentlyOpenDropdown && currentlyOpenDropdown !== groupLinksContainer) {
+                currentlyOpenDropdown.style.display = "none";
+            }
+
+            // Toggle visibility of the clicked dropdown
+            if (groupLinksContainer.style.display === "flex") {
+                groupLinksContainer.style.display = "none";
+                currentlyOpenDropdown = null;
+            } else {
+                groupLinksContainer.style.display = "flex";
+                currentlyOpenDropdown = groupLinksContainer;
+            }
+        });
+    });
+
+    // Close the dropdown if clicking anywhere outside
+    document.addEventListener("click", () => {
+        if (currentlyOpenDropdown) {
+            currentlyOpenDropdown.style.display = "none";
+            currentlyOpenDropdown = null;
+        }
+    });
+});
+
 // modals
 
 // Select all buttons that open modals and all modals

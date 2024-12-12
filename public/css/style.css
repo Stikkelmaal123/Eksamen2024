@@ -1551,3 +1551,81 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
+/* Groups.hbs */
+
+  /* Table Header */
+  .table-header-groups {
+    display: grid;
+    grid-template-columns:  1.5fr 1.5fr 1.5fr 1fr 1.5fr 1.5fr;
+    padding: 15px 20px;
+    align-items: center;
+    justify-content: center;
+    background: var(--third-background-color);
+    font-weight: bold;
+    color: var(--font-color);
+    text-transform: uppercase;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* New container that wraps each row set */
+  .row-container-groups {
+    border-radius: 10px;
+    margin-bottom: 15px;
+    background: var(--third-background-color);
+    color: var(--font-color);
+    transition: background-color 0.3s;
+    z-index: 1;
+  }
+  
+  .table-row-groups {
+    display: grid;
+    grid-template-columns:  1.5fr 1.5fr 1.5fr 1fr 1.5fr 1.5fr;
+    padding: 15px 20px;
+    align-items: center;
+    background: transparent;
+    z-index: 1;
+  }
+
+
+
+  .actions-groups {
+    position: relative;
+    display: flex;
+    gap: 8px;
+  }
+
+  .actions-groups span {
+    z-index: 1;
+  }
+  
+  .actions-groups button {
+    background: #444;
+    color: var(--font-color);
+    font-size: 12px;
+    transition: background-color 0.3s;
+    z-index: 1;
+  }
+
+  .group-links-container {
+    display: none; /* Initially hidden */
+    position: absolute;
+    top: 100%; /* Position it directly below the button */
+    left: -60px;   /* Align with the left of the parent container */
+    flex-direction: column;
+    padding: 10px;
+    background-color: var(--secondary-background-color);
+    border-radius: 10px;
+    z-index: 10;
+  }
+
+  @media (max-width: 768px) {
+    .table-header-groups span:nth-child(5), /* running stacks header */
+    .table-row-groups span:nth-child(5) {   /* running stacks row */
+      display: none;
+    }
+    .table-header-groups, .table-row-groups {
+      grid-template-columns: 1.5fr 1.5fr 2fr 1fr 1fr; /* Adjust based on remaining columns */
+      font-size: 14px;
+    }
+  }

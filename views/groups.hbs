@@ -5,7 +5,7 @@
     <main class="main-content">
       <header>
         <button class="sidebar-toggle">☰</button>
-        <h1>Projects</h1>
+        <h1>Groups</h1>
       </header>
 
       <!-- Navigation/Search -->
@@ -20,35 +20,31 @@
       <div class="project-table">
 
         <!-- Table Header (Make sure this stays) -->
-        <div class="table-header">
-          <span>Stack name</span>
-          <span>Stack type</span>
-          <span>Subdomain</span>
-          <span>Owner</span>
-          <span>Creation date</span>
-          <span>Status</span>
+        <div class="table-header-groups">
+          <span>Group name</span>
+          <span>Education</span>
+          <span>Expiration date</span>
+          <span>Users</span>
+          <span>Running Stacks</span>
           <span>Actions</span>
         </div>
         {{#each stacks}}
-        <div class="row-container">
-          <div class="table-row" onclick="toggleDetails(this)">
-            <span class="stack-name">{{this.stack_name}}</span>
-            <span>{{this.template_name}}</span>
-            <span>{{this.sub_domain}}</span>
-            <span class="owner">{{this.user_name}}</span>
-            <span class="creation-date">{{formatDate this.creation_date}}</span>
-            <span class="status online">Online</span>
-            <span class="actions">
-              <button>⋮</button>
+        <div class="row-container-groups">
+          <div class="table-row-groups">
+            <span>WUE2024</span>
+            <span>Webudvikler</span>
+            <span>12/12/2025</span>
+            <span>31</span>
+            <span>31</span>
+            <span class="actions-groups">
+              <button>
+                <img src="../img/iconMore.svg" alt="See more icon">
+              </button>
+                <div class="group-links-container">
+                    <a href="#">Details</a>
+                    <a href="#">Stacks</a>
+                </div>
             </span>
-          </div>
-          <div class="details-row">
-            <span data-mobile-only><strong>Stack Name: </strong>{{this.stack_name}}</span>
-            <span><strong>Group: </strong>{{this.group_name}}</span>
-            <span data-mobile-only><strong>Owner: </strong>{{this.user_name}}</span>
-            <span data-mobile-only><strong>Creation Date: </strong>{{formatDate this.creation_date}}</span>
-            <span><strong>Uptime: </strong>6278 days</span>
-            <span><strong>Latest run: </strong>27/13/9044</span>
           </div>
         </div>
         {{/each}}
