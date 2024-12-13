@@ -1,62 +1,36 @@
 const stacksModel = require('../models/stacks'); // DB model for stacks
-const db = require('../utils/db'); // Database utility for executing queries
+const { getTemplateByName } = require('../models/templates');
+const { processYaml } = require('../utils/yamlProcessor');
 const portainerApi = require('../utils/portainerApi'); // Portainer API utility
-const { v4: uuidv4 } = require('uuid'); // For generating unique strings
 
 exports.createStack = async (req, res) => {
     try {
-        const { stackName, templateName, subdomain } = req.body;
+        const { stackName, templateName, subdomain, subdomain2 } = req.body;
 
+        // Validate input
         if (!stackName || !templateName || !subdomain) {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
-        // Generate a unique random string for "CHANGEME"
-        const randomString = uuidv4();
+        // Fetch the YAML template
+        const templateContent = await getTemplateByName(templateName);
+        if (!templateContent) {
+            return res.status(404).json({ error: 'Template not found' });
+        }
 
-        // Create stack template
-        const stackTemplate = {
-            networks: {
-                "traefik-proxy": { external: true },
-            },
-            services: {
-                test: {
-                    image: "nginx:latest",
-                    networks: ["traefik-proxy"],
-                    deploy: {
-                        labels: [
-                            "traefik.enable=true",
-                            `traefik.http.routers.${randomString}.rule=Host(\`${subdomain}\`)`,
-                            `traefik.http.routers.${randomString}.entrypoints=web,websecure`,
-                            `traefik.http.routers.${randomString}.tls.certresolver=letsencrypt`,
-                            `traefik.http.services.${randomString}.loadbalancer.server.port=80`,
-                        ],
-                    },
-                },
-            },
-        };
+        // Process the YAML template
+        const processedYaml = await processYaml(templateContent, { subdomain, subdomain2 });
 
-        // Convert the stack template to JSON
-        const stackFileContent = JSON.stringify(stackTemplate, null, 2);
+        // Create the stack using Portainer API
+        const stackCreationResponse = await portainerApi.createStack(stackName, processedYaml);
 
-        // Pass username and password for authentication
-        const endpointId = 5;
-
-        // Call Portainer API to create the stack
-        const createdStack = await portainerApi.createStack(
-            stackName,
-            stackFileContent,
-            endpointId
-        );
-
-        // Save stack details in the database
-        const query = 'INSERT INTO stacks (stack_name, template_name, sub_domain) VALUES (?, ?, ?)';
-        await db.query(query, [stackName, templateName, subdomain]);
-
-        res.status(201).json({ message: 'Stack created successfully', stackId: createdStack.Id });
+        return res.status(201).json({
+            message: 'Stack created successfully',
+            stack: stackCreationResponse,
+        });
     } catch (error) {
-        console.error('Error in createStack:', error.message);
-        res.status(500).json({ error: 'Internal server error' });
+        console.error('Error creating stack:', error);
+        return res.status(500).json({ error: 'Internal server error' });
     }
 };
 
