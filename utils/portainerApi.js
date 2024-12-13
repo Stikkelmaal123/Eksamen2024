@@ -1,41 +1,45 @@
 const axios = require('axios');
 const https = require('https');
+const { saveToken, getToken } = require('./tokenStore');
 
+const httpsAgent = new https.Agent({ rejectUnauthorized: false });
 const BASE_URL = 'https://portainer.kubelab.dk/api';
+const ENDPOINT_ID = 5;
 
 async function login() {
     try {
-        const agent = new https.Agent({ 
-            rejectUnauthorized: false // Ignore SSL certificate errors
-        });
-        
         const response = await axios.post(
-            `${BASE_URL}/auth`,
-            { username: 'alpha', password: 'Ladida.12' },
-            { httpsAgent: agent }
+            `${BASE_URL}/auth`, 
+            {  username: 'alpha', password: 'Ladida.12' },
+            { httpsAgent }
+            
         );
-        
+
         const token = response.data.jwt;
-        console.log('JWT Token:', token);
+        console.log('JWT Token acquired:', token);
+
+        // Save token to memory
+        await saveToken(token);
 
         return token;
     } catch (error) {
-        console.error('Error authenticating with Portainer:', error.message);
-        throw error;
+        console.error('Error during login:', error.message);
+        throw new Error('Failed to authenticate with Portainer');
     }
 }
-            
 
 
-const getSwarmID = async (endpointId) => {
+const getSwarmID = async () => {
     try {
+        const token = await getToken();
         if (!token) {
             throw new Error('No token found in session storage. Please log in.');
         }
 
         const response = await axios.get(
-            `${BASE_URL}/endpoints/${endpointId}/docker/swarm`,
+            `${BASE_URL}/endpoints/${ENDPOINT_ID}/docker/swarm`,
             {
+                httpsAgent,
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -58,29 +62,31 @@ const getSwarmID = async (endpointId) => {
 
 
 // Create stack function
-const createStack = async (name, fileContent, endpointId) => {
+const createStack = async (stackName, processedYaml) => {
     try {
+        const token = await getToken();
         if (!token) {
             throw new Error('No token found in session storage. Please log in.');
         }
 
-        const swarmId = await getSwarmID(endpointId); 
+        const swarmId = await getSwarmID(); 
         console.log('Swarm ID:', swarmId);
 
         const payload = {
-            Name: name,
-            StackFileContent: fileContent,
-            EndpointId: endpointId,
+            Name: stackName,
+            StackFileContent: processedYaml,
+            EndpointId: ENDPOINT_ID,
             SwarmID: swarmId,
             ComposeFormat: "3.8",
         };
 
-        console.log('Payload for Stack Creation:', payload);
+        console.log('Payload for Stack Creation:', JSON.stringify(payload, null, 2));
 
         const response = await axios.post(
-            `${BASE_URL}/stacks?type=1&method=string&endpointId=${endpointId}`,
+            `${BASE_URL}/stacks?type=1&method=string&endpointId=${ENDPOINT_ID}`,
             payload,
             {
+                httpsAgent,
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

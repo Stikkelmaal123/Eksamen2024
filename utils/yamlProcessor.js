@@ -1,8 +1,6 @@
-// utils/yamlProcessor.js
 const yaml = require('js-yaml');
 const { v4: uuidv4 } = require('uuid');
 
-// Recursively replaces placeholders in the YAML object
 function replacePlaceholders(obj, replacements) {
     if (Array.isArray(obj)) {
         return obj.map(item => replacePlaceholders(item, replacements));
@@ -23,27 +21,54 @@ function replacePlaceholders(obj, replacements) {
     return obj;
 }
 
-// Processes the YAML template string
 async function processYaml(templateContent, dynamicValues) {
-    let yamlObject = yaml.load(templateContent);
+    try {
+        let yamlObject;
 
-    // Generate unique strings
-    const randomString1 = uuidv4();
-    const randomString2 = uuidv4();
+        // Log raw input for debugging
+        console.log('Raw templateContent:', templateContent);
 
-    // Define replacements
-    const replacements = {
-        RANDOMSTRING: randomString1,
-        RANDOMSTRING2: randomString2,
-        SUBDOMAIN: dynamicValues.subdomain,
-        SUBDOMAIN2: dynamicValues.subdomain2,
-    };
+        // Detect and parse the content
+        if (templateContent.trim().startsWith('{')) {
+            // Likely JSON, check for escaping issues
+            try {
+                yamlObject = JSON.parse(templateContent); // Try parsing directly
+            } catch {
+                console.log('Unescaping content and retrying JSON.parse');
+                const unescapedContent = templateContent.replace(/\\/g, ''); // Remove extra backslashes
+                yamlObject = JSON.parse(unescapedContent);
+            }
+        } else {
+            // Likely YAML
+            yamlObject = yaml.load(templateContent);
+        }
 
-    // Replace placeholders in YAML
-    yamlObject = replacePlaceholders(yamlObject, replacements);
+        // Generate unique strings
+        const randomString1 = uuidv4();
+        const randomString2 = uuidv4();
 
-    // Return processed YAML as a string
-    return yaml.dump(yamlObject);
+        // Define replacements
+        const replacements = {
+            RANDOMSTRING: randomString1,
+            RANDOMSTRING2: randomString2,
+            SUBDOMAIN: dynamicValues.subdomain,
+            SUBDOMAIN2: dynamicValues.subdomain2,
+        };
+
+        // Replace placeholders in YAML object
+        const updatedYamlObject = replacePlaceholders(yamlObject, replacements);
+
+        // Convert back to string for Portainer (JSON or YAML as needed)
+        const processedYaml = JSON.stringify(updatedYamlObject); // JSON for Portainer
+        console.log('Processed YAML/JSON for Portainer:', processedYaml);
+
+        return processedYaml;
+    } catch (error) {
+        console.error('Error in processYaml:', error.message);
+        throw error;
+    }
 }
+
+
 
 module.exports = { processYaml };
