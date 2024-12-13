@@ -23,25 +23,12 @@ function replacePlaceholders(obj, replacements) {
 
 async function processYaml(templateContent, dynamicValues) {
     try {
-        let yamlObject;
+        // Preprocess the templateContent to handle escaped characters
+        const preprocessedContent = templateContent.replace(/\\n/g, '\n').replace(/\\/g, '');
+        console.log('Preprocessed Content:', preprocessedContent);
 
-        // Log raw input for debugging
-        console.log('Raw templateContent:', templateContent);
-
-        // Detect and parse the content
-        if (templateContent.trim().startsWith('{')) {
-            // Likely JSON, check for escaping issues
-            try {
-                yamlObject = JSON.parse(templateContent); // Try parsing directly
-            } catch {
-                console.log('Unescaping content and retrying JSON.parse');
-                const unescapedContent = templateContent.replace(/\\/g, ''); // Remove extra backslashes
-                yamlObject = JSON.parse(unescapedContent);
-            }
-        } else {
-            // Likely YAML
-            yamlObject = yaml.load(templateContent);
-        }
+        // Parse the YAML content
+        const yamlObject = yaml.load(preprocessedContent);
 
         // Generate unique strings
         const randomString1 = uuidv4();
@@ -58,8 +45,8 @@ async function processYaml(templateContent, dynamicValues) {
         // Replace placeholders in YAML object
         const updatedYamlObject = replacePlaceholders(yamlObject, replacements);
 
-        // Convert back to string for Portainer (JSON or YAML as needed)
-        const processedYaml = JSON.stringify(updatedYamlObject); // JSON for Portainer
+        // Convert back to JSON for Portainer
+        const processedYaml = JSON.stringify(updatedYamlObject);
         console.log('Processed YAML/JSON for Portainer:', processedYaml);
 
         return processedYaml;
