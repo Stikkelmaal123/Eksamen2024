@@ -28,13 +28,13 @@
           <span>Running Stacks</span>
           <span>Actions</span>
         </div>
-        {{#each stacks}}
+        {{#each groups}}
         <div class="row-container-groups">
           <div class="table-row-groups">
             <span>{{this.group_name}}</span>
             <span>Webudvikler</span>
             <span>{{formatDate this.expiration_date}}</span>
-            <span>31</span>
+            <span>{{this.user_count}}</span>
             <span>31</span>
             <span class="actions-groups">
               <button>
