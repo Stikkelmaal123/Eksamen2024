@@ -352,34 +352,3 @@ deleteStacksModalCloseButton.addEventListener('click', () => {
 
 // Login db check js
 
-document.querySelector('#loginForm').addEventListener('submit', async (event) => {
-    event.preventDefault(); // Prevent default form submission
-
-    const email = document.querySelector('#email').value;
-    const password = document.querySelector('#password').value;
-
-    try {
-        const response = await fetch('/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-        });
-
-        const data = await response.json();
-
-        if (response.ok) {
-            // Save token in sessionStorage
-            sessionStorage.setItem('jwtToken', data.token);
-
-            // Redirect to the stacks page
-            window.location.href = data.redirect;
-        } else {
-            // Show the error message from the response
-            const errorMessage = data.message || 'Login failed. Please try again.';
-            document.querySelector('.error-message').textContent = errorMessage;
-        }
-    } catch (error) {
-        console.error('Error during login:', error);
-        alert('An unexpected error occurred. Please try again later.');
-    }
-});
