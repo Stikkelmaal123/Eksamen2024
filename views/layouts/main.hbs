@@ -67,7 +67,7 @@
         {{#each educations}}
         <label class="education-option">
                         <div class="education-item">
-                            <input type="checkbox" id="educationCheckbox" name="educationId" value="{{this.education_id}}" />
+                            <input type="checkbox" class="education-checkbox" name="educationId" value="{{this.education_id}}" />
                             <span>{{this.education_name}}</span>
                         </div>
                 </label>
@@ -103,22 +103,21 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-  // Select all education checkboxes
+  // Select all checkboxes with the class 'education-checkbox'
   const checkboxes = document.querySelectorAll('.education-checkbox');
 
   checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener('change', (event) => {
-      if (event.target.checked) {
-        // Deselect all other checkboxes
-        checkboxes.forEach((cb) => {
-          if (cb !== event.target) {
-            cb.checked = false;
-          }
-        });
-      }
+    checkbox.addEventListener('change', () => {
+      // When a checkbox is selected, uncheck all others
+      checkboxes.forEach((cb) => {
+        if (cb !== checkbox) {
+          cb.checked = false;
+        }
+      });
     });
   });
 });
+
     </script>
 
     <script>
