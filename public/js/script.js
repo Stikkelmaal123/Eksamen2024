@@ -192,21 +192,16 @@ closeButtons.forEach(button => {
 // Close modals when clicking outside of modal content
 modals.forEach(modal => {
     modal.addEventListener("click", (event) => {
-        // Only close if the click is outside the content
-        if (event.target === modal) {
+        // Select the modal content container
+        const content = modal.querySelector(".modal-content");
+        // Check if the click occurred outside the modal content
+        if (content && !content.contains(event.target)) {
             modal.close();
-            modal.style.display = "none"; // Fallback
+            modal.style.display = "none"; // Fallback for browsers that don't support `close()`
         }
     });
-
-    // Stop propagation for clicks inside modal content
-    const content = modal.querySelector(".modal-content");
-    if (content) {
-        content.addEventListener("click", (event) => {
-            event.stopPropagation();
-        });
-    }
 });
+
 
 // Close modals when the Esc key is pressed
 document.addEventListener("keydown", (event) => {
