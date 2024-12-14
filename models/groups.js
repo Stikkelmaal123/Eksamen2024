@@ -25,6 +25,11 @@ module.exports = {
       return rows;
   },
 
+  getAllEducations: async () => {
+    const [rows] = await db.execute(`SELECT education_id, education_name FROM educations ORDER BY education_name ASC`);
+    return rows;
+  },
+
   createGroup: async (groupData) => {
     const { group_name, education_id, expiration_date} = groupData;
     const result = await db.execute(
