@@ -33,13 +33,14 @@ async function processYaml(templateContent, dynamicValues) {
         // Generate unique strings
         const randomString1 = uuidv4();
         const randomString2 = uuidv4();
+        const randomString3 = uuidv4();
 
         // Define replacements
         const replacements = {
             RANDOMSTRING: randomString1,
             RANDOMSTRING2: randomString2,
             SUBDOMAIN: dynamicValues.subdomain,
-            SUBDOMAIN2: dynamicValues.subdomain2,
+            SUBDOMAIN2: randomString3,
         };
 
         // Replace placeholders in YAML object
