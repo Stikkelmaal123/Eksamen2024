@@ -53,12 +53,13 @@
     <button class="close-btn" data-close-modal>&times;</button>
     <h1>Creating group</h1>
         <div class="group-name-container">
-        <label for="group-name">Group name</label>
+        <form class="create-group-form">
+        <label for="groupName">Group name</label>
         <input type="text" id="groupName" placeholder="Enter name..." />
     </div>
     <div class="modal-content">
         <div class="left-section">
-            <form class="create-group-form">
+            
 
                 <div class="education-box">
     <h2>Education</h2>
@@ -72,10 +73,10 @@
                 </div>
             </div>
                  <div class="date-picker-box">
-                <label for="expiration-date">Expiration Date</label>
+                <label for="expirationDate">Expiration Date</label>
                 <input type="date" id="expirationDate" />
             </div>
-            </form>
+            
         </div>
         <div id="add-users-to-group" class="right-section">
             <h2>Add users to group</h2>
@@ -93,7 +94,8 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn-create-group">Create group</button>
+        <button type="submit" class="btn-create-group">Create group</button>
+        </form>
     </div>
     </dialog>
     
