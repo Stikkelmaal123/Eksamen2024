@@ -36,6 +36,13 @@ body {
   --searchbar-input-color: #2a2a2a; /* This is actually the background color for searchbar... */
   --logo-font-color: #f9f9f9;
   --header-font-colors: #f9f9f9;
+
+  --button-color: #ce430b; /* This is the main button color*/
+  --button-hover-color: #f15011; /* This is the hover effect color for the main buttons*/
+  --delete-button-color: #800; /* This is the button color for all edit and delete buttons*/
+  --delete-button-hover-color: #ca0202; /* This is the hover color for all edit and delete buttons*/
+  --modal-fields-background-color: #d9d9d9; /* This is the background color for input fields in the modals*/
+
 }
 
 
