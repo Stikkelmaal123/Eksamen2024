@@ -1,3 +1,4 @@
+const { saveToken } = require('../utils/tokenStore');
 const { getUserByEmailAndPassword } = require('../models/user');
 const portainerApi = require('../utils/portainerApi'); 
 
@@ -22,9 +23,7 @@ exports.postLogin = async (req, res) => {
         }
         const token = await portainerApi.login();
 
-        console.log('Portainer JWT token:', token);
-       // Send token to client and provide redirect URL
-       res.status(200).json({
+        res.status(200).json({
         message: 'Login successful',
         token,
         redirect: '/stacks',

@@ -5,7 +5,6 @@ const groupController = require('../controllers/groupController');
 router.get('/stacks', stackController.getStacks);
 router.get('/groups', groupController.getAllGroups);
 router.get('/createStack', stackController.renderCreateStackForm);
-// router.get('/login', stackController.login);
 router.post('/stacks/create', stackController.createStack);
 
 
