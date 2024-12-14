@@ -3,6 +3,7 @@ const exphbs = require('express-handlebars');
 const stackRoutes = require('./routes/stackRoutes');
 const dateHelper = require('./public/helpers/dateHelper');
 const authRoutes = require('./routes/authRoutes');
+const { getToken } = require('./utils/tokenStore');
 
 const app = express();
 const PORT = 3000;
@@ -23,11 +24,24 @@ app.set('views', 'views');  // Specify views directory
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const authenticateUser = async (req, res, next) => {
+    try {
+        const token = await getToken(); // Retrieve token
+        if (!token) {
+            console.error('Unauthorized: Token not found');
+            return res.redirect('/login'); // Redirect to login and terminate further processing
+        }
+        next(); // Token exists, proceed to the next middleware or route
+    } catch (error) {
+        console.error('Authentication error:', error.message);
+        return res.redirect('/login'); // Redirect on error and terminate processing
+    }
+};
 
 
 // Routes
-app.use('/', stackRoutes);
 app.use('/', authRoutes);
+app.use('/', authenticateUser, stackRoutes);
 
 
 // Start the server
