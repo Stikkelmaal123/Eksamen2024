@@ -17,7 +17,7 @@ body {
   --secondary-background-color: #202328; /* hover baground for row and headers */
   --third-background-color: #464A4C; /* Row and row header background */
   --font-color: #f9f9f9; /* for all text */
-  --searchbar-input-color: #2a2a2a;
+  --searchbar-input-color: #2a2a2a; /* This is actually the background color for searchbar... */
 
 
 
@@ -32,7 +32,7 @@ body {
   --secondary-background-color: #202328; /* hover baground for row and headers AND btns */
   --third-background-color: #464A4C; /* Row and row header background */
   --font-color: #f9f9f9; /* for all text */
-  --searchbar-input-color: #2a2a2a;
+  --searchbar-input-color: #2a2a2a; /* This is actually the background color for searchbar... */
 }
 
 
