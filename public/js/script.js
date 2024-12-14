@@ -192,7 +192,7 @@ closeButtons.forEach(button => {
 // Close modals when clicking outside of modal content
 modals.forEach(modal => {
     modal.addEventListener("click", (event) => {
-        if (event.target === modal) {
+        if (event.target.tagName === "DIALOG" && event.target === modal) {
             modal.close();
             modal.style.display = "none"; // Fallback
         }

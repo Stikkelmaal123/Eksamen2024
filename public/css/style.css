@@ -49,7 +49,7 @@ dialog[data-modal] {
   max-width: 90%;
   max-height: 90%;
   background-color: #202328;
-  color: #F9F9F9;
+  color: var(--font-color);
   position: relative;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   display: flex;
@@ -108,7 +108,7 @@ dialog[data-modal] .template-setup{
 dialog[data-modal] label {
   font-size: 18px;
   margin-bottom: 8px;
-  color: #f9f9f9;
+  color: var(--font-color);
 }
 
 /* Inputs */
@@ -179,7 +179,7 @@ dialog[data-modal] .close-btn {
   font-size: 40px;
   background: none;
   border: none;
-  color: #f9f9f9;
+  color: var(--font-color);
   cursor: pointer;
 }
 
@@ -213,7 +213,7 @@ dialog.large-modal{
 .group-name-container label {
   font-size: 18px;
   font-weight: bold;
-  color: #f9f9f9;
+  color: var(--font-color);
 }
 
 .group-name-container input {
@@ -224,7 +224,7 @@ dialog.large-modal{
   border-radius: 5px;
   background-color: #D9D9D9;
   font-size: 16px;
-  color: #f9f9f9;
+  color: var(--font-color);
 }
 
 .group-name-container input::placeholder {
@@ -465,7 +465,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  color: #202328;
+  color: var(--font-color);
 }
 
 .stack-table th,
@@ -544,7 +544,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
-  color: #F9F9F9;
+  color: var(--font-color);
 }
 
 
@@ -607,7 +607,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 .details-table {
   width: 100%;
   border-collapse: collapse;
-  color: #d1d1d1;
+  color: var(--font-color);
 }
 
 .left-section{
@@ -669,7 +669,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   align-items: center;
   gap: 10px; /* Space between checkbox and label text */
   font-size: 16px;
-  color: #F9F9F9;
+  color: var(--font-color);
 }
 
 .education-option input[type="checkbox"] {
@@ -736,7 +736,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   padding: 20px 40px;
   width: 1000px;
   background-color: #202328;
-  color: #F9F9F9;
+  color: var(--font-color);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
@@ -769,7 +769,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 
 .manage-users-modal .input-section label {
   font-size: 18px;
-  color: #F9F9F9;
+  color: var(--font-color);
 }
 
 .manage-users-modal .input-section input {
@@ -791,7 +791,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
-  color: #F9F9F9;
+  color: var(--font-color);
   font-size: 16px;
   cursor: pointer;
 }
@@ -832,7 +832,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
-  color: #FFF;
+  color: var(--font-color);
   cursor: pointer;
 }
 
@@ -851,7 +851,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
-  color: #F9F9F9;
+  color: var(--font-color);
   font-size: 16px;
   cursor: pointer;
 }
@@ -875,7 +875,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   font-size: 30px;
   background: none;
   border: none;
-  color: #F9F9F9;
+  color: var(--font-color);
   cursor: pointer;
 }
 
@@ -891,7 +891,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   padding: 20px 40px;
   width: 800px;
   background-color: #202328;
-  color: #F9F9F9;
+  color: var(--font-color);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
@@ -931,7 +931,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 
 .manage-user-modal .input-group label {
   font-size: 16px;
-  color: #F9F9F9;
+  color: var(--font-color);
 }
 
 .manage-user-modal .input-group input {
@@ -971,7 +971,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  color: #FFF;
+  color: var(--font-color);
 }
 
 .manage-user-modal .save-btn {
