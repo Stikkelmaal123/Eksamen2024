@@ -600,7 +600,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   overflow-y: auto;
 }
 
-.group-details-modal #expiration-date {
+.group-details-modal #expirationDate {
   width: 90%;
 }
 
