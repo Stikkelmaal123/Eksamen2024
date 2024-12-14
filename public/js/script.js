@@ -213,14 +213,14 @@ modals.forEach(modal => {
 
 
 // Dynamically manage users in the user list
-const userList = document.getElementById("user-list");
+/*const userList = document.getElementById("user-list");
 
 userList.addEventListener("click", (event) => {
     if (event.target.classList.contains("remove-user-btn")) {
         const listItem = event.target.closest("li");
         listItem.remove();
     }
-});
+});*/
 
 // Handle "Create Group" button functionality
 /* document.querySelector(".btn-create-group").addEventListener("click", () => {
