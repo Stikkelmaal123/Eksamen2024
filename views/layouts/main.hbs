@@ -53,7 +53,7 @@
     <button class="close-btn" data-close-modal>&times;</button>
     <h1>Creating group</h1>
         <div class="group-name-container">
-        <form class="create-group-form">
+        <form class="create-group-form" action="/create-group" method="POST">
         <label for="groupName">Group name</label>
         <input type="text" id="groupName" placeholder="Enter name..." />
     </div>
@@ -67,7 +67,7 @@
         {{#each educations}}
         <label class="education-option">
                         <div class="education-item">
-                            <input type="checkbox" id="educationCheckbox" />
+                            <input type="radio" id="educationCheckbox" value="{{this.education_id}}" />
                             <span>{{this.education_name}}</span>
                         </div>
                 </label>
