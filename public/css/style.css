@@ -830,9 +830,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   font-weight: bold;
 }
 
-.manage-users-modal .users-table td {
-  background-color: #f1f1f1;
-}
+
 
 .manage-users-modal .edit-btn {
   background-color: var(--delete-button-color);
