@@ -26,12 +26,12 @@ module.exports = {
   },
 
   createGroup: async (groupData) => {
-    const { group_name, expiration_date} = groupData;
+    const { group_name, education_name, expiration_date} = groupData;
     const result = await db.execute(
-        `INSERT INTO groups (group_name, expiration_date) VALUES (?, ?)`,
-        [group_name, expiration_date]
+        `INSERT INTO groups (group_name, expiration_date) VALUES (?, ?, ?)`,
+        [group_name, education_name, expiration_date]
     );
-    return result.insertId; // Return the ID of the newly created stack
+    
 }
 
 }
