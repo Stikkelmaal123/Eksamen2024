@@ -33,7 +33,7 @@ module.exports = {
   createGroup: async (groupData) => {
     const { group_name, education_id, expiration_date} = groupData;
     const result = await db.execute(
-        `INSERT INTO groups (group_name, expiration_date) VALUES (?, ?, ?)`,
+        `INSERT INTO \`groups\` (group_name, education_id, expiration_date) VALUES (?, ?, ?)`,
         [group_name, education_id, expiration_date]
     );
     return result;

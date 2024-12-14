@@ -15,6 +15,8 @@ exports.getCreateGroupPage = async (req, res) => {
 
 exports.createGroup = async (req, res) => {
   try {
+    console.log('Request Headers:', req.headers); // Inspect headers
+    console.log('Request body:', req.body); // Log the request body to debug
     const { groupName, educationId, expirationDate } = req.body;
 
     // Validate input
@@ -32,7 +34,7 @@ exports.createGroup = async (req, res) => {
     res.status(201).json({ success: true, groupId: result.insertId });
   } catch (error) {
     console.error('Error creating group:', error.message);
-    res.status(500).json({ error: 'Failed to create group' });
+    res.status(500).json({ error: 'Failed to create group. Group already exists' });
   }
 };
 
@@ -41,12 +43,13 @@ exports.createGroup = async (req, res) => {
 
 exports.getAllGroups = async (req, res) => {
   try {
-      const groups = await groupsModel.getAllGroups();
-      console.log(groups); // Log to see the data being returned
-      res.render('groups', { title: 'All groups', groups });
+    const groups = await groupsModel.getAllGroups();
+    const educations = await groupsModel.getAllEducations(); // Fetch educations
+    console.log('Educations:', educations); // Debug to ensure educations are fetched
+    res.render('groups', { title: 'All groups', groups, educations }); // Pass educations
   } catch (error) {
-      console.error('Error fetching groups', error.message);
-      res.status(500).send('Failed to fetch groups.');
+    console.error('Error fetching groups or educations:', error.message);
+    res.status(500).send('Failed to fetch groups or educations.');
   }
 };
 

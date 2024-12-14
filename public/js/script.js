@@ -223,7 +223,7 @@ userList.addEventListener("click", (event) => {
 });
 
 // Handle "Create Group" button functionality
-document.querySelector(".btn-create-group").addEventListener("click", () => {
+/* document.querySelector(".btn-create-group").addEventListener("click", () => {
     const groupName = document.getElementById("group-name").value.trim();
     const expirationDate = document.getElementById("expiration-date").value;
     const selectedEducations = Array.from(
@@ -241,7 +241,7 @@ document.querySelector(".btn-create-group").addEventListener("click", () => {
         )}\nExpiration Date: ${expirationDate}`
     );
 });
-
+*/
 // Handle "Edit" button clicks
 const editButtons = document.querySelectorAll(".edit-btn");
 const editModal = document.querySelector('dialog[data-modal="edit-user"]');
