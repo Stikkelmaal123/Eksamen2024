@@ -31,7 +31,7 @@ module.exports = {
         `INSERT INTO groups (group_name, expiration_date) VALUES (?, ?, ?)`,
         [group_name, education_id, expiration_date]
     );
-    return result
+    return result;
 }
 
 }
