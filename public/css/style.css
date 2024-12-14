@@ -51,7 +51,7 @@ dialog[data-modal] {
   height: 806px;
   max-width: 90%;
   max-height: 90%;
-  background-color: #202328;
+  background-color: var(--secondary-background-color);
   color: var(--font-color);
   position: relative;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
@@ -122,7 +122,7 @@ dialog[data-modal] input {
   font-size: 16px;
   border: none;
   border-radius: 5px;
-  background-color: #D9D9D9;
+  background-color: var(--modal-fields-background-color);
 }
 
 /* Reset Password Button */
@@ -131,14 +131,14 @@ dialog[data-modal] button#reset-password {
   height: 50px;
   border: none;
   border-radius: 5px;
-  background-color: #ce430b;
+  background-color: var(--button-color);
   font-size: 16px;
   cursor: pointer;
   align-self: flex-start;
 }
 
 dialog[data-modal] button#reset-password:hover {
-  background-color: #f15011;
+  background-color: var(--button-hover-color);
 }
 
 /* Footer Buttons */
@@ -157,21 +157,21 @@ dialog[data-modal] .modal-footer button {
 }
 
 dialog[data-modal] .modal-footer button#logout {
-  background-color: #800;
+  background-color: var(--delete-button-color);
 
 }
 
 dialog[data-modal] .modal-footer button#logout:hover {
-  background-color: rgb(202, 2, 2);
+  background-color: var(--delete-button-hover-color);
 }
 
 dialog[data-modal] .modal-footer button#save {
-  background-color: #ce430b;
+  background-color: var(--button-color);
 
 }
 
 dialog[data-modal] .modal-footer button#save:hover {
-  background-color: #f15011;
+  background-color: var(--button-hover-color);
 }
 
 /* Close Button */
@@ -187,7 +187,7 @@ dialog[data-modal] .close-btn {
 }
 
 dialog[data-modal] .close-btn:hover {
-  color: #ff8c33;
+  color: var(--button-hover-color);
 }
 
 dialog.large-modal{
@@ -197,7 +197,7 @@ dialog.large-modal{
   padding: 20px 40px;
   width: 1550px;
   height: 810px;
-  background-color: #202328;
+  background-color: var(--secondary-background-color);
   position: relative;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   display: flex;
@@ -225,7 +225,7 @@ dialog.large-modal{
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #D9D9D9;
+  background-color: var(--modal-fields-background-color);
   font-size: 16px;
   color: var(--font-color);
 }
@@ -273,7 +273,7 @@ dialog.large-modal{
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #D9D9D9;
+  background-color: var(--modal-fields-background-color);
   font-size: 16px;
 }
 
@@ -312,7 +312,7 @@ dialog.large-modal{
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #D9D9D9;
+  background-color: var(--modal-fields-background-color);
   font-size: 16px;
 }
 
@@ -331,7 +331,7 @@ dialog.large-modal{
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #D9D9D9;
+  background-color: var(--modal-fields-background-color);
 }
 
 #user-list li span {
@@ -339,7 +339,7 @@ dialog.large-modal{
 }
 
 #user-list .remove-user-btn {
-  background-color: #800;
+  background-color: var(--delete-button-color);
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
@@ -347,7 +347,7 @@ dialog.large-modal{
 }
 
 #user-list .remove-user-btn:hover {
-  background-color: rgb(202, 2, 2);
+  background-color: var(--delete-button-hover-color);
 }
 
 /* Footer Button */
@@ -357,7 +357,7 @@ dialog.large-modal{
 }
 
 .modal-footer .btn-create-group {
-  background-color: #ce430b;
+  background-color: var(--button-color);
   padding: 10px 30px;
   border: none;
   border-radius: 5px;
@@ -366,14 +366,14 @@ dialog.large-modal{
 }
 
 .modal-footer .btn-create-group:hover {
-  background-color: #f15011;
+  background-color: var(--button-hover-color);
 }
 
 
 .add-user-csv-box {
   width: 1050px;
   height: 400px;
-  background-color: #d9d9d9;
+  background-color: var(--modal-fields-background-color);
   margin-top: 15px;
   align-self: center;
   border-radius: 5px;
@@ -399,7 +399,7 @@ dialog[data-modal="create-stack"] .left-section select {
   padding: 8px;
   border: none;
   border-radius: 5px;
-  background-color: #d9d9d9;
+  background-color: var(--modal-fields-background-color);
   font-size: 16px;
   display: flex;
   flex-direction: column;
@@ -422,7 +422,7 @@ dialog[data-modal="create-stack"] .right-section input {
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #2e2e2e;
+  background-color: var(--modal-fields-background-color);
   font-size: 16px;
 }
 
@@ -432,7 +432,7 @@ dialog[data-modal="create-stack"] .modal-footer {
 }
 
 dialog[data-modal="create-stack"] .modal-footer button {
-  background-color: #ce430b;
+  background-color: var(--button-color);
   padding: 10px 30px;
   border: none;
   border-radius: 5px;
@@ -441,7 +441,7 @@ dialog[data-modal="create-stack"] .modal-footer button {
 }
 
 dialog[data-modal="create-stack"] .modal-footer button:hover {
-  background-color: #f15011;
+  background-color: var(--button-hover-color);
 }
 
 .group-stacks-modal {
@@ -451,7 +451,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   padding: 20px 40px;
   width: 1200px;
   height: 700px;
-  background-color: #202328;
+  background-color: var(--secondary-background-color);
   position: relative;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   display: flex;
@@ -478,29 +478,29 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .stack-table th {
-  background-color: #D9D9D9;
+  background-color: var(--modal-fields-background-color);
   font-weight: bold;
 }
 
 .stack-table td {
-  background-color: #d9d9d9;
+  background-color: var(--modal-fields-background-color);
 }
 
 .background-box{
   width: 100%;
   height: 100%;
-  background-color: #464A4C;
+  background-color: var(--third-background-color);
 }
 
 #manage-users{
   align-items: flex-start;
   justify-content: left;
-  background-color: #ce430b;
+  background-color: var(--button-color);
   margin-right: auto;
 }
 
 #manage-users:hover{
-  background-color: #f15011;
+  background-color: var(--button-hover-color);
 }
 
 .button-group{
@@ -509,7 +509,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .delete-btn {
-  background-color: #800;
+  background-color: var(--delete-button-color);
   padding: 5px 15px;
   border: none;
   border-radius: 5px;
@@ -517,7 +517,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .delete-btn:hover {
-  background-color: rgb(202, 2, 2);
+  background-color: var(--delete-button-hover-color);
 }
 
 .modal-footer {
@@ -530,13 +530,13 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   display: flex;
   flex-direction: column;
   width: 80%;
-  background-color: #464A4C;
+  background-color: var(--third-background-color);
 }
 
 .education-box{
   display: flex;
   flex-direction: column;
-  background-color: #464A4C;
+  background-color: var(--third-background-color);
   padding: 20px;
   border-radius: 10px;
   margin-top: 25%;
@@ -553,7 +553,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 
 .date-picker-box,
 .education-box {
-  background-color: #464A4C;
+  background-color: var(--third-background-color);
   padding: 20px;
   border-radius: 10px;
   margin-bottom: 20px;
@@ -575,12 +575,12 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .delete-stacks-btn {
-  background-color: #800;
+  background-color: var(--delete-button-color);
   
 }
 
 .delete-stacks-btn:hover {
-  background-color: rgb(202, 2, 2);
+  background-color: var(--delete-button-hover-color);
 }
 
 .group-details-modal {
@@ -590,7 +590,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   padding: 20px;
   width: 1200px;
   height: 800px;
-  background-color: #202328;
+  background-color: var(--secondary-background-color);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
@@ -624,22 +624,22 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .details-table th {
-  background-color: #D9D9D9;
+  background-color: var(--modal-fields-background-color);
 }
 
 .details-table td {
-  background-color: #D9D9D9;
+  background-color: var(--modal-fields-background-color);
 }
 
 .details-table-left-box{
   width: 50%;
-  background-color: #464A4C;
+  background-color: var(--third-background-color);
   border-radius: 10px;
   padding: 20px;
 }
 
 .edit-btn {
-  background-color: #800;
+  background-color: var(--delete-button-color);
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
@@ -647,7 +647,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .edit-btn:hover {
-  background-color: rgb(202, 2, 2);
+  background-color: var(--delete-button-hover-color);
 }
 
 
@@ -708,7 +708,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   display: flex;
   align-items: center;
   gap: 10px; /* Space between checkbox and text */
-  background-color: #D9D9D9;
+  background-color: var(--modal-fields-background-color);
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -738,7 +738,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   border-radius: 10px;
   padding: 20px 40px;
   width: 1000px;
-  background-color: #202328;
+  background-color: var(--secondary-background-color);
   color: var(--font-color);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   display: flex;
@@ -780,8 +780,8 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   font-size: 16px;
   border: none;
   border-radius: 5px;
-  background-color: #D9D9D9;
-  color: #0E0E0E;
+  background-color: var(--modal-fields-background-color);
+  color: var(--font-color);
 }
 
 .manage-users-modal .button-group {
@@ -790,7 +790,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .manage-users-modal .button-group button {
-  background-color: #ce430b;
+  background-color: var(--button-color);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -800,7 +800,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .manage-users-modal .button-group button:hover {
-  background-color: #f15011;
+  background-color: var(--button-hover-color);
 }
 
 .manage-users-modal .table-section {
@@ -812,7 +812,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
-  color: #0E0E0E;
+  color: var(--font-color);
 }
 
 .manage-users-modal .users-table th,
@@ -822,16 +822,14 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .manage-users-modal .users-table th {
-  background-color: #D9D9D9;
+  background-color: var(--modal-fields-background-color);
   font-weight: bold;
 }
 
-.manage-users-modal .users-table td {
-  background-color: #f1f1f1;
-}
+
 
 .manage-users-modal .edit-btn {
-  background-color: #800;
+  background-color: var(--delete-button-color);
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
@@ -840,7 +838,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .manage-users-modal .edit-btn:hover {
-  background-color: rgb(202, 2, 2);
+  background-color: var(--delete-button-hover-color);
 }
 
 .manage-users-modal .modal-footer {
@@ -850,7 +848,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .manage-users-modal .modal-footer button {
-  background-color: #ce430b;
+  background-color: var(--button-color);
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -860,15 +858,15 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .manage-users-modal .modal-footer button:hover {
-  background-color: #f15011;
+  background-color: var(--button-hover-color);
 }
 
 .manage-users-modal .remove-stacks-btn {
-  background-color: #800;
+  background-color: var(--delete-button-color);
 }
 
 .manage-users-modal .remove-stacks-btn:hover {
-  background-color: rgb(202, 2, 2);
+  background-color: var(--delete-button-hover-color);
 }
 
 .manage-users-modal .close-btn {
@@ -883,7 +881,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .manage-users-modal .close-btn:hover {
-  color: #f15011;
+  color: var(--button-hover-color);
 }
 
 
@@ -893,7 +891,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   border-radius: 10px;
   padding: 20px 40px;
   width: 800px;
-  background-color: #202328;
+  background-color: var(--secondary-background-color);
   color: var(--font-color);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   display: flex;
@@ -942,8 +940,8 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   font-size: 16px;
   border: none;
   border-radius: 5px;
-  background-color: #D9D9D9;
-  color: #0E0E0E;
+  background-color: var(--modal-fields-background-color);
+  color: var(--font-color);
 }
 
 .manage-user-modal .permission-group {
@@ -958,8 +956,8 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   font-size: 16px;
   border: none;
   border-radius: 5px;
-  background-color: #D9D9D9;
-  color: #0E0E0E;
+  background-color: var(--modal-fields-background-color);
+  color: var(--font-color);
 }
 
 .manage-user-modal .modal-footer {
@@ -978,19 +976,19 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .manage-user-modal .save-btn {
-  background-color: #ce430b;
+  background-color: var(--button-color);
 }
 
 .manage-user-modal .save-btn:hover {
-  background-color: #f15011;
+  background-color: var(--button-hover-color);
 }
 
 .manage-user-modal .delete-user-btn {
-  background-color: #800;
+  background-color: var(--delete-button-color);
 }
 
 .manage-user-modal .delete-user-btn:hover {
-  background-color: rgb(202, 2, 2);
+  background-color: var(--delete-button-hover-color);
 }
 
 .manage-user-modal .close-btn {
@@ -1000,12 +998,12 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   font-size: 30px;
   background: none;
   border: none;
-  color: #F9F9F9;
+  color: var(--font-color);
   cursor: pointer;
 }
 
 .manage-user-modal .close-btn:hover {
-  color: #f15011;
+  color: var(--button-hover-color);
 }
 
 
@@ -1079,7 +1077,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .login-box {
-    background-color: #1e1e1e;
+    background-color: var(--secondary-background-color);
     padding: 30px;
     border-radius: 10px;
     width: 400px;
@@ -1103,7 +1101,7 @@ form input {
     margin-bottom: 15px;
     border: none;
     border-radius: 5px;
-    background-color: #c7c7c7;
+    background-color: var(--modal-fields-background-color);
 }
 
 form .forgot-password {
@@ -1112,12 +1110,12 @@ form .forgot-password {
 }
 
 form .forgot-password a {
-    color: #f57c00;
+    color: var(--button-color);
     text-decoration: none;
 }
 
 form .btn-login {
-    background-color: #f57c00;
+    background-color: var(--button-color);
     border: none;
     padding: 10px 20px;
     color: var(--font-color);
@@ -1127,7 +1125,7 @@ form .btn-login {
 }
 
 form .btn-login:hover {
-    background-color: #ff8c33;
+    background-color: var(--button-hover-color);
 }
   
 
