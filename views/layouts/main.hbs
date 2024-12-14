@@ -64,12 +64,14 @@
                 <div class="education-box">
     <h2>Education</h2>
     <div class="education-options">
+        {{#each educations}}
         <label class="education-option">
                         <div class="education-item">
                             <input type="checkbox" id="educationCheckbox" />
-                            <span>Webudvikler</span>
+                            <span>{{this.education_name}}</span>
                         </div>
                 </label>
+                {{/each}}
                 </div>
             </div>
                  <div class="date-picker-box">
