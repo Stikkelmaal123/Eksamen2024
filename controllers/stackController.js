@@ -1,4 +1,5 @@
 const stacksModel = require('../models/stacks'); // DB model for stacks
+const groupsModel = require('../models/groups'); // DB model for groups
 const { getTemplateByName } = require('../models/templates');
 const { processYaml } = require('../utils/yamlProcessor');
 const portainerApi = require('../utils/portainerApi'); // Portainer API utility
@@ -38,10 +39,11 @@ exports.createStack = async (req, res) => {
 exports.getStacks = async (req, res) => {
     try {
         const stacks = await stacksModel.getAllStacks();
-        res.render('stacks', { title: 'All Stacks', stacks });
+        const educations = await groupsModel.getAllEducations(); // Fetch educations
+        res.render('stacks', { title: 'All Stacks', stacks, educations }); // Pass to view
     } catch (error) {
-        console.error('Error fetching stacks:', error.message);
-        res.status(500).send('Failed to fetch stacks.');
+        console.error('Error fetching stacks or educations:', error.message);
+        res.status(500).send('Failed to fetch stacks or educations.');
     }
 };
 
