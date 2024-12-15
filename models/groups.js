@@ -5,21 +5,21 @@ module.exports = {
       const [rows] = await db.execute(
         `
         SELECT 
-          g.group_id,
-          g.group_name,
-          g.expiration_date,
-          e.education_name, -- Include education_name
-          COUNT(gu.user_id) AS user_count
+          groups.group_id, 
+          groups.group_name, 
+          groups.expiration_date, 
+          educations.education_name,
+          COUNT(groups_users.user_id) AS user_count
         FROM
-          \`groups\` g
-        LEFT JOIN groups_users gu
-          ON g.group_id = gu.group_id
-        LEFT JOIN educations e
-          ON g.education_id = e.education_id
+          \`groups\`
+        LEFT JOIN groups_users 
+          ON groups.group_id = groups_users.group_id
+        LEFT JOIN educations 
+          ON groups.education_id = educations.education_id
         GROUP BY 
-          g.group_id, g.group_name, g.expiration_date, e.education_name
+          groups.group_id, groups.group_name, groups.expiration_date, educations.education_name
         ORDER BY 
-          g.group_name ASC;
+          groups.group_name ASC;
         `
       );  
       return rows;
