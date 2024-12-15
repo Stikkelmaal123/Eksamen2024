@@ -1613,7 +1613,6 @@ input:checked + .slider:before {
   }
   
   .actions-groups button {
-    background: #444;
     color: var(--font-color);
     font-size: 12px;
     transition: background-color 0.3s;
