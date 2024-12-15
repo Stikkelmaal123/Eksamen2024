@@ -30,13 +30,33 @@ module.exports = {
     return rows;
   },
 
+  getAllUsers: async () => {
+    const [rows] = await db.execute(`SELECT user_id, user_name, email FROM users ORDER BY user_name ASC`);
+    return rows;
+  },
+
   createGroup: async (groupData) => {
     const { group_name, education_id, expiration_date} = groupData;
-    const result = await db.execute(
+    const [result] = await db.execute(
         `INSERT INTO \`groups\` (group_name, education_id, expiration_date) VALUES (?, ?, ?)`,
         [group_name, education_id, expiration_date]
     );
     return result;
-}
+},
+
+  addUsersToGroup: async (groupId, userIds) => {
+    if (!Array.isArray(userIds)) return;
+
+    const placeholders = userIds.map(() => '(?, ?)').join(', ');
+    const values = [];
+    userIds.forEach(userId => {
+      values.push(groupId, userId);
+    });
+
+    await db.execute(
+      `INSERT INTO groups_users (group_id, user_id) VALUES ${placeholders}`,
+      values
+    );
+  }
 
 }

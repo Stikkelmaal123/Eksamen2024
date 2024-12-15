@@ -56,7 +56,7 @@
         <div class="group-name-container">
         <form class="create-group-form" action="/create-group" method="POST">
         <label for="groupName">Group name</label>
-        <input type="text" id="groupName" name="groupName" placeholder="Enter name..." />
+        <input type="text" id="groupName" name="groupName" placeholder="Enter name..." required />
     </div>
     <div class="modal-content">
         <div class="left-section">
@@ -68,7 +68,7 @@
         {{#each educations}}
         <label class="education-option">
                         <div class="education-item">
-                            <input type="checkbox" class="education-checkbox" name="educationId" value="{{this.education_id}}" />
+                            <input type="radio" class="education-checkbox" name="educationId" value="{{this.education_id}}" required  />
                             <span>{{this.education_name}}</span>
                         </div>
                 </label>
@@ -77,7 +77,7 @@
             </div>
                  <div class="date-picker-box">
                 <label for="expirationDate">Expiration Date</label>
-                <input type="date" id="expirationDate" name="expirationDate" />
+                <input type="date" id="expirationDate" name="expirationDate" required/>
             </div>
             
         </div>
@@ -87,11 +87,14 @@
                 <input type="text" placeholder="Search user" class="search-input" />
                 <ul id="user-list">
                     <!-- Example user items -->
+                {{#each users}}
                     <li>
-                        <span>Name: Anders Ole Snabe Buch</span>
-                        <span>Email: aosb48851@edu.ucl.dk</span>
-                        <button class="remove-user-btn">Remove</button>
+                        <label>
+                            <input type="checkbox" name="userIds" value="{{this.user_id}}" />
+                            <span>{{this.user_name}} ({{this.email}})</span>
+                        </label>
                     </li>
+                {{/each}}
                 </ul>
             </div>
         </div>
@@ -102,60 +105,58 @@
     </div>
     </dialog>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-  // Select all checkboxes with the class 'education-checkbox'
-  const checkboxes = document.querySelectorAll('.education-checkbox');
 
-  checkboxes.forEach((checkbox) => {
-    checkbox.addEventListener('change', () => {
-      // When a checkbox is selected, uncheck all others
-      checkboxes.forEach((cb) => {
-        if (cb !== checkbox) {
-          cb.checked = false;
-        }
-      });
-    });
-  });
-});
 
-    </script>
+<script>
+  document.querySelector('.create-group-form').addEventListener('submit', async (e) => {
+    e.preventDefault(); // Prevent the default form submission
 
-    <script>
-        document.querySelector('.create-group-form').addEventListener('submit', async (e) => {
-  e.preventDefault(); // Prevent the default form submission
+    const form = e.target;
+    const formData = new FormData(form);
 
-  // Collect form data
-  const form = e.target;
-  const formData = new FormData(form);
+    // Convert FormData to a JSON-friendly object
+    const data = Object.fromEntries(formData.entries());
 
-  // Convert FormData to JSON
-  const data = Object.fromEntries(formData.entries());
+    // Handle multiple userIds checkboxes
+    const userIds = formData.getAll('userIds');
+    data.userIds = userIds; // Add this array to data
 
-  try {
-    // Send POST request
-    const response = await fetch('/create-group', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      // Redirect to /groups on success
-      window.location.href = '/groups';
-    } else {
-      // Show an alert with the error message
-      const error = await response.json();
-      alert(`Error: ${error.error}`);
+    // Manual validation since we're using fetch
+    if (!data.educationId) {
+      alert("Please select an education.");
+      return; // Stop here if no education is selected
     }
-  } catch (err) {
-    // Handle network errors or unexpected errors
-    alert('An unexpected error occurred. Please try again.');
-    console.error('Error:', err);
-  }
-});
 
-    </script>
+    if (!data.expirationDate) {
+      alert("Please select an expiration date.");
+      return;
+    }
+
+    if (!data.groupName) {
+      alert("Please enter a group name.");
+      return;
+    }
+
+    try {
+      const response = await fetch('/create-group', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        // Successfully created the group
+        window.location.href = '/groups';
+      } else {
+        const error = await response.json();
+        alert(`Error: ${error.error}`);
+      }
+    } catch (err) {
+      alert('An unexpected error occurred. Please try again.');
+      console.error('Error:', err);
+    }
+  });
+</script>
     
 
     <!-- Add stacks modal -->
