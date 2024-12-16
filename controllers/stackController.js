@@ -46,8 +46,9 @@ exports.getStacks = async (req, res) => {
     try {
         const stacks = await stacksModel.getAllStacks();
         const educations = await groupsModel.getAllEducations(); // Fetch educations
+        const users = await groupsModel.getAllUsers(); // Fetch users here
         const templates = await getAllTemplates();
-        res.render('stacks', { title: 'All Stacks', stacks, educations, templates }); // Pass to view
+        res.render('stacks', { title: 'All Stacks', stacks, educations, users, templates }); // Pass to view
     } catch (error) {
         console.error('Error fetching stacks or educations:', error.message);
         res.status(500).send('Failed to fetch stacks or educations.');
