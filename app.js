@@ -50,7 +50,13 @@ const authenticateUser = async (req, res, next) => {
         return res.redirect('/login'); // Redirect on error and terminate processing
     }
 };
-
+const isAdmin = (req, res, next) => {
+    if (req.session.isAdmin) {
+        return next(); // Proceed if admin
+    }
+    console.error('Authentication error: User is not an admin.');
+    return res.redirect('/login'); 
+};
 
 // Routes
 app.use('/', authRoutes);

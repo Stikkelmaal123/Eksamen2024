@@ -7,7 +7,8 @@ const getUserByEmailAndPassword = async (email, password) => {
             SELECT 
                 u.user_id, 
                 gu.group_id, 
-                u.email
+                u.email,
+                u.admin
             FROM 
                 users u
             JOIN 

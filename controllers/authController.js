@@ -11,7 +11,6 @@ exports.postLogin = async (req, res) => {
     try {
         // Validate user credentials
         const user = await getUserByEmailAndPassword(email, password);
-
         if (!user) {
             // Invalid credentials
             return res.render('login', {
@@ -23,6 +22,7 @@ exports.postLogin = async (req, res) => {
         const token = await portainerApi.login();
         req.session.userId = user.user_id;
         req.session.groupId = user.group_id;
+        req.session.isAdmin = user.admin === 1;
 
         res.status(200).json({
         message: 'Login successful',

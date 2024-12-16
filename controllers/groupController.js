@@ -1,5 +1,5 @@
 const groupsModel = require('../models/groups'); // DB model for groups
-
+const { getAllTemplates } = require('../models/templates');
 
 
 
