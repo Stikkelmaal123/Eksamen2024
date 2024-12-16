@@ -161,7 +161,7 @@
 
     <!-- Add stacks modal -->
 
-    <dialog data-modal="create-stack">
+<dialog data-modal="create-stack">
     <button class="close-btn" data-close-modal>&times;</button>
     <h1>Creating stack</h1>
     <div class="modal-content">
@@ -176,34 +176,19 @@
                     <input type="text" id="subdomain" name="subdomain" required />
                 </div>
                 <div>
-        <label for="templateName">Select a Template:</label>
-        <select id="templateName" name="templateName" required>
-            <option value="">Select a template</option>
-            {{#each templates}}
-            <option value={{this.template_name}}>{{this.template_name}}</option>
-            {{/each}}
-        </select>
+                    <label for="templateName">Select a Template:</label>
+                    <select id="templateName" name="templateName" required>
+                    <option value="">Select a template</option>
+                    {{#each templates}}
+                    <option value={{this.template_name}}>{{this.template_name}}</option>
+                    {{/each}}
+                    </select>
+                </div>
+                <div class="modal-footer">
+                <button type="submit" id="create-stack">Create stack</button>
                 </div>
             </form>
         </div>
-        <div class="right-section">
-            <h2>Optional</h2>
-                <div>
-                    <label for="owner-name">Add another owner</label>
-                    <input type="text" id="owner-name" placeholder="Name" />
-                </div>
-                <div>
-                    <label for="group-name">Add group to stack</label>
-                    <input type="text" id="group-name" list="groups" placeholder="Search group" />
-                    <datalist id="groups">
-                        <option value="?"></option>
-                        <option value="?"></option>
-                    </datalist>
-                </div>
-        </div>
-    </div>
-    <div class="modal-footer">
-        <button type="submit" id="create-stack">Create stack</button>
     </div>
 </dialog>
 
@@ -214,7 +199,7 @@
         const formData = new FormData(e.target);
         const data = Object.fromEntries(formData);
 
-        const response = await fetch('/stacks/create', {
+        const response = await fetch('/create-stack', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data),
