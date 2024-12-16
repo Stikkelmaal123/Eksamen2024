@@ -17,7 +17,7 @@ exports.createStack = async (req, res) => {
         
         const saveStackQuery = `
         INSERT INTO stacks (stack_name, template_name, sub_domain)
-        VALUES (?, ?, ?)`;
+        VALUES (?, ?, CONCAT(?, '.kubelab.dk'))`;
         const [stackResult] = await db.query(saveStackQuery, [stackName, templateName, subdomain]);
 
         const stackId = stackResult.insertId;
