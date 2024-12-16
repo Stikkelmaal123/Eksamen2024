@@ -176,8 +176,13 @@
                     <input type="text" id="subdomain" name="subdomain" required />
                 </div>
                 <div>
-                    <label for="templates">Templates</label>
-                    <input type="text" id="templateName" name="templateName" required />
+        <label for="templateName">Select a Template:</label>
+        <select id="templateName" name="templateName" required>
+            <option value="">Select a template</option>
+            {{#each templates}}
+            <option value={{this.template_name}}>{{this.template_name}}</option>
+            {{/each}}
+        </select>
                 </div>
             </form>
         </div>

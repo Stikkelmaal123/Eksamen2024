@@ -344,5 +344,3 @@ deleteStacksModalCloseButton.addEventListener('click', () => {
     deleteStacksModal.style.display = "none"; // Fallback
 });
 
-// Login db check js
-

@@ -1,6 +1,6 @@
 const stacksModel = require('../models/stacks'); // DB model for stacks
 const groupsModel = require('../models/groups'); // DB model for groups
-const { getTemplateByName } = require('../models/templates');
+const { getTemplateByName, getAllTemplates } = require('../models/templates');
 const { processYaml } = require('../utils/yamlProcessor');
 const portainerApi = require('../utils/portainerApi'); // Portainer API utility
 
@@ -18,6 +18,10 @@ exports.createStack = async (req, res) => {
         if (!templateContent) {
             return res.status(404).json({ error: 'Template not found' });
         }
+        const saveStackQuery = `
+        INSERT INTO stacks (stack_name, template_name, subdomain, created_at)
+        VALUES (?, ?, ?, NOW())`;
+        await db.query(saveStackQuery, [stackName, templateName, subdomain]);
 
         // Process the YAML template
         const processedYaml = await processYaml(templateContent, { subdomain, subdomain2 });
@@ -40,16 +44,10 @@ exports.getStacks = async (req, res) => {
     try {
         const stacks = await stacksModel.getAllStacks();
         const educations = await groupsModel.getAllEducations(); // Fetch educations
-        res.render('stacks', { title: 'All Stacks', stacks, educations }); // Pass to view
+        const templates = await getAllTemplates();
+        res.render('stacks', { title: 'All Stacks', stacks, educations, templates }); // Pass to view
     } catch (error) {
         console.error('Error fetching stacks or educations:', error.message);
         res.status(500).send('Failed to fetch stacks or educations.');
     }
 };
-
-exports.renderCreateStackForm = (req, res) => {
-    // Render a form for creating a stack
-    res.render('createStack', { title: 'Create a New Stack' });
-};
-
-
