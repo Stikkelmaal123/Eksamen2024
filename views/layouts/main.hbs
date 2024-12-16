@@ -166,27 +166,23 @@
     <h1>Creating stack</h1>
     <div class="modal-content">
         <div class="left-section">
-            <form>
+            <form id="create-stack-form">
                 <div>
                     <label for="stack-name">Stack name</label>
-                    <input type="text" id="stack-name" placeholder="Name" />
+                    <input type="text" id="stackName" name="stackName" required />
                 </div>
                 <div>
                     <label for="subdomain-name">Subdomain name</label>
-                    <input type="text" id="subdomain-name" placeholder="Name" />
+                    <input type="text" id="subdomain" name="subdomain" required />
                 </div>
                 <div>
                     <label for="templates">Templates</label>
-                    <select id="templates" multiple>
-                        <option value="wordpress">WordPress</option>
-                        <option value="mariadb">MariaDB</option>
-                    </select>
+                    <input type="text" id="templateName" name="templateName" required />
                 </div>
             </form>
         </div>
         <div class="right-section">
             <h2>Optional</h2>
-            <form>
                 <div>
                     <label for="owner-name">Add another owner</label>
                     <input type="text" id="owner-name" placeholder="Name" />
@@ -195,17 +191,34 @@
                     <label for="group-name">Add group to stack</label>
                     <input type="text" id="group-name" list="groups" placeholder="Search group" />
                     <datalist id="groups">
-                        <option value="WOUE24"></option>
-                        <option value="WOUE23"></option>
+                        <option value="?"></option>
+                        <option value="?"></option>
                     </datalist>
                 </div>
-            </form>
         </div>
     </div>
     <div class="modal-footer">
-        <button id="create-stack">Create stack</button>
+        <button type="submit" id="create-stack">Create stack</button>
     </div>
 </dialog>
+
+<script>
+    document.getElementById('create-stack-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData);
+
+        const response = await fetch('/stacks/create', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+
+        const result = await response.json();
+        console.log(result);
+    });
+</script>
 
     <!-- Add users modal -->
 

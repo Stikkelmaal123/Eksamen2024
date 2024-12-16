@@ -29,6 +29,7 @@
           <span>Status</span>
           <span>Actions</span>
         </div>
+        {{#if stacks.length}}
         {{#each stacks}}
         <div class="row-container">
           <div class="table-row" onclick="toggleDetails(this)">
@@ -55,6 +56,11 @@
           </div>
         </div>
         {{/each}}
+        {{else}}
+          <div class="empty-state">
+           <p>No stacks available. Create one to get started!</p>
+        </div>
+      {{/if}}
       </div>
     </main>
   </div>
