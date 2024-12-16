@@ -21,6 +21,8 @@ exports.postLogin = async (req, res) => {
             });
         }
         const token = await portainerApi.login();
+        req.session.userId = user.user_id;
+        req.session.groupId = user.group_id;
 
         res.status(200).json({
         message: 'Login successful',

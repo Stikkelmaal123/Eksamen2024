@@ -53,7 +53,8 @@ exports.getAllGroups = async (req, res) => {
     const groups = await groupsModel.getAllGroups();
     const educations = await groupsModel.getAllEducations();
     const users = await groupsModel.getAllUsers(); // Fetch users here
-    res.render('groups', { title: 'All groups', groups, educations, users });
+    const templates = await getAllTemplates();
+    res.render('groups', { title: 'All groups', groups, educations, users, templates });
   } catch (error) {
     console.error('Error fetching groups, educations, or users:', error.message);
     res.status(500).send('Failed to fetch data.');

@@ -17,12 +17,27 @@ module.exports = {
         return rows;
     },
 
-    createStack: async (stackData) => {
-        const { stack_name, template_name, sub_domain} = stackData;
-        const result = await db.execute(
-            `INSERT INTO stacks (stack_name, template_name, sub_domain) VALUES (?, ?)`,
+    createStack: async (stackData, userId, groupId) => {
+        const { stack_name, template_name, sub_domain } = stackData;
+    
+        // Insert into stacks table
+        const [stackResult] = await db.execute(
+            `INSERT INTO stacks (stack_name, template_name, sub_domain)
+             VALUES (?, ?, ?)`,
             [stack_name, template_name, sub_domain]
         );
-        return result.insertId; // Return the ID of the newly created stack
+    
+        const stackId = stackResult.insertId;
+    
+        // Link the stack to the user and group
+        await db.execute(
+            `INSERT INTO groups_users_stacks (stack_id, groups_users_id)
+             SELECT ?, groups_users.groups_users_id
+             FROM groups_users
+             WHERE groups_users.user_id = ? AND groups_users.group_id = ?`,
+            [stackId, userId, groupId]
+        );
+    
+        return stackId; // Return the new stack ID
     }
 };

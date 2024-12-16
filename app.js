@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const exphbs = require('express-handlebars');
 const stackRoutes = require('./routes/stackRoutes');
 const dateHelper = require('./public/helpers/dateHelper');
@@ -7,6 +8,7 @@ const { getToken } = require('./utils/tokenStore');
 
 const app = express();
 const PORT = 3000;
+
 
 app.engine('hbs', exphbs.engine({
     extname: 'hbs',
@@ -24,6 +26,17 @@ app.set('views', 'views');  // Specify views directory
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(
+    session({
+        secret: "sessionSecret", 
+        resave: false,           
+        saveUninitialized: true, 
+        cookie: {
+            secure: false,        
+            maxAge: 1000 * 60 * 60, 
+        },
+    })
+);
 const authenticateUser = async (req, res, next) => {
     try {
         const token = await getToken(); // Retrieve token
