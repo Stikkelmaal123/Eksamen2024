@@ -108,7 +108,6 @@ const getAllStacks = async () => {
         httpsAgent,
         headers: { Authorization: `Bearer ${token}` },
     });
-    console.log('Stacks:', response.data);
     return response.data;
 };
 
