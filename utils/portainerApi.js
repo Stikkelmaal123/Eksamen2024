@@ -113,37 +113,6 @@ const getAllStacks = async () => {
 };
 
 
-const getStackServices = async (stackName) => {
-    const token = await getToken();
-    if (!token) throw new Error('No token found. Please log in.');
-
-    const response = await axios.get(
-        `${BASE_URL}/endpoints/${ENDPOINT_ID}/docker/services`,
-        {
-            httpsAgent,
-            headers: { Authorization: `Bearer ${token}` },
-        }
-    );
-
-    // Debugging: Log all services and their namespace labels
-    console.log('All services:');
-    response.data.forEach(service => {
-        console.log(`Service Name: ${service.Spec.Name}, Namespace: ${service.Spec.Labels?.['com.docker.stack.namespace']}`);
-    });
-
-    // Filter services by namespace label
-    const services = response.data.filter(service =>
-        service.Spec?.Labels?.['com.docker.stack.namespace'] === stackName
-    );
-
-    if (!services.length) {
-        console.error(`No services found for stack: '${stackName}'`);
-    }
-
-    return services;
-};
-
-
 const sanitizeName = (name) => name.toLowerCase().replace(/\s+/g, '');
 
 const getStackIdByName = async (stackName) => {
