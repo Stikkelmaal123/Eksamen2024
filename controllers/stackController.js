@@ -132,12 +132,16 @@ exports.getStacks = async (req, res) => {
             portainerStacks.some(pStack => pStack.Name === sanitizeName(stack.stack_name))
         );
 
+
+        const educations = await groupsModel.getAllEducations();
+        const users = await groupsModel.getAllUsers(); // Fetch users here
+        const templates = await getAllTemplates();
         // Render the page with filtered data
         res.render('stacks', {
             title: 'Stacks',
             isAdmin: isAdmin,
-            filteredStacks: filteredStacks,
-            userStacks: userStacks,
+            filteredStacks,
+            userStacks: userStacks, educations, users, templates
         });
     } catch (error) {
         console.error('Error fetching stacks:', error.message);
