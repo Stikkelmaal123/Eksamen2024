@@ -29,8 +29,8 @@
           <span>Status</span>
           <span>Actions</span>
         </div>
-        {{#if stacks.length}}
-        {{#each stacks}}
+        {{#if filteredStacks.length}}
+        {{#each filteredStacks}}
         <div class="row-container">
           <div class="table-row" onclick="toggleDetails(this)">
             <span class="stack-name">{{this.stack_name}}</span>
@@ -40,8 +40,8 @@
             <span class="creation-date">{{formatDate this.creation_date}}</span>
             <span class="status online">Online</span>
             <span class="actions">
-              <button>⟳</button>
-              <button>⏸</button>
+            <button onclick="startStack('{{this.stack_name}}')" title="Start">▶️</button>
+            <button onclick="stopStack('{{this.stack_name}}')" title="Stop">⏸</button>
               <button class="expand">☑️</button>
             </span>
           </div>
@@ -97,3 +97,50 @@
     </div>
 </dialog>
 
+<script>
+  async function startStack(stackName) {
+    try {
+      const response = await fetch('/stacks/start', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ stackName }),
+      });
+
+      if (response.ok) {
+        alert(`Stack "${stackName}" started successfully.`);
+        location.reload();
+      } else {
+        const error = await response.json();
+        alert(`Failed to start stack: ${error.error}`);
+      }
+    } catch (err) {
+      console.error('Error starting stack:', err.message);
+      alert('An unexpected error occurred while starting the stack.');
+    }
+  }
+
+  async function stopStack(stackName) {
+    try {
+      const response = await fetch('/stacks/stop', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ stackName }),
+      });
+
+      if (response.ok) {
+        alert(`Stack "${stackName}" stopped successfully.`);
+        location.reload();
+      } else {
+        const error = await response.json();
+        alert(`Failed to stop stack: ${error.error}`);
+      }
+    } catch (err) {
+      console.error('Error stopping stack:', err.message);
+      alert('An unexpected error occurred while stopping the stack.');
+    }
+  }
+</script>

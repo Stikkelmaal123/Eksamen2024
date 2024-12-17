@@ -52,13 +52,48 @@ exports.createStack = async (req, res) => {
 };
 
 
+exports.startStack = async (req, res) => {
+    try {
+        const { stackName } = req.body;
+        if (!stackName) return res.status(400).json({ error: 'Stack name is required.' });
+
+        const result = await portainerApi.startStack(stackName);
+        return res.status(200).json(result);
+    } catch (error) {
+        console.error('Error starting stack:', error.message);
+        return res.status(500).json({ error: 'Failed to start stack.' });
+    }
+};
+
+// Stop Stack
+exports.stopStack = async (req, res) => {
+    try {
+        const { stackName } = req.body;
+        if (!stackName) return res.status(400).json({ error: 'Stack name is required.' });
+
+        const result = await portainerApi.stopStack(stackName);
+        return res.status(200).json(result);
+    } catch (error) {
+        console.error('Error stopping stack:', error.message);
+        return res.status(500).json({ error: 'Failed to stop stack.' });
+    }
+};
+
 exports.getStacks = async (req, res) => {
     try {
+        const allStacks = await stacksModel.getAllStacks();
+        const portainerStacks = await portainerApi.getAllStacks(); // Fetch Portainer stacks
+
+        const sanitizeName = (name) => name.toLowerCase().replace(/\s+/g, '');
+
+        const filteredStacks = allStacks.filter(stack =>
+            portainerStacks.some(pStack => pStack.Name === sanitizeName(stack.stack_name))
+        );
         const stacks = await stacksModel.getAllStacks();
         const educations = await groupsModel.getAllEducations(); // Fetch educations
         const users = await groupsModel.getAllUsers(); // Fetch users here
         const templates = await getAllTemplates();
-        res.render('stacks', { title: 'All Stacks', stacks, educations, users, templates }); // Pass to view
+        res.render('stacks', { title: 'All Stacks', filteredStacks, educations, users, templates }); // Pass to view
     } catch (error) {
         console.error('Error fetching stacks or educations:', error.message);
         res.status(500).send('Failed to fetch stacks or educations.');

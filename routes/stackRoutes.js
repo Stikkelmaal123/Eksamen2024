@@ -9,6 +9,7 @@ router.get('/create-group', isAdmin, groupController.getCreateGroupPage);
 router.post('/create-group', isAdmin, groupController.createGroup);
 router.get('/create-stack', stackController.renderCreateStackForm); 
 router.post('/create-stack', stackController.createStack);
-
+router.post('/stacks/start', stackController.startStack);
+router.post('/stacks/stop', stackController.stopStack);
 
 module.exports = router;
