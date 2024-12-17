@@ -309,6 +309,12 @@ dialog.large-modal{
     flex: none;
     width: 100%; /* Take full width */
   }
+  .user-list-container .search-input {
+  width: 90% !important;
+  }
+  #user-list li {
+    width: 90%;
+}
 }
 
 /* For mobile screens */
@@ -343,7 +349,7 @@ dialog.large-modal{
   }
 
   dialog.large-modal h1 {
-    font-size: 20px;
+    font-size: 20px !important;
   }
 
   dialog.large-modal .close-btn {
@@ -1168,14 +1174,23 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 
 @media (max-width: 480px) {
   dialog[data-modal] h1 {
-      font-size: 20px;
+      font-size: 20px !important;
   }
+
+  dialog[data-modal="delete-stack"] .background-box{
+    height: 55%;
+  }
+
 }
 
 @media (max-width: 768px) {
   dialog[data-modal] h1 {
       font-size: 24px;
       text-align: center;
+  }
+
+  dialog[data-modal="delete-stack"] .background-box{
+    height: 70%;
   }
 }
 
@@ -1211,7 +1226,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   @media (max-width: 1024px) {
     dialog[data-modal="profile-settings"] {
         width: 90%; /* Adjust modal width */
-        height: 50%; /* Allow content-based height */
+        height: 70%; /* Allow content-based height */
 
     }
   }
