@@ -178,6 +178,22 @@ dialog[data-modal] input {
   color: var(--modal-input-font-color)
 }
 
+dialog[data-modal="large"] input {
+  width: 20%;
+  height: 50px;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--modal-fields-background-color);
+  color: var(--modal-input-font-color)
+}
+
+.large-modal-group-name-input{
+ width: 50% !important;
+}
+
+
 .checkbox-styling input[type="checkbox"] {
   transform: scale(0.8); /* Adjust size: 1 = default, < 1 = smaller */
   margin-right: 5px;     /* Add small spacing if needed */
@@ -255,8 +271,8 @@ dialog[data-modal] .modal-footer button#save:hover {
 /* Close Button */
 dialog[data-modal] .close-btn {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 10px;
+  right: 10px;
   font-size: 40px;
   background: none;
   border: none;
@@ -315,6 +331,15 @@ dialog.large-modal{
   #user-list li {
     width: 90%;
 }
+
+dialog.large-modal input{
+  width: 20%;
+}
+
+.large-modal-group-name-input {
+  width: 65% !important;
+}
+
 }
 
 /* For mobile screens */
@@ -333,11 +358,19 @@ dialog.large-modal{
     gap: 10px;
   }
 
-  dialog.large-modal input,
+  
   dialog.large-modal .btn-create-group {
     font-size: 14px;
     padding: 8px 10px;
     width: 100%; /* Input and button take full width */
+  }
+
+  dialog.large-modal input{
+    width: 20%;
+  }
+
+  .large-modal-group-name-input {
+    width: 65% !important;
   }
 }
 
@@ -346,6 +379,14 @@ dialog.large-modal{
   dialog.large-modal {
     padding: 5px;
     box-shadow: none;
+  }
+
+  dialog.large-modal input{
+    width: 20%;
+  }
+
+  .large-modal-group-name-input {
+    width: 65% !important;
   }
 
   dialog.large-modal h1 {
@@ -1188,6 +1229,12 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
       font-size: 24px;
       text-align: center;
   }
+
+  dialog.large-modal .close-btn {
+    font-size: 35px;
+    top: 10px;
+    right: 10px;
+}
 
   dialog[data-modal="delete-stack"] .background-box{
     height: 70%;
