@@ -1164,7 +1164,21 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   color: var(--button-hover-color);
 }
 
-/* Responsive Styling for create-stack modal */
+/* Responsive Styling for modal */
+
+@media (max-width: 480px) {
+  dialog[data-modal] h1 {
+      font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  dialog[data-modal] h1 {
+      font-size: 24px;
+      text-align: center;
+  }
+}
+
 @media (max-width: 1024px) {
   dialog[data-modal="create-stack"] {
       width: 90%; /* Adjust modal width */
@@ -1181,11 +1195,26 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   dialog[data-modal="create-stack"] .left-section select {
       width: 100%; /* Full width for smaller screens */
   }
+
+  dialog[data-modal="add-user"] input{
+    width: 100%; /* Full width for smaller screens */
+}
   
   dialog[data-modal="profile-settings"] input{
       width: 100%; /* Full width for smaller screens */
   }
 
+  dialog[data-modal="add-template"] input{
+    width: 90%; /* Full width for smaller screens */
+}
+
+  @media (max-width: 1024px) {
+    dialog[data-modal="profile-settings"] {
+        width: 90%; /* Adjust modal width */
+        height: 50%; /* Allow content-based height */
+
+    }
+  }
   dialog[data-modal] button#reset-password {
   width: 100%;;
   height: 30px;
