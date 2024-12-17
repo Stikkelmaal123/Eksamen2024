@@ -62,8 +62,8 @@ body {
   --login-font-color: #f9f9f9;
   --login-logo-color: #f9f9f9;
 
-  --button-color: #ce430b; /* This is the main button color*/
-  --button-hover-color: #f15011; /* This is the hover effect color for the main buttons*/
+  --button-color: #0a155e; /* This is the main button color*/
+  --button-hover-color: #354075; /* This is the hover effect color for the main buttons*/
   --delete-button-color: #800; /* This is the button color for all edit and delete buttons*/
   --delete-button-hover-color: #ca0202; /* This is the hover color for all edit and delete buttons*/
   --modal-fields-background-color: #d9d9d9; /* This is the background color for input fields in the modals*/
@@ -2073,9 +2073,10 @@ form .btn-login:hover {
 .theme-switch-wrapper em {
   color: var(--font-color);
   margin-left: 20px;
-  margin-right: 15px;
-  font-size: 1rem;
+  margin-right: 10px;
+  font-size: 14px;
   font-style: unset;
+  white-space: nowrap;
 }
 .theme-switch {
   display: inline-block;
