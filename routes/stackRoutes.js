@@ -11,5 +11,7 @@ router.get('/create-stack', stackController.renderCreateStackForm);
 router.post('/create-stack', stackController.createStack);
 router.post('/stacks/start', stackController.startStack);
 router.post('/stacks/stop', stackController.stopStack);
+router.delete('/stacks/delete', stackController.deleteStack);
+
 
 module.exports = router;

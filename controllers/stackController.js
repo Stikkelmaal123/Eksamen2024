@@ -79,6 +79,25 @@ exports.stopStack = async (req, res) => {
     }
 };
 
+exports.deleteStack = async (req, res) => {
+    try {
+        const { stackName } = req.query; // Get stackName from query params
+        console.log('Received DELETE request with stackName:', stackName);
+
+        if (!stackName) return res.status(400).json({ error: 'Stack name is required.' });
+
+        // Call the Portainer API utility to delete the stack
+        const result = await portainerApi.deleteStack(stackName);
+
+        // Return success message
+        return res.status(200).json(result);
+    } catch (error) {
+        console.error('Error deleting stack:', error.message);
+        return res.status(500).json({ error: 'Failed to delete stack.' });
+    }
+};
+
+
 exports.getStacks = async (req, res) => {
     try {
         const allStacks = await stacksModel.getAllStacks();

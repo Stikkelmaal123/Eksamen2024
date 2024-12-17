@@ -206,5 +206,37 @@ const startStack = async (stackName) => {
     }
 };
 
+const deleteStack = async (stackName) => {
+    try {
+        const token = await getToken();
+        if (!token) throw new Error('No token found. Please log in.');
 
-module.exports = { login, getSwarmID, createStack, stopStack, startStack, getAllStacks };
+        const stackId = await getStackIdByName(stackName); // Fetch stack ID dynamically
+        console.log(`Resolved Stack ID for '${stackName}': ${stackId}`);
+        console.log(`DELETE URL: ${BASE_URL}/stacks/${stackId}?endpointId=${ENDPOINT_ID}`);
+
+        // Send DELETE request to the Portainer API
+        const response = await axios.delete(
+            `${BASE_URL}/stacks/${stackId}?endpointId=${ENDPOINT_ID}`,
+            {
+                httpsAgent,
+                headers: { Authorization: `Bearer ${token}` },
+                validateStatus: (status) => status === 204 || status < 500,
+            }
+        );
+
+        console.log(`Stack '${stackName}' (ID: ${stackId}) deleted successfully.`);
+        return { message: `Stack '${stackName}' deleted successfully.` };
+    } catch (error) {
+        if (error.response) {
+            console.error('API Response Error:', error.response.status, error.response.data);
+        } else {
+            console.error('Error deleting stack:', error.message);
+        }
+        throw new Error(`Failed to delete stack '${stackName}': ${error.message}`);
+    }
+};
+
+
+
+module.exports = { login, getSwarmID, createStack, stopStack, startStack, getAllStacks, deleteStack };
