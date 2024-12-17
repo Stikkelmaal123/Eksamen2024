@@ -1306,6 +1306,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   dialog[data-modal="create-stack"] .modal-footer button {
       padding: 8px 15px; /* Reduce button padding */
       font-size: 14px; /* Adjust font size */
+      width: 100%;
   }
 }
 
