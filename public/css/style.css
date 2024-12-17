@@ -83,10 +83,10 @@ dialog[data-modal] {
   border: none;
   border-radius: 10px;
   padding: 20px 40px;
-  width: 1148px;
-  height: 806px;
-  max-width: 90%;
-  max-height: 90%;
+  max-width: 1148px;
+  max-height: 806px;
+  width: 90%;
+  height: 90%;
   background-color: var(--modal-background-color);
   color: var(--modal-font-color);
   position: relative;
@@ -1181,6 +1181,15 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   dialog[data-modal="create-stack"] .left-section select {
       width: 100%; /* Full width for smaller screens */
   }
+  
+  dialog[data-modal="profile-settings"] input{
+      width: 100%; /* Full width for smaller screens */
+  }
+
+  dialog[data-modal] button#reset-password {
+  width: 100%;;
+  height: 30px;
+  }
 
   dialog[data-modal="create-stack"] .modal-footer {
       flex-direction: column; /* Stack buttons vertically */
@@ -1225,7 +1234,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
       right: 10px;
   }
 
-  dialog[data-modal="create-stack"] .modal-footer button {
+  dialog[data-modal] .modal-footer button {
       width: 100%; /* Buttons take full width */
   }
 }
@@ -1236,6 +1245,15 @@ dialog[data-modal="create-stack"] h1 {
 
 dialog[data-modal="create-stack"] .modal-content {
   gap: 10px; /* Reduce spacing between elements */
+}
+
+dialog[data-modal] h1 {
+  margin-bottom: 10px; /* Reduced spacing */
+}
+
+.modal-content {
+  gap: 20px; /* Reduced gap */
+  margin-top: 0; /* Ensure no unintended margin above content */
 }
 
 /*Modal styling ends*/
@@ -1272,6 +1290,7 @@ dialog[data-modal="create-stack"] .modal-content {
   @media (max-width: 768px) {
     dialog[data-modal="add-template"] {
       padding: 15px;
+      max-height: 50%
     }
   
     dialog[data-modal="add-template"] h1 {
