@@ -178,6 +178,28 @@ dialog[data-modal] input {
   color: var(--modal-input-font-color)
 }
 
+.checkbox-styling input[type="checkbox"] {
+  transform: scale(0.8); /* Adjust size: 1 = default, < 1 = smaller */
+  margin-right: 5px;     /* Add small spacing if needed */
+}
+
+.checkbox-styling span {
+  display: inline-block;  /* Ensure inline-block behavior */
+  font-size: 14px;        /* Optional: Adjust font size */
+  color: #333;            /* Optional: Text color */
+}
+
+.checkbox-styling {
+  display: flex;          /* Flexbox for horizontal alignment */
+  align-items: center;    /* Align items vertically in the center */
+  gap: 8px;               /* Optional spacing between checkbox and text */
+}
+
+.education-checkbox {
+  transform: scale(0.8); /* Adjust the scale factor to your preference */
+  margin-right: 5px;     /* Add spacing between the radio and text */
+}
+
 dialog[data-modal] input::placeholder {
 color: var(--modal-input-font-color)
 }  
@@ -379,7 +401,6 @@ dialog.large-modal{
   flex-direction: column;
   gap: 20px; /* Spacing between child elements */
   flex: 1; /* Both sections take equal space */
-  overflow-y: auto; /* Allows scroll if content exceeds the container */
 }
 
 .left-section form,
@@ -460,7 +481,6 @@ dialog.large-modal{
   align-items: center;
   padding: 10px;
   border: none;
-  border-radius: 5px;
   background-color: var(--modal-fields-background-color);
 }
 
