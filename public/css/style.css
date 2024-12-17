@@ -154,7 +154,7 @@ dialog[data-modal] label {
   color: var(--modal-font-color);
 }
 
-.group-detail-expiration-date-title{
+.expiration-date-title{
   color: var(--modal-input-font-color) !important;
 }
 
