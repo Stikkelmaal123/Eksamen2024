@@ -19,10 +19,14 @@ module.exports = {
     
     getStacksByUserId: async (userId) => {
         const [rows] = await db.execute(
-            `SELECT * 
+            `SELECT stacks.*, 
+                    users.user_name AS owner, 
+                    groups.group_name AS group_name
              FROM stacks
              JOIN groups_users_stacks ON stacks.stack_id = groups_users_stacks.stack_id
              JOIN groups_users ON groups_users_stacks.groups_users_id = groups_users.groups_users_id
+             JOIN users ON groups_users.user_id = users.user_id
+             JOIN \`groups\` ON groups_users.group_id = \`groups\`.group_id
              WHERE groups_users.user_id = ?`,
             [userId]
         );
