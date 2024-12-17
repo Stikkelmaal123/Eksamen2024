@@ -40,9 +40,9 @@
             <span class="creation-date">{{formatDate this.creation_date}}</span>
             <span class="status online">Online</span>
             <span class="actions">
-            <button onclick="startStack('{{this.stack_name}}')" title="Start">▶</button>
-            <button onclick="stopStack('{{this.stack_name}}')" title="Stop">⏸</button>
-              <button class="expand">☑️</button>
+            <button onclick="event.stopPropagation(); startStack('{{this.stack_name}}')" title="Start">▶</button>
+            <button onclick="event.stopPropagation(); stopStack('{{this.stack_name}}')" title="Stop">⏸</button>
+            <button class="expand">☑️</button>
             </span>
           </div>
           <div class="details-row">
