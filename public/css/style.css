@@ -151,7 +151,11 @@ dialog[data-modal] .template-setup{
 dialog[data-modal] label {
   font-size: 18px;
   margin-bottom: 8px;
-  color: var(--modal-input-font-color);
+  color: var(--modal-font-color);
+}
+
+.group-detail-expiration-date-title{
+  color: var(--modal-input-font-color) !important;
 }
 
 .group-name-titel{
