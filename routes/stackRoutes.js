@@ -5,8 +5,8 @@ const groupController = require('../controllers/groupController');
 const isAdmin = require('../isAdmin');
 router.get('/stacks', stackController.getStacks);
 router.get('/groups', isAdmin, groupController.getAllGroups);
-router.get('/create-group', groupController.getCreateGroupPage);
-router.post('/create-group', groupController.createGroup);
+router.get('/create-group', isAdmin, groupController.getCreateGroupPage);
+router.post('/create-group', isAdmin, groupController.createGroup);
 router.get('/create-stack', stackController.renderCreateStackForm); 
 router.post('/create-stack', stackController.createStack);
 
