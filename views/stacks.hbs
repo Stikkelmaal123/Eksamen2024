@@ -61,6 +61,7 @@
   {{/if}}
 
   <!-- Render User Stacks -->
+  {{#unless isAdmin}}
   {{#if userStacks.length}}
     {{#each userStacks}}
             <div class="row-container">
@@ -68,7 +69,6 @@
           <span class="stack-name">{{this.stack_name}}</span>
           <span>{{this.template_name}}</span>
           <span>{{this.sub_domain}}</span>
-          <span class="owner">{{this.user_name}}</span>
           <span class="creation-date">{{formatDate this.creation_date}}</span>
           <span class="status online">Online</span>
           <span class="actions">
@@ -89,6 +89,7 @@
       <p>No stacks available for you. Create one to get started!</p>
     </div>
   {{/if}}
+  {{/unless}}
       </div>
     </main>
   </div>
