@@ -29,67 +29,79 @@
           <span>Status</span>
           <span>Actions</span>
         </div>
-  {{#if isAdmin}}
-    {{#if filteredStacks.length}}
-      {{#each filteredStacks}}
-      <div class="row-container">
-        <div class="table-row" onclick="toggleDetails(this)">
-          <span class="stack-name">{{this.stack_name}}</span>
-          <span>{{this.template_name}}</span>
-          <span>{{this.sub_domain}}</span>
-          <span class="owner">{{this.user_name}}</span>
-          <span class="creation-date">{{formatDate this.creation_date}}</span>
-          <span class="status online">Online</span>
-          <span class="actions">
+        {{#if isAdmin}}
+        {{#if filteredStacks.length}}
+        {{#each filteredStacks}}
+        <div class="row-container">
+          <div class="table-row" onclick="toggleDetails(this)">
+            <span class="stack-name">{{this.stack_name}}</span>
+            <span>{{this.template_name}}</span>
+            <span>{{this.sub_domain}}</span>
+            <span class="owner">{{this.user_name}}</span>
+            <span class="creation-date">{{formatDate this.creation_date}}</span>
+            <span class="status online">Online</span>
+            <span class="actions">
             <button onclick="event.stopPropagation(); startStack('{{this.stack_name}}')" title="Start">▶</button>
             <button onclick="event.stopPropagation(); stopStack('{{this.stack_name}}')" title="Stop">⏸</button>
             <button onclick="event.stopPropagation(); restartStack('{{this.stack_name}}')" title="Restart">🔄</button>
-          </span>
+            </span>
+          </div>
+          <div class="details-row">
+            <span data-mobile-only><strong>Stack Name: </strong>{{this.stack_name}}</span>
+            <span><strong>Group: </strong>{{this.group_name}}</span>
+            <span data-mobile-only><strong>Owner: </strong>{{this.user_name}}</span>
+            <span data-mobile-only><strong>Creation Date: </strong>{{formatDate this.creation_date}}</span>
+            <span><strong>Uptime: </strong>6278 days</span>
+            <span><strong>Latest run: </strong>27/13/9044</span>
+            <button class="custom-button" onclick="event.stopPropagation(); deleteStack('{{this.stack_name}}')">Delete 🗑</button>
+            {{!-- data-open-modal="delete-stack"  --}}
+          </div>
         </div>
-        <div class="details-row">
-          <span><strong>Group: </strong>{{this.group_name}}</span>
-          <span><strong>Uptime: </strong>6278 days</span>
-          <button class="custom-button" onclick="event.stopPropagation(); deleteStack('{{this.stack_name}}')">Delete 🗑</button>
+        {{/each}}
+        {{else}}
+          <div class="empty-state">
+           <p>No stacks available. Create one to get started!</p>
         </div>
+      {{/if}}
+      {{/if}}
       </div>
-      {{/each}}
-    {{else}}
-      <div class="empty-state">
-        <p>No stacks available for Admins.</p>
-      </div>
-    {{/if}}
-  {{/if}}
-
-  <!-- Render User Stacks -->
-  {{#unless isAdmin}}
-  {{#if userStacks.length}}
-    {{#each userStacks}}
-            <div class="row-container">
-        <div class="table-row" onclick="toggleDetails(this)">
-          <span class="stack-name">{{this.stack_name}}</span>
-          <span>{{this.template_name}}</span>
-          <span>{{this.sub_domain}}</span>
-          <span class="creation-date">{{formatDate this.creation_date}}</span>
-          <span class="status online">Online</span>
-          <span class="actions">
+    </main>
+  </div>
+        {{#unless isAdmin}}
+        {{#if userStacks.length}}
+        {{#each userStacks}}
+        <div class="row-container">
+          <div class="table-row" onclick="toggleDetails(this)">
+            <span class="stack-name">{{this.stack_name}}</span>
+            <span>{{this.template_name}}</span>
+            <span>{{this.sub_domain}}</span>
+            <span class="owner">{{this.user_name}}</span>
+            <span class="creation-date">{{formatDate this.creation_date}}</span>
+            <span class="status online">Online</span>
+            <span class="actions">
             <button onclick="event.stopPropagation(); startStack('{{this.stack_name}}')" title="Start">▶</button>
             <button onclick="event.stopPropagation(); stopStack('{{this.stack_name}}')" title="Stop">⏸</button>
             <button onclick="event.stopPropagation(); restartStack('{{this.stack_name}}')" title="Restart">🔄</button>
-          </span>
+            </span>
+          </div>
+          <div class="details-row">
+            <span data-mobile-only><strong>Stack Name: </strong>{{this.stack_name}}</span>
+            <span><strong>Group: </strong>{{this.group_name}}</span>
+            <span data-mobile-only><strong>Owner: </strong>{{this.user_name}}</span>
+            <span data-mobile-only><strong>Creation Date: </strong>{{formatDate this.creation_date}}</span>
+            <span><strong>Uptime: </strong>6278 days</span>
+            <span><strong>Latest run: </strong>27/13/9044</span>
+            <button class="custom-button" onclick="event.stopPropagation(); deleteStack('{{this.stack_name}}')">Delete 🗑</button>
+            {{!-- data-open-modal="delete-stack"  --}}
+          </div>
         </div>
-        <div class="details-row">
-          <span><strong>Group: </strong>{{this.group_name}}</span>
-          <span><strong>Uptime: </strong>6278 days</span>
-          <button class="custom-button" onclick="event.stopPropagation(); deleteStack('{{this.stack_name}}')">Delete 🗑</button>
+        {{/each}}
+        {{else}}
+          <div class="empty-state">
+           <p>No stacks available. Create one to get started!</p>
         </div>
-      </div>
-    {{/each}}
-  {{else}}
-    <div class="empty-state">
-      <p>No stacks available for you. Create one to get started!</p>
-    </div>
-  {{/if}}
-  {{/unless}}
+      {{/if}}
+      {{/unless}}
       </div>
     </main>
   </div>
