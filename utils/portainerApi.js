@@ -108,7 +108,7 @@ const getAllStacks = async () => {
         httpsAgent,
         headers: { Authorization: `Bearer ${token}` },
     });
-
+    console.log('Stacks:', response.data);
     return response.data;
 };
 
@@ -125,62 +125,118 @@ const getStackServices = async (stackName) => {
         }
     );
 
-    // Filter services by stack name label
-    const services = response.data.filter(service => 
+    // Debugging: Log all services and their namespace labels
+    console.log('All services:');
+    response.data.forEach(service => {
+        console.log(`Service Name: ${service.Spec.Name}, Namespace: ${service.Spec.Labels?.['com.docker.stack.namespace']}`);
+    });
+
+    // Filter services by namespace label
+    const services = response.data.filter(service =>
         service.Spec?.Labels?.['com.docker.stack.namespace'] === stackName
     );
 
-    if (!services.length) throw new Error(`No services found for stack: ${stackName}`);
+    if (!services.length) {
+        console.error(`No services found for stack: '${stackName}'`);
+    }
+
     return services;
 };
 
+
 const sanitizeName = (name) => name.toLowerCase().replace(/\s+/g, '');
 
-// Stop (Pause) all services in a stack
-const stopStack = async (stackName) => {
-    const saniStackName = sanitizeName(stackName);
-    console.log(`Stopping stack: ${stackName} (Sanitized: ${saniStackName})`);
+const getStackIdByName = async (stackName) => {
     const token = await getToken();
     if (!token) throw new Error('No token found. Please log in.');
 
-    const services = await getStackServices(saniStackName);
+    const response = await axios.get(`${BASE_URL}/stacks`, {
+        httpsAgent,
+        headers: { Authorization: `Bearer ${token}` },
+    });
 
-    for (const service of services) {
-        await axios.post(
-            `${BASE_URL}/endpoints/${ENDPOINT_ID}/docker/services/${service.ID}/pause`,
-            null, // No payload
-            {
-                httpsAgent,
-                headers: { Authorization: `Bearer ${token}` },
-            }
-        );
-        console.log(`Service ${service.Spec.Name} paused.`);
+    const stacks = response.data;
+
+    // Normalize stack name for comparison
+    const saniStackName = sanitizeName(stackName);
+
+    // Find stack ID by name
+    const stack = stacks.find(s => sanitizeName(s.Name) === saniStackName);
+
+    if (!stack) {
+        throw new Error(`Stack with name '${stackName}' not found.`);
     }
 
-    return { message: `Stack '${stackName}' stopped successfully.` };
+    return stack.Id; // Return the stack ID
 };
+// Stop (Pause) all services in a stack
+const stopStack = async (stackName) => {
+    try {
+        const token = await getToken();
+        if (!token) throw new Error('No token found. Please log in.');
+
+        const stackId = await getStackIdByName(stackName); // Fetch stack ID dynamically
+        console.log(`Attempting to stop stack '${stackName}' with ID: ${stackId}`);
+
+        // Include endpointId in the query parameter
+        const response = await axios.post(
+            `${BASE_URL}/stacks/${stackId}/stop?endpointId=${ENDPOINT_ID}`,
+            null, // No payload needed
+            {
+                httpsAgent,
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        );
+
+        console.log(`Stack '${stackName}' stopped successfully.`);
+        return { message: `Stack '${stackName}' stopped successfully.` };
+
+    } catch (error) {
+        if (error.response) {
+            console.error('API Response Error:', error.response.status, error.response.data);
+        } else {
+            console.error('Error stopping stack:', error.message);
+        }
+        throw new Error(`Failed to stop stack '${stackName}': ${error.message}`);
+    }
+};
+
 
 // Start (Unpause) all services in a stack
 const startStack = async (stackName) => {
-    const saniStackName = sanitizeName(stackName);
-    const token = await getToken();
-    if (!token) throw new Error('No token found. Please log in.');
+    try {
+        const token = await getToken();
+        if (!token) throw new Error('No token found. Please log in.');
 
-    const services = await getStackServices(saniStackName);
+        const stackId = await getStackIdByName(stackName); // Fetch stack ID dynamically
+        console.log(`Attempting to start stack '${stackName}' with ID: ${stackId}`);
 
-    for (const service of services) {
-        await axios.post(
-            `${BASE_URL}/endpoints/${ENDPOINT_ID}/docker/services/${service.ID}/unpause`,
-            null, // No payload
+        // Include endpointId in the query parameter
+        const response = await axios.post(
+            `${BASE_URL}/stacks/${stackId}/start?endpointId=${ENDPOINT_ID}`,
+            null, // No payload needed
             {
                 httpsAgent,
-                headers: { Authorization: `Bearer ${token}` },
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             }
         );
-        console.log(`Service ${service.Spec.Name} unpaused.`);
-    }
 
-    return { message: `Stack '${stackName}' started successfully.` };
+        console.log(`Stack '${stackName}' started successfully.`);
+        return { message: `Stack '${stackName}' started successfully.` };
+
+    } catch (error) {
+        if (error.response) {
+            console.error('API Response Error:', error.response.status, error.response.data);
+        } else {
+            console.error('Error starting stack:', error.message);
+        }
+        throw new Error(`Failed to start stack '${stackName}': ${error.message}`);
+    }
 };
+
 
 module.exports = { login, getSwarmID, createStack, stopStack, startStack, getAllStacks };
