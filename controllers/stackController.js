@@ -97,25 +97,51 @@ exports.deleteStack = async (req, res) => {
     }
 };
 
-
 exports.getStacks = async (req, res) => {
     try {
-        const allStacks = await stacksModel.getAllStacks();
-        const portainerStacks = await portainerApi.getAllStacks(); // Fetch Portainer stacks
+        // Check if the user is logged in
+        if (!req.session.userId) {
+            return res.status(403).send('Unauthorized: Please log in.');
+        }
+
+        const isAdmin = req.session.isAdmin;
+
+        // Fetch stacks based on role
+        let filteredStacks = [];
+        let userStacks = [];
+
+        if (isAdmin) {
+            filteredStacks = await stacksModel.getAllStacks(); // Admin gets all stacks
+        }
+
+        userStacks = await stacksModel.getStacksByUserId(req.session.userId); // User's own stacks
+
+        // Fetch Portainer stacks for status filtering (optional)
+        const portainerStacks = await portainerApi.getAllStacks();
 
         const sanitizeName = (name) => name.toLowerCase().replace(/\s+/g, '');
 
-        const filteredStacks = allStacks.filter(stack =>
+        // If using Portainer stacks for filtering
+        if (filteredStacks.length > 0) {
+            filteredStacks = filteredStacks.filter(stack =>
+                portainerStacks.some(pStack => pStack.Name === sanitizeName(stack.stack_name))
+            );
+        }
+
+        userStacks = userStacks.filter(stack =>
             portainerStacks.some(pStack => pStack.Name === sanitizeName(stack.stack_name))
         );
-        const stacks = await stacksModel.getAllStacks();
-        const educations = await groupsModel.getAllEducations(); // Fetch educations
-        const users = await groupsModel.getAllUsers(); // Fetch users here
-        const templates = await getAllTemplates();
-        res.render('stacks', { title: 'All Stacks', filteredStacks, educations, users, templates }); // Pass to view
+
+        // Render the page with filtered data
+        res.render('stacks', {
+            title: 'Stacks',
+            isAdmin: isAdmin,
+            filteredStacks: filteredStacks,
+            userStacks: userStacks,
+        });
     } catch (error) {
-        console.error('Error fetching stacks or educations:', error.message);
-        res.status(500).send('Failed to fetch stacks or educations.');
+        console.error('Error fetching stacks:', error.message);
+        res.status(500).send('Failed to fetch stacks.');
     }
 };
 

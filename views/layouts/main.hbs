@@ -18,14 +18,20 @@
         <h3>Navigation</h3>
         <ul>
           <li><a href="/stacks">Projects</a></li>
+          {{#if isAdmin}}
           <li><a href="/groups">Groups</a></li>
+          {{/if}}
         </ul>
         <h3>Functions</h3>
         <ul>
+            {{#if isAdmin}}
           <li><a href="#" data-open-modal="large">+ Add groups</a></li>
+          {{/if}}
           <li><a href="#" data-open-modal="create-stack">+ Add Stacks</a></li>
+          {{#if isAdmin}}
           <li><a href="#" data-open-modal="add-user">+ Add users</a></li>
           <li><a href="#" data-open-modal="add-template">+ Add templates</a></li>
+          {{/if}}
         </ul>
         <h3>Settings</h3>
         <ul>

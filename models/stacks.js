@@ -16,6 +16,18 @@ module.exports = {
         );  
         return rows;
     },
+    
+    getStacksByUserId: async (userId) => {
+        const [rows] = await db.execute(
+            `SELECT * 
+             FROM stacks
+             JOIN groups_users_stacks ON stacks.stack_id = groups_users_stacks.stack_id
+             JOIN groups_users ON groups_users_stacks.groups_users_id = groups_users.groups_users_id
+             WHERE groups_users.user_id = ?`,
+            [userId]
+        );
+        return rows;
+    },
 
     createStack: async (stackData, userId, groupId) => {
         const { stack_name, template_name, sub_domain } = stackData;

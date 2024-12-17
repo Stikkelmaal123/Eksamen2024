@@ -37,6 +37,10 @@ app.use(
         },
     })
 );
+app.use((req, res, next) => {
+    res.locals.isAdmin = req.session.isAdmin || false; 
+    next();
+});
 const authenticateUser = async (req, res, next) => {
     try {
         const token = await getToken(); // Retrieve token
