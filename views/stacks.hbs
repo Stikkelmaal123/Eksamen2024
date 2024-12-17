@@ -42,6 +42,7 @@
             <span class="actions">
             <button onclick="event.stopPropagation(); startStack('{{this.stack_name}}')" title="Start">▶</button>
             <button onclick="event.stopPropagation(); stopStack('{{this.stack_name}}')" title="Stop">⏸</button>
+            <button onclick="event.stopPropagation(); restartStack('{{this.stack_name}}')" title="Restart">🔄</button>
             </span>
           </div>
           <div class="details-row">
@@ -169,5 +170,48 @@ async function deleteStack(stackName) {
         alert('An unexpected error occurred while deleting the stack.');
     }
 }
+
+
+async function restartStack(stackName) {
+    if (!confirm(`Are you sure you want to restart the stack "${stackName}"?`)) return;
+
+    try {
+        // Step 1: Stop the stack
+        let response = await fetch('/stacks/stop', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ stackName }),
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(`Failed to stop stack: ${error.error}`);
+        }
+        console.log(`Stack "${stackName}" stopped successfully.`);
+
+        // Step 2: Start the stack
+        response = await fetch('/stacks/start', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ stackName }),
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(`Failed to start stack: ${error.error}`);
+        }
+
+        alert(`Stack "${stackName}" restarted successfully.`);
+        location.reload();
+    } catch (err) {
+        console.error('Error restarting stack:', err.message);
+        alert(`An unexpected error occurred: ${err.message}`);
+    }
+}
+
 
 </script>
