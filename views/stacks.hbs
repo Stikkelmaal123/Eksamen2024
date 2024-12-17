@@ -64,9 +64,6 @@
         </div>
       {{/if}}
       {{/if}}
-      </div>
-    </main>
-  </div>
         {{#unless isAdmin}}
         {{#if userStacks.length}}
         {{#each userStacks}}
@@ -75,7 +72,7 @@
             <span class="stack-name">{{this.stack_name}}</span>
             <span>{{this.template_name}}</span>
             <span>{{this.sub_domain}}</span>
-            <span class="owner">{{this.user_name}}</span>
+            <span class="owner">{{this.user}}</span>
             <span class="creation-date">{{formatDate this.creation_date}}</span>
             <span class="status online">Online</span>
             <span class="actions">
