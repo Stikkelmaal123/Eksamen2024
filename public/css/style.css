@@ -155,7 +155,7 @@ dialog[data-modal] label {
 }
 
 .expiration-date-title{
-  color: var(--modal-input-font-color) !important;
+  color: #f9f9f9 !important;
 }
 
 .group-name-titel{
@@ -2075,6 +2075,7 @@ form .btn-login:hover {
   margin-left: 20px;
   margin-right: 15px;
   font-size: 1rem;
+  font-style: unset;
 }
 .theme-switch {
   display: inline-block;
