@@ -39,7 +39,6 @@
     
   </div>
           </li>
-          <li><a href="#">Readable fonts</a></li>
           <li><a href="#" data-open-modal="profile-settings">Profile</a></li>
         </ul>
       </nav>
@@ -55,7 +54,7 @@
     <h1>Creating group</h1>
         <div class="group-name-container">
         <form class="create-group-form" action="/create-group" method="POST">
-        <label for="groupName">Group name</label>
+        <label for="groupName" class="group-name-titel">Group name</label>
         <input type="text" id="groupName" name="groupName" placeholder="Enter name..." required />
     </div>
     <div class="modal-content">
@@ -237,7 +236,7 @@
         <p class="csv">Drag and drop csv file or click here</p>
     </div>
     <div class="modal-footer">
-        <button id="save">Done</button>
+        <button id="save" data-close-modal>Done</button>
     </div>
 </dialog>
 
