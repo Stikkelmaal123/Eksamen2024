@@ -1665,10 +1665,6 @@ form .btn-login:hover {
     .login-logo {
         font-size: 18px; /* Adjust logo size */
         line-height: 1.2;
-        position: relative; /* Move logo to relative position */
-        top: auto;
-        left: auto;
-        text-align: center;
         margin-bottom: 10px;
     }
 
