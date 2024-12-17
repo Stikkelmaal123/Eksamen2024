@@ -37,6 +37,8 @@ body {
   --modal-box-background-color: #354075;
   --modal-font-color: #0e0e0e;
   --modal-input-font-color: #f9f9f9;
+  --save-button-color: #1b7002;
+  --save-button-color-hover: #2db705;
 
 
   /* fonts */
@@ -62,8 +64,8 @@ body {
   --login-font-color: #f9f9f9;
   --login-logo-color: #f9f9f9;
 
-  --button-color: #0a155e; /* This is the main button color*/
-  --button-hover-color: #354075; /* This is the hover effect color for the main buttons*/
+  --button-color: #ce430b; /* This is the main button color*/
+  --button-hover-color: #f15011; /* This is the hover effect color for the main buttons*/
   --delete-button-color: #800; /* This is the button color for all edit and delete buttons*/
   --delete-button-hover-color: #ca0202; /* This is the hover color for all edit and delete buttons*/
   --modal-fields-background-color: #d9d9d9; /* This is the background color for input fields in the modals*/
@@ -71,7 +73,7 @@ body {
   --modal-box-background-color: #464A4C;
   --modal-font-color: #f9f9f9;
   --modal-input-font-color: #0e0e0e;
-
+  --save-button-color: #1b7002;
 }
 
 
@@ -248,6 +250,7 @@ dialog[data-modal] .modal-footer button {
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
+  color: #f9f9f9;
 }
 
 dialog[data-modal] .modal-footer button#logout {
@@ -260,11 +263,20 @@ dialog[data-modal] .modal-footer button#logout:hover {
 }
 
 dialog[data-modal] .modal-footer button#save {
+  background-color: var(--save-button-color);
+
+}
+
+dialog[data-modal] .modal-footer button#done {
   background-color: var(--button-color);
 
 }
 
 dialog[data-modal] .modal-footer button#save:hover {
+  background-color: var(--save-button-color-hover);
+}
+
+dialog[data-modal] .modal-footer button#done:hover {
   background-color: var(--button-hover-color);
 }
 
@@ -555,7 +567,7 @@ dialog.large-modal input{
 }
 
 .modal-footer .btn-create-group {
-  background-color: var(--button-color);
+  background-color: var(--save-button-color);
   padding: 10px 30px;
   border: none;
   border-radius: 5px;
@@ -564,7 +576,7 @@ dialog.large-modal input{
 }
 
 .modal-footer .btn-create-group:hover {
-  background-color: var(--button-hover-color);
+  background-color: var(--save-button-color-hover);
 }
 
 
@@ -631,7 +643,7 @@ dialog[data-modal="create-stack"] .modal-footer {
 }
 
 dialog[data-modal="create-stack"] .modal-footer button {
-  background-color: var(--button-color);
+  background-color: var(--save-button-color);
   padding: 10px 30px;
   border: none;
   border-radius: 5px;
@@ -640,7 +652,7 @@ dialog[data-modal="create-stack"] .modal-footer button {
 }
 
 dialog[data-modal="create-stack"] .modal-footer button:hover {
-  background-color: var(--button-hover-color);
+  background-color: var(--save-button-color-hover);
 }
 
 .group-stacks-modal {
@@ -1038,7 +1050,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
-  color: var(--modal-font-color);
+  color: #f9f9f9;
   cursor: pointer;
 }
 
@@ -1067,7 +1079,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .manage-users-modal .remove-stacks-btn {
-  background-color: var(--delete-button-color);
+  background-color: var(--delete-button-color) !important;
 }
 
 .manage-users-modal .remove-stacks-btn:hover {
@@ -1146,7 +1158,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   border: none;
   border-radius: 5px;
   background-color: var(--modal-fields-background-color);
-  color: var(--modal-font-color);
+  color: var(--modal-input-font-color);
 }
 
 .manage-user-modal .permission-group {
@@ -1162,7 +1174,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   border: none;
   border-radius: 5px;
   background-color: var(--modal-fields-background-color);
-  color: var(--modal-font-color);
+  color: var(--modal-input-font-color);
 }
 
 .manage-user-modal .modal-footer {
@@ -1177,7 +1189,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  color: var(--modal-font-color);
+  color: #f9f9f9;
 }
 
 .manage-user-modal .save-btn {
