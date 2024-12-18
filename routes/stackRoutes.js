@@ -11,6 +11,7 @@ router.get('/create-stack', stackController.renderCreateStackForm);
 router.post('/create-stack', stackController.createStack);
 router.post('/stacks/start', stackController.startStack);
 router.post('/stacks/stop', stackController.stopStack);
+router.post('/api/templates', stackController .addTemplate);
 router.delete('/stacks/delete', isAdmin, stackController.deleteStack);
 
 

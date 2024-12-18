@@ -282,7 +282,7 @@ dialog[data-modal] .modal-footer button#logout:hover {
   background-color: var(--delete-button-hover-color);
 }
 
-dialog[data-modal] .modal-footer button#save {
+dialog[data-modal] .modal-footer button.save {
   background-color: var(--save-button-color);
 
 }
@@ -292,7 +292,7 @@ dialog[data-modal] .modal-footer button#done {
 
 }
 
-dialog[data-modal] .modal-footer button#save:hover {
+dialog[data-modal] .modal-footer button.save:hover {
   background-color: var(--save-button-color-hover);
 }
 
@@ -314,14 +314,6 @@ dialog[data-modal] .close-btn {
 
 dialog[data-modal] .close-btn:hover {
   color: var(--button-hover-color);
-}
-
-#save-1, #save-2, #save-3, #save-4{
-  background-color: var(--button-color);
-}
-
-#save-1, #save-2, #save-3, #save-4 :hover{
-  background-color: var(--button-hover-color);
 }
 
 dialog.large-modal{

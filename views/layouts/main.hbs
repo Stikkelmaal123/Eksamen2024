@@ -244,7 +244,7 @@
         <p class="csv">Drag and drop csv file or click here</p>
     </div>
     <div class="modal-footer">
-        <button id="save" data-close-modal>Done</button>
+        <button class="save" data-close-modal>Done</button>
     </div>
 </dialog>
 
@@ -263,9 +263,42 @@
         <textarea class="place-for-template-yaml" id="template-text" placeholder="Add your template here..."></textarea>
     </div>
     <div class="modal-footer">
-        <button id="save">Add</button>
+        <button class="save" id="addTemplate">Add</button>
     </div>
 </dialog>
+
+<script>
+ document.getElementById('addTemplate').addEventListener('click', async () => {
+  const templateName = document.querySelector('.template-name-form').value;
+  const templateContent = document.querySelector('.place-for-template-yaml').value;
+
+  if (!templateName || !templateContent) {
+    alert('Please provide both the template name and content.');
+    return;
+  }
+
+  try {
+    const response = await fetch('/api/templates', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ templateName, templateContent }),
+    });
+
+    if (response.ok) {
+      alert('Template added successfully!');
+      location.reload(); // Refresh the page to show updated templates
+    } else {
+      const error = await response.json();
+      alert(`Error: ${error.error}`);
+    }
+  } catch (err) {
+    console.error('Error adding template:', err);
+    alert('Failed to add template. Please try again.');
+  }
+});
+</script>
 
 
     <!-- Profile settings -->
@@ -286,7 +319,7 @@
     </form>
     <div class="modal-footer">
         <button id="logout">Log out</button>
-        <button id="save">Save</button>
+        <button class="save">Save</button>
     </div>
 </dialog>
 

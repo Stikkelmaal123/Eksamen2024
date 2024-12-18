@@ -1,7 +1,7 @@
 const stacksModel = require('../models/stacks'); // DB model for stacks
 const groupsModel = require('../models/groups'); // DB model for groups
 const db = require('../utils/db');
-const { getTemplateByName, getAllTemplates } = require('../models/templates');
+const { getTemplateByName, getAllTemplates, addTemplate } = require('../models/templates');
 const { processYaml } = require('../utils/yamlProcessor');
 const portainerApi = require('../utils/portainerApi'); // Portainer API utility
 
@@ -166,6 +166,26 @@ exports.getStacks = async (req, res) => {
         res.status(500).send('Failed to fetch stacks.');
     }
 };
+
+exports.addTemplate = async (req, res) => {
+    try {
+      const { templateName, templateContent } = req.body;
+  
+      // Validate input
+      if (!templateName || !templateContent) {
+        return res.status(400).json({ error: 'Template name and content are required.' });
+      }
+  
+      // Add the template to the database
+      const templateId = await addTemplate(templateName, templateContent);
+  
+      res.status(201).json({ success: true, templateId });
+    } catch (error) {
+      console.error('Error adding template:', error.message);
+      res.status(500).json({ error: 'Failed to add template.' });
+    }
+  };
+
 
 exports.renderCreateStackForm = async (req, res) => {
     try{
