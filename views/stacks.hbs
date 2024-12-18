@@ -36,7 +36,7 @@
           <div class="table-row" onclick="toggleDetails(this)">
             <span class="stack-name">{{this.stack_name}}</span>
             <span>{{this.template_name}}</span>
-            <span>{{this.sub_domain}}</span>
+            <span><a href="{{this.sub_domain}}">{{this.sub_domain}}</a></span>
             <span class="owner">{{this.user_name}}</span>
             <span class="creation-date">{{formatDate this.creation_date}}</span>
             <span class="status {{this.status}}">{{this.status}}</span>
@@ -71,7 +71,7 @@
           <div class="table-row" onclick="toggleDetails(this)">
             <span class="stack-name">{{this.stack_name}}</span>
             <span>{{this.template_name}}</span>
-            <span>{{this.sub_domain}}</span>
+            <span><a href="{{this.sub_domain}}">{{this.sub_domain}}</a></span>
             <span class="owner">{{this.owner}}</span>
             <span class="creation-date">{{formatDate this.creation_date}}</span>
             <span class="status {{this.status}}">{{this.status}}</span>
