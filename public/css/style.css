@@ -1327,7 +1327,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 
 
   .group-details-modal .details-table-left-box {
-    width: 80%;
+    width: 87%;
     overflow-y: auto;
   }
 
@@ -1434,6 +1434,11 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   dialog[data-modal="create-stack"] h1 {
       font-size: 20px; /* Smaller heading on mobile */
       text-align: center; /* Center align heading */
+  }
+
+  .group-details-modal .details-table-left-box {
+    width: 92%;
+    overflow-y: auto;
   }
 
   dialog[data-modal="create-stack"] .left-section form {
