@@ -867,9 +867,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   color: var(--modal-font-color);
 }
 
-.left-section{
-  margin-top: 10px;
-}
+
 
 .details-table th,
 .details-table td {
@@ -891,7 +889,6 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   width: 50%;
   background-color: var(--modal-box-background-color); 
   border-radius: 10px;
-  padding: 20px;
   color: var(--modal-input-font-color);
 }
 
