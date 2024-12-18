@@ -41,11 +41,17 @@ exports.postLogin = async (req, res) => {
 
 
 exports.logout = (req, res) => {
-    req.session.destroy(() => {
-        res.redirect('/auth/login'); // Redirect to login after logout
+    req.session.destroy((err) => {
+        if (err) {
+            console.error('Failed to destroy session:', err);
+            return res.status(500).json({ message: 'Failed to log out.' });
+        }
+
+        res.clearCookie('connect.sid'); // Clear session cookie
+        res.status(200).json({ message: 'Logged out successfully.' });
     });
-    res.redirect('/auth/login');
 };
+
 
 exports.getForgotPasswordPage = (req, res) => {
     res.render('password', { layout: 'main2'});
@@ -62,3 +68,4 @@ exports.postForgotPassword = (req, res) => {
         message: `A password reset link has been sent to ${email}.` 
     });
 };
+

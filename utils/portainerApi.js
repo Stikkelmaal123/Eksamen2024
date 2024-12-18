@@ -135,7 +135,7 @@ const getStackIdByName = async (stackName) => {
         throw new Error(`Stack with name '${stackName}' not found.`);
     }
 
-    return stack.Id; // Return the stack ID
+    return stack.Id;
 };
 // Stop (Pause) all services in a stack
 const stopStack = async (stackName) => {
@@ -238,5 +238,4 @@ const deleteStack = async (stackName) => {
 };
 
 
-
-module.exports = { login, getSwarmID, createStack, stopStack, startStack, getAllStacks, deleteStack };
+module.exports = { login, getSwarmID, createStack, stopStack, startStack, getAllStacks, deleteStack};

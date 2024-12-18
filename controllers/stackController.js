@@ -116,23 +116,41 @@ exports.getStacks = async (req, res) => {
 
         userStacks = await stacksModel.getStacksByUserId(req.session.userId); // User's own stacks
 
-        // Fetch Portainer stacks for status filtering (optional)
         const portainerStacks = await portainerApi.getAllStacks();
 
         const sanitizeName = (name) => name.toLowerCase().replace(/\s+/g, '');
 
         // If using Portainer stacks for filtering
+        const mergeStatusWithStacks = (stacks, portainerStacks) =>
+            stacks.map(stack => {
+                const matchedStack = portainerStacks.find(
+                    pStack => pStack.Name === sanitizeName(stack.stack_name)
+                );
+                return {
+                    ...stack,
+                    status: matchedStack
+                    ? matchedStack.Status === 1 ? 'online' : 'offline' : 'Unknown', 
+                };
+            });
+
+        // If using Portainer stacks for filtering
         if (filteredStacks.length > 0) {
-            filteredStacks = filteredStacks.filter(stack =>
-                portainerStacks.some(pStack => pStack.Name === sanitizeName(stack.stack_name))
+            filteredStacks = mergeStatusWithStacks(
+                filteredStacks.filter(stack =>
+                    portainerStacks.some(pStack => pStack.Name === sanitizeName(stack.stack_name))
+                ),
+                portainerStacks
             );
         }
 
-        userStacks = userStacks.filter(stack =>
-            portainerStacks.some(pStack => pStack.Name === sanitizeName(stack.stack_name))
+        userStacks = mergeStatusWithStacks(
+            userStacks.filter(stack =>
+                portainerStacks.some(pStack => pStack.Name === sanitizeName(stack.stack_name))
+            ),
+            portainerStacks
         );
 
-
+        
         const educations = await groupsModel.getAllEducations();
         const users = await groupsModel.getAllUsers(); // Fetch users here
         const templates = await getAllTemplates();

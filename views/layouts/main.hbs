@@ -290,6 +290,27 @@
     </div>
 </dialog>
 
+<script>
+    document.getElementById('logout').addEventListener('click', async () => {
+        try {
+            const response = await fetch('/logout', {
+                method: 'POST', // Ensure your server accepts POST for logout
+                headers: { 'Content-Type': 'application/json' },
+            });
+
+            if (response.ok) {
+                // Successfully logged out
+                window.location.href = '/login'; // Redirect to login page
+            } else {
+                const error = await response.json();
+                alert(`Error: ${error.message}`);
+            }
+        } catch (err) {
+            console.error('Error during logout:', err);
+            alert('An unexpected error occurred. Please try again.');
+        }
+    });
+</script>
 
 
     {{{body}}} <!-- Content from child templates will be injected here -->
