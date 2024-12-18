@@ -726,7 +726,18 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   width: 100%;
   height: 100%;
   background-color: var(--modal-box-background-color);
+  border-radius: 5px;
 }
+
+.left-corner-radius {
+  border-radius: 5px 0px 0px 0px;
+}
+
+.right-corner-radius {
+  border-radius: 0px 5px 0px 0px;
+}
+
+
 
 #manage-users{
   align-items: flex-start;
