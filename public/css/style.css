@@ -140,13 +140,35 @@ dialog[data-modal] form {
 
 dialog[data-modal="large"] form {
   display: flex;
-  flex-direction: row;
 }
 
 dialog[data-modal] .template-setup{
   display: flex;
   flex-direction: column;
   margin-bottom: 16px; /* Space between rows */
+}
+
+.template-name-form{
+  width: 75% !important;
+
+}
+
+.place-for-template-yaml{
+  width: 77% !important;          /* Adjust width if needed */
+  height: 333px !important;       /* Adjust height for enough space */
+  box-sizing: border-box;         /* Include padding and border in width/height */
+  padding: 10px;                  /* Add padding for inner spacing */
+  overflow: auto !important;      /* Ensure scrollability if needed */
+  resize: none;                   /* Prevent resizing if it's unnecessary */
+  vertical-align: top !important; /* Ensure text aligns at the top */
+  background-color: var(--modal-fields-background-color);
+  color: var(--modal-input-font-color);
+  border: none;
+  border-radius: 5px;
+}
+
+.place-for-template-yaml::placeholder {
+  vertical-align: text-top !important;
 }
 
 /* Labels */
@@ -165,7 +187,7 @@ dialog[data-modal] label {
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator {
-background-color: var(--modal-input-font-color);
+color: var(--modal-input-font-color) !important;
 }
 
 /* Inputs */
@@ -196,8 +218,9 @@ dialog[data-modal="large"] input {
 }
 
 
+
 .checkbox-styling input[type="checkbox"] {
-  transform: scale(0.8); /* Adjust size: 1 = default, < 1 = smaller */
+  transform: scale(1.5); /* Adjust size: 1 = default, < 1 = smaller */
   margin-right: 5px;     /* Add small spacing if needed */
 }
 
@@ -213,10 +236,7 @@ dialog[data-modal="large"] input {
   gap: 8px;               /* Optional spacing between checkbox and text */
 }
 
-.education-checkbox {
-  transform: scale(0.8); /* Adjust the scale factor to your preference */
-  margin-right: 5px;     /* Add spacing between the radio and text */
-}
+
 
 dialog[data-modal] input::placeholder {
 color: var(--modal-input-font-color)
@@ -454,6 +474,13 @@ dialog.large-modal input{
   height: auto;
 }
 
+
+.dialog[data-modal="create-stack"]{
+  justify-content: unset !important;
+
+}
+
+
 .left-section,
 .right-section {
   display: flex;
@@ -519,7 +546,7 @@ dialog.large-modal input{
 }
 
 .user-list-container .search-input {
-  width: 100%;
+  width: 96.5%;
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -540,12 +567,15 @@ dialog.large-modal input{
   align-items: center;
   padding: 10px;
   border: none;
-  background-color: var(--modal-fields-background-color);
+  background-color: var(--modal-box-background-color);
+  border-radius: 5px;
+  margin-bottom: 5px;
 }
 
 #user-list li span {
   font-size: 16px;
-  color: var(--modal-input-font-color);
+  color: var(--font-color);
+  white-space: nowrap;
 }
 
 #user-list .remove-user-btn {
@@ -582,13 +612,13 @@ dialog.large-modal input{
 
 .add-user-csv-box {
   width: 100%;
-  height: 200px;
+  height: 300px;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-size: 14px;
+  font-size: 24px;
   color: var(--modal-font-color);
   background-color: var(--modal-fields-background-color);
 }
@@ -615,6 +645,7 @@ dialog[data-modal="create-stack"] .left-section select {
   flex-direction: column;
   gap: 15px;
   color: var(--modal-input-font-color);
+  margin-bottom: 50px;
 }
 
 /* Right Section */
@@ -622,19 +653,11 @@ dialog[data-modal="create-stack"] .right-section {
   flex: 1;
 }
 
-dialog[data-modal="create-stack"] .right-section form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
 
-dialog[data-modal="create-stack"] .right-section input {
-  width: 100%;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: var(--modal-fields-background-color);
-  font-size: 16px;
+
+.create-stack-content-space{
+  padding-bottom: 15%;
+  margin-bottom: 20px;
 }
 
 dialog[data-modal="create-stack"] .modal-footer {
@@ -752,7 +775,6 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   background-color: var(--modal-box-background-color);
   padding: 20px;
   border-radius: 10px;
-  margin-top: 25%;
   width: 80%;
 }
 
@@ -769,7 +791,6 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   background-color: var(--modal-box-background-color); 
   padding: 20px;
   border-radius: 10px;
-  margin-bottom: 20px;
 }
 
 .education-options div {
@@ -814,10 +835,19 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   gap: 20px;
   flex: 1;
   overflow-y: auto;
+  flex-wrap: wrap; /* Wraps items on smaller screens */
 }
 
 .group-details-modal #expirationDate {
   width: 90%;
+}
+
+.large-modal #expirationDate {
+  width: 95.5%;
+}
+
+.date-group-details{
+  width: 95% !important;
 }
 
 .details-table {
@@ -921,9 +951,9 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 }
 
 .education-item {
-  display: flex;
-  align-items: center;
-  gap: 10px; /* Space between checkbox and text */
+  display: flex !important;
+  align-items: center !important;
+  gap: 0px !important;
   background-color: var(--modal-fields-background-color);
   padding: 10px;
   border-radius: 8px;
@@ -933,6 +963,18 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   width: 100%;
 }
 
+.education-checkbox {
+  margin-right: 10px; /* Add space between radio button and label text */
+  vertical-align: middle; /* Ensure vertical alignment with text */
+    transform: scale(0.5); /* Adjust the scale factor to your preference */
+    margin-right: 8px;     /* Add spacing between the radio and text */
+    flex-direction: row;
+}
+
+.education-option {
+  margin-bottom: 8px; /* Optional: Add spacing between options */
+}
+
 .education-item input[type="checkbox"] {
   height: 20px;
   cursor: pointer;
@@ -940,9 +982,12 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 
 .education-item span {
   font-size: 16px;
-  font-weight: bold;
   flex-grow: 1; /* Allows the text to take up remaining space */
   color: var(--modal-input-font-color);
+}
+
+.education-span-group-details {
+  margin-right: auto !important;
 }
 
 .large-modal .education-box{
@@ -960,13 +1005,13 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: unset !important;
   overflow: hidden;
 }
 
 .manage-users-modal h1 {
   font-size: 28px;
-  margin-bottom: 20px;
+  margin-bottom: 66px !important;
 }
 
 .manage-users-modal .modal-content {
@@ -1014,6 +1059,7 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   color: var(--modal-font-color);
   font-size: 16px;
   cursor: pointer;
+  color: var(--font-color);
 }
 
 .manage-users-modal .button-group button:hover {
@@ -1036,11 +1082,14 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 .manage-users-modal .users-table td {
   padding: 15px;
   border: none;
+  background-color: var(--modal-box-background-color);
+  color: var(--modal-input-font-color);
 }
 
 .manage-users-modal .users-table th {
   background-color: var(--modal-fields-background-color);
   font-weight: bold;
+  color: var(--modal-input-font-color);
 }
 
 
@@ -1060,8 +1109,9 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 
 .manage-users-modal .modal-footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-end !important;
   gap: 20px;
+  margin-top: auto;
 }
 
 .manage-users-modal .modal-footer button {
@@ -1139,6 +1189,10 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 .manage-user-modal .permissions-section h2 {
   font-size: 18px;
   margin-bottom: 10px;
+}
+
+#permitted-snacks{
+  width: 96% !important;
 }
 
 .manage-user-modal .input-group {
@@ -1223,6 +1277,9 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   color: var(--button-hover-color);
 }
 
+
+
+
 /* Responsive Styling for modal */
 
 @media (max-width: 480px) {
@@ -1234,7 +1291,41 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
     height: 55%;
   }
 
+  dialog[data-modal="manage-users-modal"] .input-section form {
+    width: 90% !important;
+  }
+
 }
+
+@media (max-width: 768px) {
+
+  .group-details-modal {
+    overflow-y: auto;
+  }
+
+  .group-details-modal .modal-content {
+    flex-direction: column; /* Stack items vertically */
+    gap: 15px; /* Add spacing between items */
+  }
+
+
+  .group-details-modal .right-section {
+    width: 100%; /* Make each section take full width */
+  }
+
+
+  .group-details-modal .details-table-left-box {
+    width: 80%;
+    overflow-y: auto;
+  }
+
+  .group-details-modal .details-table,
+  .group-details-modal .date-picker-box,
+  .group-details-modal .education-box {
+    margin-bottom: 15px; /* Add spacing for a cleaner layout */
+  }
+}
+
 
 @media (max-width: 768px) {
   dialog[data-modal] h1 {
@@ -1320,6 +1411,11 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
       font-size: 14px; /* Adjust font size */
       width: 100%;
   }
+
+  .manage-user-modal {
+    flex-direction: column;
+  }
+
 }
 
 @media (max-width: 480px) {
@@ -1341,13 +1437,13 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
   dialog[data-modal] .modal-footer button {
       width: 100%; /* Buttons take full width */
   }
+
 }
 
-dialog[data-modal="create-stack"] h1 {
-  margin: 0; /* Reset default margin */
-}
 
-dialog[data-modal="create-stack"] .modal-content {
+
+
+dialog[data-modal="create-stack"] {
   gap: 10px; /* Reduce spacing between elements */
 }
 
@@ -1514,7 +1610,6 @@ dialog[data-modal] h1 {
 .group-details-modal .details-table-left-box,
 .group-details-modal .right-section {
   flex: 1;
-  overflow-y: auto;
 }
 
 /* Table styling */

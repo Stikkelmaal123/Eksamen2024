@@ -172,6 +172,7 @@
     <div class="modal-content">
         <div class="left-section">
             <form id="create-stack-form">
+                <div class="create-stack-content-space">
                 <div>
                     <label for="stack-name">Stack name</label>
                     <input type="text" id="stackName" name="stackName" required />
@@ -188,6 +189,7 @@
                     <option value={{this.template_name}}>{{this.template_name}}</option>
                     {{/each}}
                     </select>
+                </div>
                 </div>
                 <div class="modal-footer">
                 <button type="submit" id="create-stack">Create stack</button>
@@ -254,11 +256,11 @@
     <h1>Add template</h1>
     <div class="template-setup">
         <label for="name">Template name</label>
-        <input type="text" id="name" placeholder="Template..." />
+        <input class="template-name-form" type="text" id="name" placeholder="Template..." />
     </div>
     <div class="template-setup">
         <label for="name">Template text</label>
-        <input type="text" id="name" placeholder="Add template text here..." />
+        <textarea class="place-for-template-yaml" id="template-text" placeholder="Add your template here..."></textarea>
     </div>
     <div class="modal-footer">
         <button id="save">Add</button>

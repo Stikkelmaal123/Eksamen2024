@@ -75,22 +75,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Example rows -->
                         <tr>
-                            <td>Anders Ole Snabe Buch</td>
-                            <td>aosb48851@edu.ucl.dk</td>
-                            <td><button class="edit-btn" data-open-modal="manage-user">Edit</button></td>
+
                         </tr>
-                        <tr>
-                            <td>Anders Ole Snabe Buch</td>
-                            <td>aosb48851@edu.ucl.dk</td>
-                            <td><button class="edit-btn" data-open-modal="manage-user">Edit</button></td>
-                        </tr>
-                        <tr>
-                            <td>Anders Ole Snabe Buch</td>
-                            <td>aosb48851@edu.ucl.dk</td>
-                            <td><button class="edit-btn" data-open-modal="manage-user">Edit</button></td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -99,21 +87,21 @@
         <div class="right-section">
             <div class="date-picker-box">
                 <label for="expiration-date" class="expiration-date-title">Expiration Date</label>
-                <input type="date" id="expiration-date" />
+                <input class="date-group-details" type="date" id="expiration-date" />
             </div>
             <div class="education-box">
     <h2>Education</h2>
     <div class="education-options">
         <label class="education-option">
                         <div class="education-item">
-                            <input type="checkbox" id="webudvikler" />
-                            <span>Webudvikler</span>
+                            <input type="radio" class="education-checkbox" value="2" required/>
+                            <span class="education-span-group-details">Softwareudvikler</span>
                         </div>
                 </label>
                 <label class="education-option">
                         <div class="education-item">
-                            <input type="checkbox" id="webbureau" />
-                            <span>Webbureau</span>
+                            <input type="radio" class="education-checkbox" value="1" required/>
+                            <span class="education-span-group-details">Webudvikler</span>
                         </div>
                         </label>
                 </div>
@@ -125,7 +113,7 @@
         <button id="manage-users" class="manage-btn" data-open-modal="manage-users">Manage Users</button>
         <div class="button-group">
             <button id="delete-group" class="delete-btn" data-open-modal="delete-stack-4">Delete Group</button>
-            <button id="save" class="save-btn">Save</button>
+            <button id="save" class="save-btn" data-close-modal>Save</button>
         </div>
     </div>
 </dialog>
@@ -167,31 +155,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Example rows -->
+
                         <tr>
-                            <td>Anders Ole Snabe Buch</td>
-                            <td>aosb48851@edu.ucl.dk</td>
-                            <td>Webudvikling</td>
-                            <td><button class="edit-btn" data-open-modal="manage-user">Edit</button></td>
+
                         </tr>
-                        <tr>
-                            <td>Anders Ole Snabe Buch</td>
-                            <td>aosb48851@edu.ucl.dk</td>
-                            <td>Webudvikling</td>
-                            <td><button class="edit-btn" data-open-modal="manage-user">Edit</button></td>
-                        </tr>
-                        <tr>
-                            <td>Anders Ole Snabe Buch</td>
-                            <td>aosb48851@edu.ucl.dk</td>
-                            <td>Webudvikling</td>
-                            <td><button class="edit-btn" data-open-modal="manage-user">Edit</button></td>
-                        </tr>
-                        <tr>
-                            <td>Anders Ole Snabe Buch</td>
-                            <td>aosb48851@edu.ucl.dk</td>
-                            <td>Webudvikling</td>
-                            <td><button class="edit-btn" data-open-modal="manage-user">Edit</button></td>
-                        </tr>
+
                     </tbody>
                 </table>
             </div>
@@ -200,7 +168,7 @@
         <!-- Footer Section -->
         <div class="modal-footer">
             <button class="remove-stacks-btn" data-open-modal="delete-stack-1">Remove stacks</button>
-            <button id="save">Save</button>
+            <button id="save" data-close-modal>Save</button>
         </div>
     </dialog>
 
@@ -232,10 +200,8 @@
                 <div class="permission-group">
                     <h2>Change permissions</h2>
                     <select id="user-permissions">
-                        <option value="student">Student</option>
-                        <option value="good-student">The good student</option>
+                        <option value="student">User</option>
                         <option value="admin">Admin</option>
-                        <option value="super-admin">Super admin</option>
                     </select>
                 </div>
                 <div class="permission-group">
@@ -270,18 +236,8 @@
                 </tr>
             </thead>
             <tbody>
-                <!-- Example rows -->
                 <tr>
-                    <td>OPStackbro</td>
-                    <td>WPServer</td>
-                    <td>aosb48851@edu.ucl.dk</td>
-                    <td><button class="delete-btn" data-open-modal="delete-stack-2">Delete</button></td>
-                </tr>
-                <tr>
-                    <td>OPStackbro</td>
-                    <td>WPServer</td>
-                    <td>aosb48851@edu.ucl.dk</td>
-                    <td><button class="delete-btn" data-open-modal="delete-stack-2">Delete</button></td>
+
                 </tr>
             </tbody>
         </table>
@@ -289,7 +245,7 @@
     </div>
     <div class="modal-footer">
         <button id="delete-stacks" class="delete-stacks-btn" data-open-modal="delete-stack-1">Delete stacks</button>
-        <button id="save" class="save-btn">Done</button>
+        <button id="save" class="save-btn" data-close-modal>Done</button>
     </div>
 </dialog>
 
@@ -312,9 +268,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>StackOne</td>
-                        <td>TypeA</td>
-                        <td>stackone@domain.com</td>
+
                     </tr>
                 </tbody>
             </table>
@@ -322,7 +276,7 @@
     </div>
     <div class="modal-footer">
         <button id="delete-stacks-1" class="delete-stacks-btn">Yes delete</button>
-        <button id="save">No don't delete</button>
+        <button id="save" data-close-modal>No don't delete</button>
     </div>
 </dialog>
 
@@ -342,9 +296,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>StackTwo</td>
-                        <td>TypeB</td>
-                        <td>stacktwo@domain.com</td>
+
                     </tr>
                 </tbody>
             </table>
@@ -352,7 +304,7 @@
     </div>
     <div class="modal-footer">
         <button id="delete-stacks-2" class="delete-stacks-btn">Yes delete</button>
-        <button id="save">No don't delete</button>
+        <button id="save" data-close-modal>No don't delete</button>
     </div>
 </dialog>
 
@@ -372,9 +324,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>StackThree</td>
-                        <td>TypeC</td>
-                        <td>stackthree@domain.com</td>
+
                     </tr>
                 </tbody>
             </table>
@@ -382,7 +332,7 @@
     </div>
     <div class="modal-footer">
         <button id="delete-stacks-3" class="delete-stacks-btn">Yes delete</button>
-        <button id="save">No don't delete</button>
+        <button id="save" data-close-modal>No don't delete</button>
     </div>
 </dialog>
 
@@ -402,9 +352,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>StackFour</td>
-                        <td>TypeD</td>
-                        <td>stackfour@domain.com</td>
+
                     </tr>
                 </tbody>
             </table>
@@ -412,6 +360,6 @@
     </div>
     <div class="modal-footer">
         <button id="delete-stacks-4" class="delete-stacks-btn">Yes delete</button>
-        <button id="save">No don't delete</button>
+        <button id="save" data-close-modal>No don't delete</button>
     </div>
 </dialog>
