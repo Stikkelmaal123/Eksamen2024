@@ -1299,6 +1299,10 @@ dialog[data-modal="create-stack"] .modal-footer button:hover {
 
 @media (max-width: 768px) {
 
+  .place-for-template-yaml {
+    height: 150px !important;
+  }
+
   .group-details-modal {
     overflow-y: auto;
   }
