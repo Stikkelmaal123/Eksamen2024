@@ -39,7 +39,7 @@
             <span>{{this.sub_domain}}</span>
             <span class="owner">{{this.user_name}}</span>
             <span class="creation-date">{{formatDate this.creation_date}}</span>
-            <span class="status online">{{this.status}}</span>
+            <span class="status {{this.status}}">{{this.status}}</span>
             <span class="actions">
             <button onclick="event.stopPropagation(); startStack('{{this.stack_name}}')" title="Start">▶</button>
             <button onclick="event.stopPropagation(); stopStack('{{this.stack_name}}')" title="Stop">⏸</button>
@@ -74,7 +74,7 @@
             <span>{{this.sub_domain}}</span>
             <span class="owner">{{this.owner}}</span>
             <span class="creation-date">{{formatDate this.creation_date}}</span>
-            <span class="status online">Online</span>
+            <span class="status {{this.status}}">{{this.status}}</span>
             <span class="actions">
             <button onclick="event.stopPropagation(); startStack('{{this.stack_name}}')" title="Start">▶</button>
             <button onclick="event.stopPropagation(); stopStack('{{this.stack_name}}')" title="Stop">⏸</button>
