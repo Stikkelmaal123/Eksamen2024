@@ -5,6 +5,7 @@ const stackRoutes = require('./routes/stackRoutes');
 const dateHelper = require('./public/helpers/dateHelper');
 const authRoutes = require('./routes/authRoutes');
 const { getToken } = require('./utils/tokenStore');
+const formatSubdomain = require('./public/helpers/formatSubdomain');
 
 const app = express();
 const PORT = 3000;
@@ -15,7 +16,8 @@ app.engine('hbs', exphbs.engine({
     defaultLayout: 'main',
     layoutsDir: 'views/layouts/', 
     helpers: {
-        formatDate: dateHelper.formatDate
+        formatDate: dateHelper.formatDate,
+        formatUrl: formatSubdomain.formatUrl,
     }
 }));
 app.set('view engine', 'hbs');
