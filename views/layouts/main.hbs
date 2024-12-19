@@ -213,6 +213,7 @@
         });
         if (response.ok) {
         // Successfully created the group
+        alert('Stack successfully created!');
         window.location.href = '/stacks';
       } else {
         const error = await response.json();
