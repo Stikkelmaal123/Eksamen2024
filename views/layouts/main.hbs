@@ -4,8 +4,382 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Mono+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <script src="../js/script.js" defer></script>
 </head>
 <body>
+        <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="logo">KUBE<br>LAB</div>
+      <nav class="menu">
+        <h3>Navigation</h3>
+        <ul>
+          <li><a href="/stacks">Projects</a></li>
+          {{#if isAdmin}}
+          <li><a href="/groups">Groups</a></li>
+          {{/if}}
+        </ul>
+        <h3>Functions</h3>
+        <ul>
+            {{#if isAdmin}}
+          <li><a href="#" data-open-modal="large">+ Add groups</a></li>
+          {{/if}}
+          <li><a href="#" data-open-modal="create-stack">+ Add Stacks</a></li>
+          {{#if isAdmin}}
+          <li><a href="#" data-open-modal="add-user">+ Add users</a></li>
+          <li><a href="#" data-open-modal="add-template">+ Add templates</a></li>
+          {{/if}}
+        </ul>
+        <h3>Settings</h3>
+        <ul>
+          <li>
+              <div class="theme-switch-wrapper">
+                <em>Dark mode</em>
+       <label class="theme-switch" for="checkbox">
+    <input type="checkbox" id="checkbox" />
+    <div class="slider round"></div>
+  </label>
+    
+  </div>
+          </li>
+          <li><a href="#" data-open-modal="profile-settings">Profile</a></li>
+        </ul>
+      </nav>
+    </aside>
+      
+      
+      <!-- Modals -->
+
+      <!-- Add groups modal -->
+
+    <dialog data-modal="large" class="large-modal">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Creating group</h1>
+        <div class="group-name-container">
+        <form class="create-group-form" action="/create-group" method="POST">
+        <label for="groupName" class="group-name-titel">Group name</label>
+        <input class="large-modal-group-name-input" type="text" id="groupName" name="groupName" placeholder="Enter name..." required />
+    </div>
+    <div class="modal-content">
+        <div class="left-section">
+            
+
+                <div class="education-box">
+    <h2>Education</h2>
+    <div class="education-options">
+        {{#each educations}}
+        <label class="education-option">
+                        <div class="education-item">
+                            <input type="radio" class="education-checkbox" name="educationId" value="{{this.education_id}}" required  />
+                            <span>{{this.education_name}}</span>
+                        </div>
+                </label>
+                {{/each}}
+                </div>
+            </div>
+                 <div class="date-picker-box">
+                <label for="expirationDate" class="expiration-date-title">Expiration Date</label>
+                <input type="date" id="expirationDate" name="expirationDate" required/>
+            </div>
+            
+        </div>
+        <div id="add-users-to-group" class="right-section">
+            <h2>Add users to group</h2>
+            <div class="user-list-container">
+                <input type="text" placeholder="Search user" class="search-input" />
+                <ul id="user-list">
+                    <!-- Example user items -->
+                {{#each users}}
+                    <li>
+                        <label class="checkbox-styling">
+                            <input type="checkbox" name="userIds" value="{{this.user_id}}" />
+                            <span>{{this.user_name}} ({{this.email}})</span>
+                        </label>
+                    </li>
+                {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn-create-group">Create group</button>
+        </form>
+    </div>
+    </dialog>
+
+
+
+<script>
+  document.querySelector('.create-group-form').addEventListener('submit', async (e) => {
+    e.preventDefault(); // Prevent the default form submission
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    // Convert FormData to a JSON-friendly object
+    const data = Object.fromEntries(formData.entries());
+
+    // Handle multiple userIds checkboxes
+    const userIds = formData.getAll('userIds');
+    data.userIds = userIds; // Add this array to data
+
+    // Manual validation since we're using fetch
+    if (!data.educationId) {
+      alert("Please select an education.");
+      return; // Stop here if no education is selected
+    }
+
+    if (!data.expirationDate) {
+      alert("Please select an expiration date.");
+      return;
+    }
+
+    if (!data.groupName) {
+      alert("Please enter a group name.");
+      return;
+    }
+
+    try {
+      const response = await fetch('/create-group', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        // Successfully created the group
+        window.location.href = '/groups';
+      } else {
+        const error = await response.json();
+        alert(`Error: ${error.error}`);
+      }
+    } catch (err) {
+      alert('An unexpected error occurred. Please try again.');
+      console.error('Error:', err);
+    }
+  });
+</script>
+    
+
+    <!-- Add stacks modal -->
+
+<dialog data-modal="create-stack">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Creating stack</h1>
+    <div class="modal-content">
+        <div class="left-section">
+            <form id="create-stack-form">
+                <div class="create-stack-content-space">
+                <div>
+                    <label for="stack-name">Stack name</label>
+                    <input type="text" id="stackName" name="stackName" required />
+                </div>
+                <div>
+                    <label for="subdomain-name">Subdomain name</label>
+                    <input type="text" id="subdomain" name="subdomain" required />
+                </div>
+                <div>
+                    <label for="templateName">Select a Template:</label>
+                    <select id="templateName" name="templateName" required>
+                    <option value="">Select a template</option>
+                    {{#each templates}}
+                    <option value={{this.template_name}}>{{this.template_name}}</option>
+                    {{/each}}
+                    </select>
+                </div>
+                </div>
+                <div class="modal-footer">
+                <button type="submit" id="create-stack">Create stack</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</dialog>
+
+<script>
+    document.getElementById('create-stack-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData);
+
+        const response = await fetch('/create-stack', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+        if (response.ok) {
+        // Successfully created the group
+        window.location.href = '/stacks';
+      } else {
+        const error = await response.json();
+        alert(`Error: ${error.error}`);
+      }
+
+        const result = await response.json();
+        console.log(result);
+    });
+</script>
+
+    <!-- Add users modal -->
+
+    <dialog data-modal="add-user">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Add user</h1>
+    <form class="add-user-form" action="/add-user" method="POST">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="Name..." />
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Email..." />
+        </div>
+        <button type="submit" id="reset-password">Add user</button>
+    </form>
+    <div class="add-user-csv-box">
+        <p class="csv">Drag and drop csv file or click here</p>
+    </div>
+    <div class="modal-footer">
+        <button class="save" data-close-modal>Done</button>
+    </div>
+</dialog>
+<script>
+  document.querySelector('.add-user-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    const data = Object.fromEntries(formData.entries());
+
+    if (!data.name || !data.email) {
+        alert('Please fill out both name and email fields.');
+        return;
+    }
+
+    try {
+        const response = await fetch('/add-user', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+            alert('User added successfully!');
+            form.reset(); // Reset the form
+        } else {
+            const error = await response.json();
+            alert(`Error: ${error.error}`);
+        }
+    } catch (err) {
+        console.error('Error adding user:', err);
+        alert('An unexpected error occurred. Please try again.');
+    }
+});
+
+</script>
+    
+    <!-- Add template modal -->
+
+    <dialog data-modal="add-template">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Add template</h1>
+    <div class="template-setup">
+        <label for="name">Template name</label>
+        <input class="template-name-form" type="text" id="name" placeholder="Template..." />
+    </div>
+    <div class="template-setup">
+        <label for="name">Template text</label>
+        <textarea class="place-for-template-yaml" id="template-text" placeholder="Add your template here..."></textarea>
+    </div>
+    <div class="modal-footer">
+        <button class="save" id="addTemplate">Add</button>
+    </div>
+</dialog>
+
+<script>
+ document.getElementById('addTemplate').addEventListener('click', async () => {
+  const templateName = document.querySelector('.template-name-form').value;
+  const templateContent = document.querySelector('.place-for-template-yaml').value;
+
+  if (!templateName || !templateContent) {
+    alert('Please provide both the template name and content.');
+    return;
+  }
+
+  try {
+    const response = await fetch('/api/templates', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ templateName, templateContent }),
+    });
+
+    if (response.ok) {
+      alert('Template added successfully!');
+      location.reload(); // Refresh the page to show updated templates
+    } else {
+      const error = await response.json();
+      alert(`Error: ${error.error}`);
+    }
+  } catch (err) {
+    console.error('Error adding template:', err);
+    alert('Failed to add template. Please try again.');
+  }
+});
+</script>
+
+
+    <!-- Profile settings -->
+
+<dialog data-modal="profile-settings">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Profile settings</h1>
+    <form>
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="name" value="{{user_name}}" disabled/>
+        </div>
+        <div>
+            <label for="email">Email</label>
+            <input type="email" id="email" value="{{email}}" disabled/>
+        </div>
+        <button type="button" id="reset-password">Reset password</button>
+    </form>
+    <div class="modal-footer">
+        <button id="logout">Log out</button>
+        <button class="save">Save</button>
+    </div>
+</dialog>
+
+<script>
+    document.getElementById('logout').addEventListener('click', async () => {
+        try {
+            const response = await fetch('/logout', {
+                method: 'POST', // Ensure your server accepts POST for logout
+                headers: { 'Content-Type': 'application/json' },
+            });
+
+            if (response.ok) {
+                // Successfully logged out
+                window.location.href = '/login'; // Redirect to login page
+            } else {
+                const error = await response.json();
+                alert(`Error: ${error.message}`);
+            }
+        } catch (err) {
+            console.error('Error during logout:', err);
+            alert('An unexpected error occurred. Please try again.');
+        }
+    });
+</script>
+
+
     {{{body}}} <!-- Content from child templates will be injected here -->
 </body>
 </html>

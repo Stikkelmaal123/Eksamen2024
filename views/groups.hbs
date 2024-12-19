@@ -1,0 +1,364 @@
+
+      <div class="dashboard">
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header>
+        <button class="sidebar-toggle">☰</button>
+        <h1>Groups</h1>
+      </header>
+
+      <!-- Navigation/Search -->
+      <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <div class="search-icon">
+          <img src="../img/1st trailing-icon.svg" alt="Search Icon">
+        </div>
+      </div>
+
+      <!-- Project Table -->
+      <div class="project-table">
+
+        <!-- Table Header (Make sure this stays) -->
+        <div class="table-header-groups">
+          <span>Group name</span>
+          <span>Education</span>
+          <span>Expiration date</span>
+          <span>Users</span>
+          <span>Running Stacks</span>
+          <span>Actions</span>
+        </div>
+        {{#each groups}}
+        <div class="row-container-groups">
+          <div class="table-row-groups">
+            <span>{{this.group_name}}</span>
+            <span>{{this.education_name}}</span>
+            <span>{{formatDate this.expiration_date}}</span>
+            <span>{{this.user_count}}</span>
+            <span>{{this.stack_count}}</span>
+            <span class="actions-groups">
+              <button>
+                <img src="../img/iconMore.svg" alt="See more icon">
+              </button>
+                <div class="group-links-container">
+                    <a href="#" data-open-modal="group-details">Details</a>
+                    <a href="#" data-open-modal="group-stacks">Stacks</a>
+                </div>
+            </span>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </main>
+  </div>
+
+
+
+
+  <!-- Modals -->
+
+    <!-- Group Details Modal -->
+
+  <dialog data-modal="group-details" class="group-details-modal">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1 class="modal-header">WUE24</h1>
+    
+    <div class="modal-content">
+        <div class="details-table-left-box">
+            <div class="left-section">
+                <table class="details-table">
+                    <thead>
+                        <tr>
+                            <th class="left-corner-radius">Name</th>
+                            <th>Email</th>
+                            <th class="right-corner-radius">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="right-section">
+            <div class="date-picker-box">
+                <label for="expiration-date" class="expiration-date-title">Expiration Date</label>
+                <input class="date-group-details" type="date" id="expiration-date" />
+            </div>
+            <div class="education-box">
+    <h2>Education</h2>
+    <div class="education-options">
+        <label class="education-option">
+                        <div class="education-item">
+                            <input type="radio" class="education-checkbox" value="2" required/>
+                            <span class="education-span-group-details">Softwareudvikler</span>
+                        </div>
+                </label>
+                <label class="education-option">
+                        <div class="education-item">
+                            <input type="radio" class="education-checkbox" value="1" required/>
+                            <span class="education-span-group-details">Webudvikler</span>
+                        </div>
+                        </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button id="manage-users" class="manage-btn" data-open-modal="manage-users">Manage Users</button>
+        <div class="button-group">
+            <button id="delete-group" class="delete-btn" data-open-modal="delete-stack-4">Delete Group</button>
+            <button class="save" class="save-btn" data-close-modal>Save</button>
+        </div>
+    </div>
+</dialog>
+
+    <!-- Manage Multiple Users Modal -->
+
+    <dialog data-modal="manage-users" class="manage-users-modal">
+        <button class="close-btn" data-close-modal>&times;</button>
+        <h1>Manage users in ("current group")</h1>
+        
+        <div class="modal-content">
+            <!-- Form Section -->
+            <div class="input-section">
+                <form>
+                    <div>
+                        <label for="user-name">Name</label>
+                        <input type="text" id="user-name" placeholder="Indtast navn">
+                    </div>
+                    <div>
+                        <label for="user-email">Email</label>
+                        <input type="email" id="user-email" placeholder="Indtast email">
+                    </div>
+                </form>
+                <div class="button-group">
+                    <button class="add-user-btn">Add user</button>
+                    <button class="add-users-csv-btn">Add user(s) from csv file</button>
+                </div>
+            </div>
+
+            <!-- Table Section -->
+            <div class="table-section">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th class="left-corner-radius">Name</th>
+                            <th>Email</th>
+                            <th>Education</th>
+                            <th class="right-corner-radius">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="modal-footer">
+            <button class="save" data-close-modal>Save</button>
+        </div>
+    </dialog>
+
+
+<!-- Manage Single User Modal -->
+
+<dialog data-modal="manage-user" class="manage-user-modal">
+        <button class="close-btn" data-close-modal>&times;</button>
+        <h1>Managing ("current user")</h1>
+        
+        <div class="modal-content">
+            <!-- Left Section -->
+            <div class="edit-user-section">
+                <h2>Edit user info</h2>
+                <form>
+                    <div class="input-group">
+                        <label for="user-name">Name</label>
+                        <input type="text" id="user-name" value="Anders Ole Snabe Buch">
+                    </div>
+                    <div class="input-group">
+                        <label for="user-email">Email</label>
+                        <input type="email" id="user-email" value="aosb48851@edu.ucl.dk">
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Section -->
+            <div class="permissions-section">
+                <div class="permission-group">
+                    <h2>Change permissions</h2>
+                    <select id="user-permissions">
+                        <option value="student">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="permission-group">
+                    <h2>Permitted snacks</h2>
+                    <input type="number" id="permitted-snacks" value="1">
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="modal-footer">
+            <button class="delete-user-btn" data-open-modal="delete-stack-3">Delete user</button>
+            <button class="save">Save</button>
+        </div>
+    </dialog>
+
+
+<!-- Group Stacks Modal -->
+
+<dialog data-modal="group-stacks" class="group-stacks-modal">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Stacks in ("current group")</h1>
+    <div class="background-box">
+    <div class="modal-content">
+        <table class="stack-table">
+            <thead>
+                <tr>
+                    <th class="left-corner-radius">Stack name</th>
+                    <th>Stack type</th>
+                    <th>Subdomain</th>
+                    <th class="right-corner-radius">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+    <div class="modal-footer">
+        <button id="delete-stacks" class="delete-stacks-btn" data-open-modal="delete-stack-1">Delete stacks</button>
+        <button class="save" class="save-btn" data-close-modal>Done</button>
+    </div>
+</dialog>
+
+
+
+
+<!-- Delete Modal Multiple Stacks -->
+<dialog data-modal="delete-stack-1">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Are you sure you want to delete these Stacks?</h1>
+    <div class="background-box">
+        <div class="modal-content">
+            <table class="stack-table">
+                <thead>
+                    <tr>
+                        <th class="left-corner-radius">Stack name</th>
+                        <th>Stack type</th>
+                        <th class="right-corner-radius">Subdomain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="delete-stacks-1" class="delete-stacks-btn">Yes delete</button>
+        <button class="save" data-close-modal>No don't delete</button>
+    </div>
+</dialog>
+
+<!-- Delete Modal Single Stack -->
+<dialog data-modal="delete-stack-2">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Are you sure you want to delete this Stack?</h1>
+    <div class="background-box">
+        <div class="modal-content">
+            <table class="stack-table">
+                <thead>
+                    <tr>
+                        <th class="left-corner-radius">Stack name</th>
+                        <th>Stack type</th>
+                        <th class="right-corner-radius">Subdomain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="delete-stacks-2" class="delete-stacks-btn">Yes delete</button>
+        <button class="save" data-close-modal>No don't delete</button>
+    </div>
+</dialog>
+
+<!-- Delete Modal User and Stacks -->
+<dialog data-modal="delete-stack-3">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Are you sure you want to delete this user and following stacks?</h1>
+    <div class="background-box">
+        <div class="modal-content">
+            <table class="stack-table">
+                <thead>
+                    <tr>
+                        <th class="left-corner-radius">Stack name</th>
+                        <th>Stack type</th>
+                        <th class="right-corner-radius">Subdomain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="delete-stacks-3" class="delete-stacks-btn">Yes delete</button>
+        <button class="save" data-close-modal>No don't delete</button>
+    </div>
+</dialog>
+
+<!-- Delete Modal Group and Stacks -->
+<dialog data-modal="delete-stack-4">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Are you sure you want to delete this group and following stacks?</h1>
+    <div class="background-box">
+        <div class="modal-content">
+            <table class="stack-table">
+                <thead>
+                    <tr>
+                        <th class="left-corner-radius">Stack name</th>
+                        <th>Stack type</th>
+                        <th class="right-corner-radius">Subdomain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="delete-stacks-4" class="delete-stacks-btn">Yes delete</button>
+        <button class="save" data-close-modal>No don't delete</button>
+    </div>
+</dialog>

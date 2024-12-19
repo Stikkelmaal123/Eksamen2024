@@ -1,0 +1,59 @@
+
+<div class="login-body">
+<div class="login-logo">KUBE<br>LAB</div>
+    <div class="login-container">
+        <div class="login-box">
+            <h1>Log in</h1>
+             {{#if message}}
+                <div class="error-message">{{message}}</div>
+            {{/if}}
+            <form action="/login" method="POST" id="loginForm">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Email..." required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Password..." required>
+
+                <div class="forgot-password">
+                 <a href="/auth/password">forgot password</a>
+                </div>
+
+                <button type="submit" class="btn-login">Log in</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.querySelector('#loginForm').addEventListener('submit', async (event) => {
+    event.preventDefault(); // Prevent default form submission
+
+    const email = document.querySelector('#email').value;
+    const password = document.querySelector('#password').value;
+
+    try {
+        const response = await fetch('/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            // Save token in sessionStorage
+            sessionStorage.setItem('jwtToken', data.token);
+
+            // Redirect to the stacks page
+            window.location.href = data.redirect;
+        } else {
+            // Show the error message from the response
+            const errorMessage = data.message || 'Login failed. Please try again.';
+            document.querySelector('.error-message').textContent = errorMessage;
+        }
+    } catch (error) {
+        console.error('Error during login:', error);
+        alert('An unexpected error occurred. Please try again later.');
+    }
+});
+</script>
