@@ -1,23 +1,254 @@
-<h1>{{title}}</h1>
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Swarm ID</th>
-            <th>Endpoint ID</th>
-            <th>Created At</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{#each stacks}}
-        <tr>
-            <td>{{this.id}}</td>
-            <td>{{this.name}}</td>
-            <td>{{this.swarm_id}}</td>
-            <td>{{this.endpoint_id}}</td>
-            <td>{{this.created_at}}</td>
-        </tr>
+
+      <div class="dashboard">
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <header>
+        <button class="sidebar-toggle">☰</button>
+        <h1>Projects</h1>
+      </header>
+
+      <!-- Navigation/Search -->
+      <div class="search-bar">
+        <input type="text" placeholder="Search...">
+        <div class="search-icon">
+          <img src="../img/1st trailing-icon.svg" alt="Search Icon">
+        </div>
+      </div>
+
+      <!-- Project Table -->
+      <div class="project-table">
+
+        <!-- Table Header (Make sure this stays) -->
+        <div class="table-header">
+          <span>Stack name</span>
+          <span>Stack type</span>
+          <span>Subdomain</span>
+          <span>Owner</span>
+          <span>Creation date</span>
+          <span>Status</span>
+          <span>Actions</span>
+        </div>
+        {{#if isAdmin}}
+        {{#if filteredStacks.length}}
+        {{#each filteredStacks}}
+        <div class="row-container">
+          <div class="table-row" onclick="toggleDetails(this)">
+            <span class="stack-name">{{this.stack_name}}</span>
+            <span>{{this.template_name}}</span>
+            <span><a href="{{formatUrl this.sub_domain}}" target="_blank">{{this.sub_domain}}</a></span>
+            <span class="owner">{{this.user_name}}</span>
+            <span class="creation-date">{{formatDate this.creation_date}}</span>
+            <span class="status {{this.status}}">{{this.status}}</span>
+            <span class="actions">
+            <button onclick="event.stopPropagation(); startStack('{{this.stack_name}}')" title="Start">▶</button>
+            <button onclick="event.stopPropagation(); stopStack('{{this.stack_name}}')" title="Stop">⏸</button>
+            <button onclick="event.stopPropagation(); restartStack('{{this.stack_name}}')" title="Restart">🔄</button>
+            </span>
+          </div>
+          <div class="details-row">
+            <span data-mobile-only><strong>Stack Name: </strong>{{this.stack_name}}</span>
+            <span><strong>Group: </strong>{{this.group_name}}</span>
+            <span data-mobile-only><strong>Owner: </strong>{{this.user_name}}</span>
+            <span data-mobile-only><strong>Creation Date: </strong>{{formatDate this.creation_date}}</span>
+            <span><strong>Uptime: </strong>6278 days</span>
+            <span><strong>Latest run: </strong>27/13/9044</span>
+            <button class="custom-button" onclick="event.stopPropagation(); deleteStack('{{this.stack_name}}')">Delete 🗑</button>
+            {{!-- data-open-modal="delete-stack"  --}}
+          </div>
+        </div>
         {{/each}}
-    </tbody>
-</table>
+        {{else}}
+          <div class="empty-state">
+           <p>No stacks available. Create one to get started!</p>
+        </div>
+      {{/if}}
+      {{/if}}
+        {{#unless isAdmin}}
+        {{#if userStacks.length}}
+        {{#each userStacks}}
+        <div class="row-container">
+          <div class="table-row" onclick="toggleDetails(this)">
+            <span class="stack-name">{{this.stack_name}}</span>
+            <span>{{this.template_name}}</span>
+            <span><a href="{{formatUrl this.sub_domain}}" target="_blank">{{this.sub_domain}}</a></span>
+            <span class="owner">{{this.owner}}</span>
+            <span class="creation-date">{{formatDate this.creation_date}}</span>
+            <span class="status {{this.status}}">{{this.status}}</span>
+            <span class="actions">
+            <button onclick="event.stopPropagation(); startStack('{{this.stack_name}}')" title="Start">▶</button>
+            <button onclick="event.stopPropagation(); stopStack('{{this.stack_name}}')" title="Stop">⏸</button>
+            <button onclick="event.stopPropagation(); restartStack('{{this.stack_name}}')" title="Restart">🔄</button>
+            </span>
+          </div>
+          <div class="details-row">
+            <span data-mobile-only><strong>Stack Name: </strong>{{this.stack_name}}</span>
+            <span><strong>Group: </strong>{{this.group_name}}</span>
+            <span data-mobile-only><strong>Owner: </strong>{{this.owner}}</span>
+            <span data-mobile-only><strong>Creation Date: </strong>{{formatDate this.creation_date}}</span>
+            <span><strong>Uptime: </strong>6278 days</span>
+            <span><strong>Latest run: </strong>27/13/9044</span>
+            <button class="custom-button" onclick="event.stopPropagation(); deleteStack('{{this.stack_name}}')">Delete 🗑</button>
+            {{!-- data-open-modal="delete-stack"  --}}
+          </div>
+        </div>
+        {{/each}}
+        {{else}}
+          <div class="empty-state">
+           <p>No stacks available. Create one to get started!</p>
+        </div>
+      {{/if}}
+      {{/unless}}
+      </div>
+    </main>
+  </div>
+
+<dialog data-modal="delete-stack">
+    <button class="close-btn" data-close-modal>&times;</button>
+    <h1>Are you sure you want to delete (“stack”)?</h1>
+    <div class="background-box">
+    <div class="modal-content">
+        <table class="stack-table">
+            <thead>
+                <tr>
+                    <th>Stack name</th>
+                    <th>Stack type</th>
+                    <th>Subdomain</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Example rows -->
+                <tr>
+                    <td>OPStackbro</td>
+                    <td>WPServer</td>
+                    <td>aosb48851@edu.ucl.dk</td>
+                    <td><button class="delete-btn">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button id="delete-stacks" class="delete-stacks-btn">Yes delete stack</button>
+        <button id="save" class="save-btn">No don't delete</button>
+    </div>
+</dialog>
+
+<script>
+  async function startStack(stackName) {
+    try {
+      const response = await fetch('/stacks/start', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ stackName }),
+      });
+
+      if (response.ok) {
+        alert(`Stack "${stackName}" started successfully.`);
+        location.reload();
+      } else {
+        const error = await response.json();
+        alert(`Failed to start stack: ${error.error}`);
+      }
+    } catch (err) {
+      console.error('Error starting stack:', err.message);
+      alert('An unexpected error occurred while starting the stack.');
+    }
+  }
+
+  async function stopStack(stackName) {
+    try {
+      const response = await fetch('/stacks/stop', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ stackName }),
+      });
+
+      if (response.ok) {
+        alert(`Stack "${stackName}" stopped successfully.`);
+        location.reload();
+      } else {
+        const error = await response.json();
+        alert(`Failed to stop stack: ${error.error}`);
+      }
+    } catch (err) {
+      console.error('Error stopping stack:', err.message);
+      alert('An unexpected error occurred while stopping the stack.');
+    }
+  }
+
+
+async function deleteStack(stackName) {
+    console.log(`Sending DELETE request for stack: ${stackName}`);
+    if (!confirm(`Are you sure you want to delete the stack "${stackName}"?`)) return;
+
+    try {
+        const response = await fetch(`/stacks/delete?stackName=${encodeURIComponent(stackName)}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            alert(`Stack "${stackName}" deleted successfully.`);
+            location.reload();
+        } else {
+            const error = await response.json();
+            alert(`Failed to delete stack: ${error.error}`);
+        }
+    } catch (err) {
+        console.error('Error deleting stack:', err.message);
+        alert('An unexpected error occurred while deleting the stack.');
+    }
+}
+
+
+async function restartStack(stackName) {
+    if (!confirm(`Are you sure you want to restart the stack "${stackName}"?`)) return;
+
+    try {
+        // Step 1: Stop the stack
+        let response = await fetch('/stacks/stop', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ stackName }),
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(`Failed to stop stack: ${error.error}`);
+        }
+        console.log(`Stack "${stackName}" stopped successfully.`);
+
+        // Step 2: Start the stack
+        response = await fetch('/stacks/start', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ stackName }),
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(`Failed to start stack: ${error.error}`);
+        }
+
+        alert(`Stack "${stackName}" restarted successfully.`);
+        location.reload();
+    } catch (err) {
+        console.error('Error restarting stack:', err.message);
+        alert(`An unexpected error occurred: ${err.message}`);
+    }
+}
+
+
+</script>
