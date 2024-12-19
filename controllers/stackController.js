@@ -170,13 +170,11 @@ exports.getStacks = async (req, res) => {
 exports.addTemplate = async (req, res) => {
     try {
       const { templateName, templateContent } = req.body;
-  
-      // Validate input
+
       if (!templateName || !templateContent) {
         return res.status(400).json({ error: 'Template name and content are required.' });
       }
   
-      // Add the template to the database
       const templateId = await addTemplate(templateName, templateContent);
   
       res.status(201).json({ success: true, templateId });
