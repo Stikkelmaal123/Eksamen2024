@@ -4,12 +4,35 @@ const db = require('../utils/db');
 const { getTemplateByName, getAllTemplates, addTemplate } = require('../models/templates');
 const { processYaml } = require('../utils/yamlProcessor');
 const portainerApi = require('../utils/portainerApi'); // Portainer API utility
+const usersModel = require('../models/user');
+const { generateRandomPassword } = require('../utils/password'); 
+
+exports.createUser = async (req, res) => {
+    try {
+        const { name, email } = req.body;
+
+        if (!name || !email) {
+            return res.status(400).json({ error: 'Name and email are required.' });
+        }
+
+        const randomPassword = generateRandomPassword();
+
+        await usersModel.addUser(name, email, randomPassword);
+
+        res.status(201).json({ success: true, message: 'User created successfully.' });
+    } catch (error) {
+        console.error('Error creating user:', error.message);
+        res.status(500).json({ error: 'Failed to create user.' });
+    }
+};
+
 
 exports.createStack = async (req, res) => {
     try {
         const { stackName, templateName, subdomain, subdomain2 } = req.body;
         const userId = req.session.userId; // User ID from session
         const groupId = req.session.groupId;
+
         // Validate input
         if (!stackName || !templateName || !subdomain) {
             return res.status(400).json({ error: 'Missing required fields' });
@@ -105,7 +128,13 @@ exports.getStacks = async (req, res) => {
         }
 
         const isAdmin = req.session.isAdmin;
+        const userId = req.session.userId; 
 
+        const [userDetails] = await db.query(
+            'SELECT user_name, email FROM users WHERE user_id = ?',
+            [userId]
+        );
+        const { user_name, email } = userDetails;
         // Fetch stacks based on role
         let filteredStacks = [];
         let userStacks = [];
@@ -159,7 +188,8 @@ exports.getStacks = async (req, res) => {
             title: 'Stacks',
             isAdmin: isAdmin,
             filteredStacks,
-            userStacks: userStacks, educations, users, templates
+            userStacks: userStacks, user_name, 
+            email, educations, users, templates
         });
     } catch (error) {
         console.error('Error fetching stacks:', error.message);

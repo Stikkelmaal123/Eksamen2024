@@ -3,6 +3,7 @@ const { getAllTemplates } = require('../models/templates');
 
 
 
+
 exports.getCreateGroupPage = async (req, res) => {
   try {
     const educations = await groupsModel.getAllEducations();

@@ -247,7 +247,41 @@
         <button class="save" data-close-modal>Done</button>
     </div>
 </dialog>
+<script>
+  document.querySelector('.add-user-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
 
+    const form = e.target;
+    const formData = new FormData(form);
+
+    const data = Object.fromEntries(formData.entries());
+
+    if (!data.name || !data.email) {
+        alert('Please fill out both name and email fields.');
+        return;
+    }
+
+    try {
+        const response = await fetch('/add-user', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+            alert('User added successfully!');
+            form.reset(); // Reset the form
+        } else {
+            const error = await response.json();
+            alert(`Error: ${error.error}`);
+        }
+    } catch (err) {
+        console.error('Error adding user:', err);
+        alert('An unexpected error occurred. Please try again.');
+    }
+});
+
+</script>
     
     <!-- Add template modal -->
 
@@ -309,11 +343,11 @@
     <form>
         <div>
             <label for="name">Name</label>
-            <input type="text" id="name" value="Anders Ole Snabe Buch" disabled/>
+            <input type="text" id="name" value="{{user_name}}" disabled/>
         </div>
         <div>
             <label for="email">Email</label>
-            <input type="email" id="email" value="aosb48851@edu.ucl.dk" disabled/>
+            <input type="email" id="email" value="{{email}}" disabled/>
         </div>
         <button type="button" id="reset-password">Reset password</button>
     </form>

@@ -12,6 +12,7 @@ router.post('/create-stack', stackController.createStack);
 router.post('/stacks/start', stackController.startStack);
 router.post('/stacks/stop', stackController.stopStack);
 router.post('/api/templates', stackController .addTemplate);
+router.post('/add-user', stackController.createUser);
 router.delete('/stacks/delete', isAdmin, stackController.deleteStack);
 
 
