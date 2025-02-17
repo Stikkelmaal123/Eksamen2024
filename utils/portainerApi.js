@@ -10,7 +10,7 @@ async function login() {
     try {
         const response = await axios.post(
             `${BASE_URL}/auth`, 
-            {  username: 'mikkelstaal', password: 'ladida12' },
+            {  username: 'mikkelstall', password: 'ladida12' },
             { httpsAgent }
             
         );
