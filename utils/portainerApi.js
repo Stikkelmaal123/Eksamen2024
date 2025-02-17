@@ -10,7 +10,7 @@ async function login() {
     try {
         const response = await axios.post(
             `${BASE_URL}/auth`, 
-            {  username: 'alpha', password: 'Ladida.12' },
+            {  username: 'mikkelstaal', password: 'ladida12' },
             { httpsAgent }
             
         );
@@ -92,7 +92,7 @@ const createStack = async (stackName, processedYaml) => {
                 },
             }
         );
-
+        
         return response.data;
     } catch (error) {
         console.error('Error creating stack:', error.response?.data || error.message);
