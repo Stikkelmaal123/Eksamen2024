@@ -59,11 +59,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use('/', authRoutes);
-<<<<<<< Updated upstream
-app.use('/', authenticateUser, stackRoutes);
-=======
 app.use('/' ,stackRoutes);
->>>>>>> Stashed changes
 
 
 // Start the server
