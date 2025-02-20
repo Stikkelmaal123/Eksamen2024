@@ -8,20 +8,31 @@ const getUserByEmailAndPassword = async (email, password) => {
                 u.user_id, 
                 gu.group_id, 
                 u.email,
+                u.password,  -- Henter hash fra DB
                 u.admin
             FROM 
                 users u
-            JOIN 
+            LEFT JOIN 
                 groups_users gu ON u.user_id = gu.user_id
             WHERE 
-                u.email = ? AND u.password = ?;
+                u.email = ?;
         `;
-        const [result] = await db.query(query, [email, password]);
+        const [result] = await db.query(query, [email]);
         
         if (result.length > 0) {
-            return result[0]; // Return the first user found with their group
+            const user = result[0];
+
+            // 🔥 Brug bcrypt.compare til at validere password korrekt
+            const passwordMatch = await bcrypt.compare(password, user.password);
+            if (!passwordMatch) {
+                return null; // Forkert password
+            }
+
+            // ✅ Slet password fra objektet, før vi returnerer det
+            delete user.password;
+            return user;
         } else {
-            return null; // No user found
+            return null; // Ingen bruger fundet
         }
     } catch (error) {
         console.error('Error fetching user:', error);
