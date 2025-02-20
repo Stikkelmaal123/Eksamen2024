@@ -28,38 +28,42 @@ app.set('views', 'views');  // Specify views directory
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(
-    session({
-        secret: "sessionSecret", 
-        resave: false,           
-        saveUninitialized: true, 
-        cookie: {
-            secure: false,        
-            maxAge: 1000 * 60 * 60, 
-        },
-    })
-);
-app.use((req, res, next) => {
-    res.locals.isAdmin = req.session.isAdmin || false; 
-    next();
-});
-const authenticateUser = async (req, res, next) => {
-    try {
-        const token = await getToken(); // Retrieve token
-        if (!token) {
-            console.error('Unauthorized: Token not found');
-            return res.redirect('/login'); // Redirect to login and terminate further processing
-        }
-        next(); // Token exists, proceed to the next middleware or route
-    } catch (error) {
-        console.error('Authentication error:', error.message);
-        return res.redirect('/login'); // Redirect on error and terminate processing
-    }
-};
+// app.use(
+//     session({
+//         secret: "sessionSecret", 
+//         resave: false,           
+//         saveUninitialized: true, 
+//         cookie: {
+//             secure: false,        
+//             maxAge: 1000 * 60 * 60, 
+//         },
+//     })
+// );
+// app.use((req, res, next) => {
+//     res.locals.isAdmin = req.session.isAdmin || false; 
+//     next();
+// });
+// const authenticateUser = async (req, res, next) => {
+//     try {
+//         const token = await getToken(); // Retrieve token
+//         if (!token) {
+//             console.error('Unauthorized: Token not found');
+//             return res.redirect('/login'); // Redirect to login and terminate further processing
+//         }
+//         next(); // Token exists, proceed to the next middleware or route
+//     } catch (error) {
+//         console.error('Authentication error:', error.message);
+//         return res.redirect('/login'); // Redirect on error and terminate processing
+//     }
+// };
 
 // Routes
 app.use('/', authRoutes);
+<<<<<<< Updated upstream
 app.use('/', authenticateUser, stackRoutes);
+=======
+app.use('/' ,stackRoutes);
+>>>>>>> Stashed changes
 
 
 // Start the server

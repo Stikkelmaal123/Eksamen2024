@@ -36,21 +36,24 @@ const addUser = async (name, email, password, role = 0) => {
         // Check if the user already exists
         const [existingUser] = await db.query('SELECT email FROM users WHERE email = ?', [email]);
         if (existingUser.length > 0) {
-            throw new Error(`User with email ${email} already exists.`);
+            console.log(`User with email ${email} already exists.`);
+            return;
         }
 
-        // Hash the password
+        // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const query = `
             INSERT INTO users (user_name, email, password, admin)
             VALUES (?, ?, ?, ?);
         `;
-        const result = await db.query(query, [name, email, hashedPassword, role]);
-        return result;
+        await db.query(query, [name, email, hashedPassword, role]);
+
+        console.log(`User ${email} added successfully.`);
     } catch (error) {
         console.error('Error adding user:', error.message);
         throw error;
     }
 };
+
 module.exports = { getUserByEmailAndPassword, addUser};
